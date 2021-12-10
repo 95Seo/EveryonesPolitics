@@ -15,6 +15,7 @@ public class BoardDTO {
     private String useYn;
     private Date sysregdate;
     private Date sysmoddate;
+
     private String totalCd;
     private int viewCnt;
     private int likeCnt;
@@ -23,5 +24,4 @@ public class BoardDTO {
 
     // 리스트, 디테일
     private int rownum;
-    
 }

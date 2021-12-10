@@ -1,19 +1,15 @@
 package com.hustar.edu.vote.service;
 
 import com.hustar.edu.vote.dto.BoardDTO;
-import com.hustar.edu.vote.mapper.BoardMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import com.hustar.edu.vote.paging.Criteria;
 
-@Service
-public class PromiseService {
+import java.util.List;
 
-    @Autowired
-    private BoardMapper boardMapper;
+public interface PromiseService {
+    public void insertPromiseBoard(BoardDTO boardDTO);
+    public List<BoardDTO> getPromiseBoardList(Criteria criteria);
+    //추가(전체 글 개수)
+    public int getPromiseTotal(Criteria cri);
 
-    @Transactional
-    public void insertBoard(BoardDTO board) {
-        boardMapper.insertBoard(board);
-    }
+    public BoardDTO getPromiseBoardDetail(BoardDTO boardDTO);
 }

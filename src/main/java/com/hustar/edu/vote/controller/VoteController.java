@@ -23,16 +23,16 @@ public class VoteController {
 		return "/vote/board/boardDetail";
 	}
 
-	@GetMapping("/vote/promiseDetail")
-	public String votePromiseDetailController() {
-		log.info("VotePromiseDetailPage");
-		return "/vote/promise/promiseDetail";
-	}
-	@GetMapping("/vote/promiseList")
-	public String votePromiseListController() {
-		log.info("VotePromiseListPage");
-		return "/vote/promise/promiseList";
-	}
+//	@GetMapping("/vote/promiseDetail")
+//	public String votePromiseDetailController() {
+//		log.info("VotePromiseDetailPage");
+//		return "/vote/promise/promiseDetail";
+//	}
+//	@GetMapping("")
+//	public String votePromiseListController() {
+//		log.info("VotePromiseListPage");
+//
+//	}
 
 	@GetMapping("/vote/myProfileWrite")
 	public String voteMyProfileWriteController() {
