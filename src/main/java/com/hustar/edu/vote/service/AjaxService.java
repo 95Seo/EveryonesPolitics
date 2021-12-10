@@ -1,0 +1,51 @@
+package com.hustar.edu.vote.service;
+
+import com.hustar.edu.vote.dto.BoardDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.List;
+
+@Service
+public class AjaxService {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    BoardService boardService;
+
+    public HashMap<String, Object> pagingList(int page, int cnt, int fill) {
+        // page 페이지 번호 = pageNum
+        // cnt 페이지당 글 갯수 = amount
+
+        //총 게시물 수
+        int allCnt = boardService.getTotal(fill);
+
+        // = 생성 가능 페이지 수 (나머지가 있으면 페이지 하나 더 생성)
+        int range = allCnt % cnt>0 ?
+                Math.round(allCnt/cnt)+1 : allCnt/cnt;
+        logger.info("총 게시물 수 : {}", allCnt);
+        logger.info("생성 가능 페이지 수 : {}", range);
+
+        //요청 페이지가 생성 가능 페이지 보다 클 경우 생성 가능 페이지로 적용
+        if(page >range) {
+            page = range;
+        }
+//        int end = page * cnt; // 5페이지 일때 200
+        int start = (page-1) * cnt; //5페이지 일때 첫 페이지 번호 81
+
+
+        HashMap<String, Object> json = new HashMap<>();
+        json.put("range",range);       //생성 가능한 총 페이지 수
+        json.put("fill",fill);
+        json.put("list", boardService.getBoardList(start,cnt,fill)); //요청한 게시물
+
+        List<BoardDTO> list = boardService.getBoardList(start,cnt,fill);
+
+        json.put("currPage", page);//현재 페이지
+        return json;
+    }
+}

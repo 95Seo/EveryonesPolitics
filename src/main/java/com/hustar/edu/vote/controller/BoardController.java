@@ -41,15 +41,27 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardList")
-    public String GetBoardListController (Criteria cri, Model model) {
+    public String GetBoardListController (Model model) {
         log.info("GetBoardListPage");
-        int total = boardService.getTotal(cri);
-        cri.setRowStart((cri.getPageNum()-1) * cri.getAmount());
-        List<BoardDTO> boardList = boardService.getBoardList(cri);
-        log.info("nick : " + boardList.get(0).getNickName());
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("pageMaker", new PageDTO(cri, total));
+//        int total = boardService.getTotal(cri);
+//        cri.setRowStart((cri.getPageNum()-1) * cri.getAmount());
+//        List<BoardDTO> boardList = boardService.getBoardList(cri);
+//        log.info("nick : " + boardList.get(0).getNickName());
+//        model.addAttribute("boardList", boardList);
+//        model.addAttribute("pageMaker", new PageDTO(cri, total));
 
         return "/vote/board/boardList";
+    }
+
+    @GetMapping("/vote/boardCreate")
+    public String voteBoardController() {
+        log.info("VoteBoardPage");
+        return "/vote/board/boardCreate";
+    }
+
+    @GetMapping("/vote/boardDetail")
+    public String voteBoardDetailController() {
+        log.info("VoteBoardDetailPage");
+        return "/vote/board/boardDetail";
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoardMapper {
     void insertBoard(BoardDTO boardDTO) ;
 
-    public List<BoardDTO> selectBoardList(Criteria criteria);
+    public List<BoardDTO> selectBoardList(int start, int end, int fill);
 
-    public int selectBoardTotalCount(Criteria criteria);
+    public int selectBoardTotalCount(int fill);
 }
