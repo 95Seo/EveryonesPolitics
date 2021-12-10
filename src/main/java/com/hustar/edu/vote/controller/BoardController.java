@@ -36,8 +36,6 @@ public class BoardController {
         boardDTO.setTitle(title);
         boardDTO.setContent(content);
         // 1 - 공약, 2 - 비하인드, 3 - 사용자 게시판
-        boardDTO.setDashboard_cd("3");
-
         boardService.insertBoard(boardDTO);
         return "/vote/board/boardList";
     }

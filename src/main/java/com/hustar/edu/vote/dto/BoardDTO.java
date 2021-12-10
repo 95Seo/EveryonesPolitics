@@ -18,4 +18,8 @@ public class BoardDTO {
     private Date sysmoddate;
     private String total_cd;
     private String dashboard_cd;
+    private int like_cnt;
+    private int dislike_cnt;
+    private int comment_cnt;
+
 }

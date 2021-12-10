@@ -17,54 +17,16 @@
                     </li>
                 </ul>
                 <ul class="list-bd">
-                    <li>
-                        <div class="no">1</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-31</div>
-                        <div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-                    <li>
-                        <div class="no">2</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-23</div>
-                        <div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-                    <li>
-                        <div class="no">3</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-23</div>
-                        <div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-                    <li>
-                        <div class="no">4</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-23</div>
-                        <div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-                    <li>
-                        <div class="no">5</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-23</div>
-                        <div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-                    <li>
-                        <div class="no">6</div>
-                        <div class="subject"><a href="/vote/promiseDetail">게시물 제목이 출력되는곳</a></div>
-                        <div class="date">2021-12-23</div><div class="writer">백동채</div>
-                        <div class="view-num">4</div>
-                        <div class="recommend-num">65</div>
-                    </li>
-
+                    <c:forEach items="${promiseboardList}" var="promise_list">
+                        <li>
+                            <div class="no"><c:out value="${promise_list.idx}" /></div>
+                            <div class="subject"><a href="/vote/promiseDetail?idx=${promise_list.idx}"><c:out value="${promise_list.title}" /></a></div>
+                            <div class="date"><c:out value="${promise_list.sysregdate}" /></div>
+                            <div class="writer"><c:out value="${promise_list.writer_idx}" /></div>
+                            <div class="view-num"><c:out value="${promise_list.view_cnt}" /></div>
+                            <div class="recommend-num">0</div>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="list-btn">

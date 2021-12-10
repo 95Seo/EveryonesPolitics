@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hustar.edu.vote.mapper.PromiseMapper">
+    <insert id="insertPromiseBoard" parameterType="BoardDTO">
+        insert into tb_promise(writer_idx, title, content, total_cd) values (#{writer_idx}, #{title}, #{content});
+    </insert>
+    <select id="selectPromiseBoardList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BoardDTO">
+        SELECT *
+        FROM tb_promise
+        WHERE use_yn = 'Y'
+        ORDER BY idx DESC,
+                 sysregdate DESC
+    </select>
+
+    <select id="selectPromiseBoardTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_promise
+        WHERE
+            use_yn = 'Y'
+    </select>
+
+    <select id="selectPromiseBoardDetail" parameterType="BoardDTO" resultType="BoardDTO">
+        SELECT *
+        from tb_promise
+        where idx = #{idx};
+    </select>
+        </mapper>
