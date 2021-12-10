@@ -47,6 +47,12 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs
 	implementation 'org.springframework.security:spring-security-taglibs:5.6.0'
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
+
+	runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+	apply plugin: 'idea'
+
+
 }
 
 test {

@@ -32,21 +32,21 @@ public class BoardController {
 
         BoardDTO boardDTO = new BoardDTO();
 
-        boardDTO.setWriter_idx(((PrincipalDetail) principal).getIdx());
+        boardDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
         boardDTO.setTitle(title);
         boardDTO.setContent(content);
-        // 1 - 공약, 2 - 비하인드, 3 - 사용자 게시판
-        boardDTO.setDashboard_cd("3");
 
         boardService.insertBoard(boardDTO);
-        return "/vote/board/boardList";
+        return "redirect:/vote/boardList";
     }
 
     @GetMapping("/vote/boardList")
     public String GetBoardListController (Criteria cri, Model model) {
         log.info("GetBoardListPage");
         int total = boardService.getTotal(cri);
+        cri.setRowStart((cri.getPageNum()-1) * cri.getAmount());
         List<BoardDTO> boardList = boardService.getBoardList(cri);
+        log.info("nick : " + boardList.get(0).getNickName());
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageMaker", new PageDTO(cri, total));
 

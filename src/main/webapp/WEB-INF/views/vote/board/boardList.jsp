@@ -48,12 +48,12 @@
                 <ul class="list-bd">
                     <c:forEach items="${boardList}" var="board_list">
                         <li>
-                            <div class="no"><c:out value="${board_list.idx}" /></div>
+                            <div class="no"><c:out value="${board_list.rownum}" /></div>
                             <div class="subject"><a href="/vote/boardDetail?${board_list.idx}"><c:out value="${board_list.title}" /></a></div>
                             <div class="date"><c:out value="${board_list.sysregdate}" /></div>
-                            <div class="writer"><c:out value="${board_list.idx}" /></div>
-                            <div class="view-num"><c:out value="${board_list.view_cnt}" /></div>
-                            <div class="recommend-num">0</div>
+                            <div class="writer"><c:out value="${board_list.nickName}" /></div>
+                            <div class="view-num"><c:out value="${board_list.viewCnt}" /></div>
+                            <div class="recommend-num"><c:out value="${board_list.likeCnt}" /></div>
                         </li>
                     </c:forEach>
                 </ul>

@@ -20,7 +20,7 @@ public class PromiseApiController {
     @PostMapping("/api/board")
     public ResponseDto<Integer> save(@RequestBody BoardDTO board,
                                      @AuthenticationPrincipal PrincipalDetail principal) {
-        board.setWriter_idx(principal.getIdx());
+        board.setWriterIdx(principal.getIdx());
         System.out.println("Content: " + board.getContent());
         promiseService.insertBoard(board);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
