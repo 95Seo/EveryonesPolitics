@@ -1,0 +1,246 @@
+/*=====================================================================
+                   myprofile section css
+=======================================================================*/
+
+/* ===================myprofile-info=================== */
+
+.myprofile-info-wrap {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.myprofile-inner {
+    padding-bottom: 40px;
+}
+
+.myprofile-inner ul>li {
+    padding: 10px;
+}
+
+.myprofile-box-01 {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.myprofile-left-img img {
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid 1px #ccc;
+}
+
+.myprofile-left-img {
+    padding-right: 20px;
+}
+
+.myprofile-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.myprofile-box-02 a {
+    font-size: 24px;
+    padding-right: 10px;
+}
+
+.myprofile-box-02 a:hover {
+    color:#e74c3c;
+}
+
+.myprofile-right button {
+    font-size: 24px;
+    padding: 4px;
+    color: white;
+    background-color: #c62368;
+    border-radius: 10px;
+    border: solid 1px black;
+}
+
+.myprofile-right button:hover {
+    color: white;
+    background-color: #e74c3c;
+}
+
+.myprofile-right h3 {
+    font-size: 30px;
+    color: #000;
+    padding: 4px;
+}
+
+.myprofile-box-02 ul {
+    display: flex;
+    justify-items: center;
+}
+
+.myprofile-inner h4 {
+    color: black;
+    margin: 0;
+    font-size: 26px;
+}
+
+.myprofile-inner p {
+    color: black;
+    font-size: 20px;
+}
+
+.myprofile-info-box-06-li img{
+    padding-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+/* ===============myprofile-write=================== */
+
+.myprofile-info h3{
+    color: #000;
+}
+
+.myprofile-write-wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.myprofile-write-box-03 {
+    padding:10px;
+}
+
+.myprofile-list-box>ul>li {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.myprofile-list-box>ul.myprofile-list-hd>li>div {
+    border-top: 3px solid #000;
+}
+
+.myprofile-list-box>ul.list-hd>li>div {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.myprofile-list-box>ul.list-bd>li>div.subject {
+    text-align: left;
+}
+
+.myprofile-list-btn {
+    text-align: right;
+    margin: 20px 0;
+}
+
+.myprofile-list-btn a {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    line-height: 40px;
+    padding: 0 20px;
+    font-size: 15px;
+}
+
+.myprofile-paging>ul {
+    display: flex;
+    justify-content: center;
+}
+
+.myprofile-paging>ul>li {
+    margin: 0 5px;
+}
+
+.myprofile-paging>ul>li>a {
+    font-size: 17px;
+    border: 1px solid #000;
+    display: block;
+    line-height: 30px;
+    padding: 0 10px;
+}
+
+.myprofile-paging>ul>li:first-child a {
+    color: green;
+}
+
+.myprofile-paging>ul>li:last-child a {
+    color: green;
+}
+
+.myprofile-paging>ul>li.on>a {
+    font-weight: 600;
+    color: red;
+    border: 1px solid red;
+}
+
+.myprofile-paging>ul>li:hover a {
+    color: red;
+    border: 1px solid red;
+}
+
+/* ===============myprofile-edit=================== */
+
+.myprofile-edit-title {
+    padding-bottom: 20px;
+}
+
+.myprofile-edit-box li{
+    padding: 10px;
+}
+
+.myprofile-edit-box li p {
+    font-size:  24px;
+}
+
+.myprofile-edit-box input[type="text"] {
+	width:100%;
+	height:40px;
+	border-radius:4px;
+	border: 1px solid #ccc;
+	padding:4px;
+	}
+
+.myprofile-edit-box input[type="text"]:hover{
+	background-color: #e74c3c;
+}
+
+.myprofile-edit-email input[type="text"] {
+    background-color: beige;
+    border: 0;
+}
+
+.myprofile-edit-img {
+    display: flex;
+    align-items: flex-end;
+}
+
+.myprofile-edit-img button {
+    border-radius: 5px;
+    border: solid 1px black;
+    background-color: white;
+    padding: 7px;
+}
+
+.myprofile-edit-img button:hover{
+    background-color:#e74c3c;
+    color: white;
+}
+
+.myprofile-edit-button {
+    display: flex;
+    justify-content: center
+}
+
+.myprofile-edit-button button{
+    border-radius: 5px;
+    border: solid 1px black;
+    background-color: white;
+    padding: 7px;
+}
+
+.myprofile-edit-button button:hover{
+    background-color:#e74c3c;
+    color: white;
+}
+/*=====================================================================
+                    End myprofile section css
+=======================================================================*/

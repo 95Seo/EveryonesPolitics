@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hustar.edu.vote.mapper.CalenDao">
+    <resultMap type="Calendar" id="calMap">
+        <result property="start" column="start1"/>
+        <result property="end" column="end1"/>
+    </resultMap>
+    <select id="calenList" resultMap="calMap">
+        SELECT id, title,
+        start1,
+        end1,
+        ALLDAY,
+        TEXTCOLOR,
+        BACKGROUNDCOLOR,
+        BORDERCOLOR
+        FROM tb_calendar
+    </select>
+</mapper>
+

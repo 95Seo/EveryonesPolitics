@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hustar.edu.vote.mapper.BoardMapper">
+    <insert id="insertBoard" parameterType="BoardDTO">
+        insert into tb_dashboard(writer_idx, title, content, total_cd) values (
+        #{writer_idx}, #{title}, #{content}, #{total_cd});
+    </insert>
+    <select id="selectBoardList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BoardDTO">
+        SELECT *
+        FROM tb_dashboard
+        WHERE use_yn = 'Y'
+        AND dashboard_cd = "3"
+        ORDER BY idx DESC,
+        sysregdate DESC
+        LIMIT (#{pageNum}-1)*(#{amount}+1), #{pageNum}*#{amount}
+    </select>
+
+    <select id="selectBoardTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_dashboard
+        WHERE
+            use_yn = 'Y'
+          AND
+            dashboard_cd = "3"
+    </select>
+</mapper>
