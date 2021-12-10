@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BoardService {
     public void insertBoard(BoardDTO boardDTO);
-    public List<BoardDTO> getBoardList(Criteria criteria);
+    public List<BoardDTO> getBoardList(int start, int end, int fill);
     //추가(전체 글 개수)
-    public int getTotal(Criteria cri);
+    public int getTotal(int fill);
 }

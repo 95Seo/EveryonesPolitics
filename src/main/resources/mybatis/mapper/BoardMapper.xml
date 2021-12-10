@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hustar.edu.vote.mapper.BoardMapper">
+
     <insert id="insertBoard" parameterType="BoardDTO">
         insert into tb_board(writer_idx, title, content)
         values (#{writer_idx}, #{title}, #{content});
     </insert>
-    <select id="selectBoardList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BoardDTO">
+    <select id="selectBoardList" parameterType="int" resultType="BoardDTO">
         SELECT c.*
         FROM (SELECT
-                @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt
-            FROM tb_board a,
-                tb_user b,
-                (SELECT @ROWNUM := 0) TMP
-            WHERE a.use_yn = 'Y'
-            AND a.WRITER_IDX = b.IDX
-            ORDER BY a.idx DESC,
-            a.sysregdate DESC) c
-        LIMIT #{rowStart}, #{amount};
+        @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt, total_cd
+        FROM tb_board a,
+        tb_user b,
+        (SELECT @ROWNUM := 0) TMP
+        WHERE a.use_yn = 'Y'
+        <if test="fill != 5 ">AND a.total_cd = #{fill}</if>
+        AND a.WRITER_IDX = b.IDX) c
+        ORDER BY c.idx DESC,
+        c.sysregdate DESC
+        LIMIT #{start}, #{end};
     </select>
 
-    <select id="selectBoardTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
+    <select id="selectBoardTotalCount" parameterType="int" resultType="int">
         SELECT COUNT(*)
         FROM tb_board
         WHERE use_yn = 'Y'
+        <if test="fill != 5 ">AND total_cd = #{fill}</if>
     </select>
 </mapper>

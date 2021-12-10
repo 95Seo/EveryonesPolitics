@@ -22,21 +22,21 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDTO> getBoardList(Criteria criteria) {
+    public List<BoardDTO> getBoardList(int start, int end, int fill) {
         List<BoardDTO> boardList = Collections.emptyList();
 
-        int boardTotalCount = boardMapper.selectBoardTotalCount(criteria);
+        int boardTotalCount = boardMapper.selectBoardTotalCount(fill);
 
         if (boardTotalCount > 0) {
-            boardList = boardMapper.selectBoardList(criteria);
+            boardList = boardMapper.selectBoardList(start, end, fill);
         }
 
         return boardList;
     }
 
     @Override
-    public int getTotal(Criteria cri) {
+    public int getTotal(int fill) {
         log.info("get total count");
-        return boardMapper.selectBoardTotalCount(cri);
+        return boardMapper.selectBoardTotalCount(fill);
     }
 }

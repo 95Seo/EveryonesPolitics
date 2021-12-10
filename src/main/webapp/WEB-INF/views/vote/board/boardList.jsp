@@ -3,35 +3,112 @@
 <%@include file="../../include/header.jsp"%>
 
 <script>
-    $(document).ready(function() {
+    var obj={};
+    obj.dataType = "JSON";
+    obj.error=function(e){console.log(e)};
 
-        var actionForm = $("#actionForm");
+    showPage = 1; //보여줄 페이지
+    showFill = 5;
 
-        var pageNumTag = $("input[name='pageNum']").clone();
-        var amountTag = $("input[name='amount']").clone();
-        var keywordTag = $("input[name='keyword']").clone();
-        var typeTag = $("input[name='type']").clone();
+    listCall(showPage, showFill); //리스트 호출 함수
 
-        // 페이지 번호 클릭 이벤트
-        $(".paginate_button a").on("click", function(e) {
-            e.preventDefault();
-            // console.log('click');
-            actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-            actionForm.submit();
-        });
+    $(document).on("change","input[type=radio]",function(){
+        var fill=$('input[name=fill]:checked').val();
+        //라디오 버튼 값을 가져온다.
+        listCall(showPage, fill);
     });
+
+    // /listSub/{pagePerCnt}/{page}
+    function listCall(page, fill){
+        obj.url="/vote/board/boardList/";
+        obj.type="get";
+        obj.data ={};
+        obj.url +=10+"/";
+        obj.url += page+"/"
+        obj.url += fill;
+        console.log(obj.url);
+
+        obj.success= function(d){
+            console.log(d);
+            listPrint(d.list); //리스트 그리기
+            showPage = d.currPage;
+
+            pagePrint(d.currPage,d.range, d.fill) //페이징 처리
+        };
+        ajaxCall(obj);
+    }
+
+    function ajaxCall(obj){
+        $.ajax(obj);
+    }
+
+    //받아온 리스트 그리기
+    function listPrint(list){
+        var content="";
+        list.forEach(function(item, idx){
+            content += "<li>"
+            content +="<div class='no'>"+item.rownum+"</div>"
+            content +="<div class='subject'><a href=/vote/boardDetail?"+item.idx+" style='color: #797979'>"+item.title+"</a></div>"
+            content +="<div class='date'>"+item.sysregdate+"</div>"
+            content +="<div class='writer'>"+item.nickName+"</div>"
+            content +="<div class='view-num'>"+item.viewCnt+"</div>"
+            content +="<div class='recommend-num'>"+item.likeCnt+"</div>"
+            content += "</li>"
+        });
+        //내용 붙이기
+        $("#list").empty();
+        $("#list").append(content);
+    }
+
+
+    //페이징 그리기 => 플러그인을 사용하면 쓸 필요가 없음.
+    function pagePrint(currPage,range,fill){
+        //이전
+        var start =1;
+        var end = 5;
+        var content="";
+
+        if(currPage>5){
+            //end = currPage + 4; 일 경우 페이지 변화 시 마다 페이징이 이동된다.
+            //우리가 원하는 것은 5 단위로 움직일때 새로운 페이징 생성
+            end = Math.ceil(currPage/5)*5; //생성가능 페이지수? 6,11,16 씩 대입해 보자
+            start= end - 4;
+            content +="<li><a href='#' onclick='listCall("+(start-1)+','+fill+")' class='fa fa-angle-left'>이전</a> |</li> ";
+        }
+
+        for(var i=start; i<=end;i++){
+            //i는 절대 생성 가능 페이지보다 크면 안된다.
+            if(i <= range){
+                if(currPage == i){
+                    content += "<li  class='active'><a style='color: white'>"+i+"</a></li>"
+                }else{
+                    content += "<li><a href='#' onclick='listCall("+i+','+fill+")' style='color: black'>"+i+"</a></li>"
+                }
+            }
+        }
+
+        //다음 (range가 5보다 클 경우)
+        if(end < range){
+            content += " <li><a href='#' onclick='listCall("+(end+1)+','+fill+")' class='fa fa-angle-right'>다음</a></li>"
+        }
+        $("#paging").empty();
+        $("#paging").append(content);
+    }
 </script>
 
-<!-- Form 시작 -->
-<form id='actionForm' action="/vote/boardList" method='get'>
-    <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-    <input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
-    <input type='hidden' name='keyword'	value='<c:out value="${ pageMaker.cri.keyword }"/>'>
-</form>
+
+
+
 
 <!-- board Section(게시판 리스트)-->
 <section id="board-list" class="board-list">
+    <div id="fillter">
+        <input type="radio" name="fill" value="5" checked>전체
+        <input type="radio" name="fill" value="1">이재명
+        <input type="radio" name="fill" value="2">윤석열
+        <input type="radio" name="fill" value="3">심상정
+        <input type="radio" name="fill" value="4">안철수
+    </div>
     <div class="promise-list-wrap">
         <div class="promise-wrap">
             <div class="list-box">
@@ -45,17 +122,7 @@
                         <div class="recommend-num">추천 수</div>
                     </li>
                 </ul>
-                <ul class="list-bd">
-                    <c:forEach items="${boardList}" var="board_list">
-                        <li>
-                            <div class="no"><c:out value="${board_list.rownum}" /></div>
-                            <div class="subject"><a href="/vote/boardDetail?${board_list.idx}"><c:out value="${board_list.title}" /></a></div>
-                            <div class="date"><c:out value="${board_list.sysregdate}" /></div>
-                            <div class="writer"><c:out value="${board_list.nickName}" /></div>
-                            <div class="view-num"><c:out value="${board_list.viewCnt}" /></div>
-                            <div class="recommend-num"><c:out value="${board_list.likeCnt}" /></div>
-                        </li>
-                    </c:forEach>
+                <ul id="list" class="list-bd">
                 </ul>
             </div>
             <div class="list-btn">
@@ -64,18 +131,7 @@
 
             <div class="paging">
                 <!--  Pagination 시작 -->
-                <ul class="pagination">
-                    <c:if test="${pageMaker.prev}">
-                        <li class="paginate_button previous"><a href="${pageMaker.startPage -1}">Previous</a></li>
-                    </c:if>
-                    <c:forEach var="num" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
-                        <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-                            <a href="${num}">${num}</a>
-                        </li>
-                    </c:forEach>
-                    <c:if test="${pageMaker.next}">
-                        <li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
-                    </c:if>
+                <ul class="pagination" id="paging">
                 </ul>
                 <!--  Pagination 끝 -->
             </div>

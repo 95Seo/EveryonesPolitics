@@ -12,16 +12,6 @@ public class VoteController {
 		log.info("VoteMainPage");
 		return "/vote/main";
 	}
-	@GetMapping("/vote/boardCreate")
-	public String voteBoardController() {
-		log.info("VoteBoardPage");
-		return "/vote/board/boardCreate";
-	}
-	@GetMapping("/vote/boardDetail")
-	public String voteBoardDetailController() {
-		log.info("VoteBoardDetailPage");
-		return "/vote/board/boardDetail";
-	}
 
 //	@GetMapping("/vote/promiseDetail")
 //	public String votePromiseDetailController() {
