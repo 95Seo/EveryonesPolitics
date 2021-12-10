@@ -4,8 +4,10 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.hustar.edu.vote.auth.PrincipalDetail;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -15,18 +17,21 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
 public class S3Uploader {
 
+    @Autowired
     private final AmazonS3Client amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;  // S3 버킷 이름
 
-    public String upload(MultipartFile multipartFile) throws IOException {
+    public UploadFile upload(MultipartFile multipartFile) throws IOException {
+        System.out.println("오십니까1");
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
 
@@ -34,16 +39,26 @@ public class S3Uploader {
     }
 
     // S3로 파일 업로드하기
-    private String upload(File uploadFile) {
-        String fileName = uploadFile.getName();   // S3에 저장된 파일 이름
+    private UploadFile upload(File uploadFile) {
+        System.out.println("오십니까2");
+        String fileName = "BOARD/IMAGES/"+UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름   // S3에 저장된 파일 이름
+        System.out.println("fileName : " + fileName);
         String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
+        System.out.println("uploadImageUrl : " + uploadImageUrl);
         removeNewFile(uploadFile);
-        return uploadImageUrl;
+        UploadFile upload = new UploadFile();
+        upload.setFile_nm(fileName);
+        upload.setFile_dir(uploadImageUrl);
+        System.out.println("uploadImageUrl1 : " + uploadImageUrl);
+        return upload;
     }
 
     // S3로 업로드
     private String putS3(File uploadFile, String fileName) {
+        System.out.println("안 오시나요 1 ");
+        System.out.println("bucket :" + bucket);
         amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        System.out.println("안 오시나요 2");
         return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 

@@ -2,8 +2,6 @@ package com.hustar.edu.vote.controller;
 
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BoardDTO;
-import com.hustar.edu.vote.paging.Criteria;
-import com.hustar.edu.vote.paging.PageDTO;
 import com.hustar.edu.vote.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +22,7 @@ public class BoardController {
 
     @PostMapping("/vote/boardCreate")
     public String PostBoardCreateController (@RequestParam("title") String title, @RequestParam("content") String content) {
+
         log.info("PostBoardCreatePage");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -55,6 +53,12 @@ public class BoardController {
 
     @GetMapping("/vote/boardCreate")
     public String voteBoardController() {
+        try {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            PrincipalDetail userDetails = (PrincipalDetail) principal;
+        } catch (Exception e) {
+            return "redirect:/vote/boardList";
+        }
         log.info("VoteBoardPage");
         return "/vote/board/boardCreate";
     }

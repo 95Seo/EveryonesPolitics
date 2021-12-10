@@ -1,5 +1,6 @@
 package com.hustar.edu.vote.FileUpload;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,20 +15,29 @@ import java.util.HashMap;
 @RestController
 public class FileUploadHandler {
 
+    @Autowired
+    S3Uploader s3Uploader;
+
     @RequestMapping(value = "/image/drag", produces = MediaType.APPLICATION_JSON_VALUE, method= RequestMethod.POST)
     @ResponseBody
     public Object handleFileUpload(@RequestParam("upload") MultipartFile uploadfile) {
         
         System.out.println("오십니까");
 
+        System.out.println("uploadName : "+uploadfile.getOriginalFilename());
+
         HashMap<String, Object> map = new HashMap<>();
 
         try {
-//            UploadFile uploadedFile = S3Uploader.upload(uploadfile);
-
+            System.out.println("오십니까3");
+            UploadFile uploadedFile = s3Uploader.upload(uploadfile);
+            System.out.println("오십니까4");
             map.put("uploaded", 1);
-//            map.put("url", uploadedFile.getFile_dir());
-//            map.put("fileName", uploadedFile.getFile_nm());
+            map.put("url", uploadedFile.getFile_dir());
+            map.put("fileName", uploadedFile.getFile_nm());
+
+            System.out.println("uri : " + uploadedFile.getFile_dir());
+            System.out.println("file_nm : " + uploadedFile.getFile_nm());
 
             return map;
         } catch (Exception e) {
@@ -44,16 +54,23 @@ public class FileUploadHandler {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 
+        System.out.println("uploadName : "+upload.getOriginalFilename());
+
         try {
             String callback = request.getParameter("CKEditorFuncNum");
 
-//            UploadFile uploadedFile = S3Uploader.upload(upload);
+            System.out.println("오십니까5");
+            UploadFile uploadedFile = s3Uploader.upload(upload);
+            System.out.println("오십니까6");
+
+            System.out.println("uri1 : " + uploadedFile.getFile_dir());
+            System.out.println("file_nm1 : " + uploadedFile.getFile_nm());
 
             printWriter = response.getWriter();
             printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
                     + callback
                     + ",'"
-//                    + uploadedFile.getFile_dir()
+                    + uploadedFile.getFile_dir()
                     + "','이미지를 업로드 하였습니다.'"
                     + ")</script>");
             printWriter.flush();

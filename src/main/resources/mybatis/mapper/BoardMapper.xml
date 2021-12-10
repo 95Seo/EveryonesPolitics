@@ -4,7 +4,7 @@
 
     <insert id="insertBoard" parameterType="BoardDTO">
         insert into tb_board(writer_idx, title, content)
-        values (#{writer_idx}, #{title}, #{content});
+        values (#{writerIdx}, #{title}, #{content});
     </insert>
     <select id="selectBoardList" parameterType="int" resultType="BoardDTO">
         SELECT c.*

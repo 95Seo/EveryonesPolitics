@@ -29,6 +29,11 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user_name_attribute: id
 
+  servlet:
+    multipart:
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
+
 mybatis:
   type-aliases-package: com.hustar.edu.vote.dto
   mapper-locations: classpath:mybatis/mapper/*.xml
