@@ -43,9 +43,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public tb_user login(String username) {
+    public tb_user getUser(int idx) {
         System.out.println("로그인 구현체");
-        return userMapper.login(username);
+        return userMapper.getUser(idx);
     }
 
     public void updateUser(String nickname, String username) {

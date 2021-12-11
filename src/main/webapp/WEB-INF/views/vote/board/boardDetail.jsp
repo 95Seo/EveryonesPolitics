@@ -1,5 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../../include/header.jsp"%>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+<script>
+    var obj={};
+    obj.dataType = "JSON";
+    obj.error=function(e){console.log(e)};
+
+    board_nm = "tb_board"; //보여줄 페이지
+    board_idx = JSON.parse ( ${json} );
+
+    detailCall(board_nm, board_idx); //리스트 호출 함수
+
+    $(document).on("click","a[class=view-vote]",function(){
+        check_id = this.id;
+
+        if(check_id == 'guest') {
+            alert("로그인이 필요한 서비스 입니다.");
+        } else {
+            if(check_id == 'active') {
+                like = 'N'
+            } else if(check_id == 'no') {
+                like = 'Y'
+            }
+            updateLike(board_nm, board_idx, like);
+        }
+    });
+
+    // /vote/updateLike/{page}/{idx}/{like}
+    function updateLike(page,idx,like){
+        obj.url="/vote/updateLike/";
+        obj.type="get";
+        obj.data ={};
+        obj.url += page + "/";
+        obj.url += idx + "/"
+        obj.url += like;
+        console.log(obj.url);
+
+        obj.success= function(d){
+            console.log(d);
+            detailCall(board_nm, board_idx);
+        };
+
+        ajaxCall(obj);
+    }
+
+    // /vote/board/boardDetail/{page}/{idx}
+    // likeCnt - 좋아요 수
+    // likeYn - 좋아요 여부
+    function detailCall(page,idx){
+        obj.url="/vote/board/boardDetail/";
+        obj.type="get";
+        obj.data ={};
+        obj.url += page + "/";
+        obj.url += idx;
+        console.log(obj.url);
+
+        obj.success= function(d){
+            console.log(d);
+            likePrint(d.likeCnt, d.like.likeYn); //리스트 그리기
+        };
+        ajaxCall(obj);
+    }
+
+    // ajax 호출
+    function ajaxCall(obj){
+        $.ajax(obj);
+    }
+
+    // 좋아요 그리기
+    function likePrint(likes, my_like){
+        like_cnt="<b>"+likes+"</b>";
+        if(my_like == 'Y') {
+            $("a[class=view-vote]").attr('id', 'active');
+        } else if(my_like == 'N') {
+            $("a[class=view-vote]").attr('id', 'no');
+        } else {
+            $("a[class=view-vote]").attr('id', 'guest');
+        }
+        //내용 붙이기
+        $(".likeCnt").empty();
+        $(".likeCnt").append(like_cnt);
+    }
+</script>
 <div class="view-wrap">
     <div class="view-box">
         <div class="view-nav-title">
@@ -13,50 +98,38 @@
                         </div>
                     </div>
                     <div class="view-profile-right">
-                        <a href="#none">글쓴이</a>
+                        <a href="<c:out value="${user.profile_img}"/>"><c:out value="${user.nickname}"/></a>
                         <p>14일전</p>
                     </div>
                 </div>
                 <div class="view-inner-content">
-                    <div class="view-title">
-                        <h2>윤석열이 왜 당대표... 20,30세대 분노</h2>
+                    <div class="view-title" id="title">
+                        <h2><c:out value="${board.title}" /></h2>
                     </div>
                     <div class="recommend-view-flex">
                         <div class="recommend-view-flex-wrap">
                             <div class="recommend-view-flex-wrap-left">
                                 <span class="recommend-span-txt">조회 수</span>
-                                <span class="recmmend-span-num"><b>12</b></span>
+                                <span class="recmmend-span-num" id="viewCnt"><b><c:out value="${board.viewCnt}" /></b></span>
                             </div>
                             <div class="recommend-view-flex-wrap-right">
                                 <span class="recommend-span-txt">추천 수</span>
-                                <span class="recmmend-span-num"><b>2</b></span>
+                                <span class="likeCnt recmmend-span-num"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="view-txt">
-                <p>낮엔 파란 하늘 별이 보이는 밤 기분 좋은날 오랜만에 볼까<br>
-                    내가 사랑하는 삶을 사랑하지 나는 기분 좋은날 우야야야양야<br>
-                    아저스트워너 비 칠 마 호미 하얀색의 모래 또 파란색의 물위에<br>
-                    파도들이 쓱 밀려오지 전화해둬 잡아줘 펜션 이미 올라온 텐션 yeah
-                    나는 문재인을 사랑합니다.
-                </p>
+            <div class="view-txt" id="content">
+                <c:out value="${board.content}" escapeXml="false" />
             </div>
             <div class="view-button-vote">
-                <a href="#none" class="view-vote">
+                <a href="#none" name="like" class="view-vote">
                     <div>
                         <i class="fas fa-heart"></i>
-                        <span id="view-vote-count">1</span>
+                        <span id="view-vote-count" class="likeCnt"></span>
                     </div>
                     <p>공감</p>
-                </a>
-                <a href="#none" class="view-declare">
-                    <div>
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span id="view-declare-count">2</span>
-                    </div>
-                    <p>신고</p>
                 </a>
             </div>
             <div class="view-button-box">
@@ -65,11 +138,13 @@
                         <button>목록</button>
                     </a>
                 </div>
-                <div class="view-write-button">
-                    <a href="/vote/boardCreate">
-                        <button>글쓰기</button>
-                    </a>
-                </div>
+                <c:if test="${board.writerIdx==principal.idx}">
+                    <div class="view-write-button">
+                        <a href="/vote/boardUpdate?idx=<c:out value="${board.idx}" />">
+                            <button>수정</button>
+                        </a>
+                    </div>
+                </c:if>
             </div>
         </div>
         <div class="comment-wrap">

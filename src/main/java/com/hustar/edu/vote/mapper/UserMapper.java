@@ -15,8 +15,8 @@ public interface UserMapper extends JpaRepository<tb_user, Integer> {
 
     Optional<tb_user> findByUsername(String username);
 
-    @Query(value = "SELECT * FROM user WHERE username = ?1", nativeQuery = true)
-    tb_user login(String username);
+    @Query(value = "SELECT * FROM tb_user WHERE idx = ?1", nativeQuery = true)
+    tb_user getUser(int idx);
 
     @Query(value = "UPDATE user SET nickname=?1, update_date=now() WHERE username = ?3", nativeQuery = true)
     void updateUser(String nickname, String username);

@@ -1,8 +1,12 @@
 package com.hustar.edu.vote.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BoardDTO;
+import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.service.BoardService;
+import com.hustar.edu.vote.service.CommonService;
+import com.hustar.edu.vote.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,13 +16,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller
 public class BoardController {
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    CommonService commonService;
 
     @PostMapping("/vote/boardCreate")
     public String PostBoardCreateController (@RequestParam("title") String title, @RequestParam("content") String content) {
@@ -39,8 +50,16 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardList")
-    public String GetBoardListController (Model model) {
+    public String GetBoardListController (@RequestParam(value = "showPage", required = false, defaultValue = "1") int showPage, Model model) {
         log.info("GetBoardListPage");
+
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonText = mapper.writeValueAsString(showPage);
+            model.addAttribute( "json", jsonText );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        int total = boardService.getTotal(cri);
 //        cri.setRowStart((cri.getPageNum()-1) * cri.getAmount());
 //        List<BoardDTO> boardList = boardService.getBoardList(cri);
@@ -52,7 +71,7 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardCreate")
-    public String voteBoardController() {
+    public String voteBoardCreateController() {
         try {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             PrincipalDetail userDetails = (PrincipalDetail) principal;
@@ -63,9 +82,37 @@ public class BoardController {
         return "/vote/board/boardCreate";
     }
 
+    @GetMapping("/vote/boardUpdate")
+    public String voteGetBoardUpdateController(int idx, Model model) {
+        log.info("VoteBoardUpdatePage");
+        model.addAttribute("board", boardService.selectBoardDetail(idx));
+        return "/vote/board/boardUpdate";
+    }
+
+    @PostMapping("/vote/boardUpdate")
+    public String votePostBoardUpdateController(BoardDTO boardDTO) {
+        log.info("VoteBoardUpdatePage");
+        boardService.updateBoardDetail(boardDTO);
+        return "redirect:/vote/boardDetail?idx="+boardDTO.getIdx();
+    }
+
     @GetMapping("/vote/boardDetail")
-    public String voteBoardDetailController() {
+    public String voteBoardDetailController(int idx, Model model, HttpServletRequest request, HttpServletResponse response) {
+        commonService.viewCountUp("tb_board", idx, request, response);
         log.info("VoteBoardDetailPage");
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonText = mapper.writeValueAsString(idx);
+            model.addAttribute( "json", jsonText );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        BoardDTO boardDTO = boardService.selectBoardDetail(idx);
+        tb_user user = userService.getUser(boardDTO.getWriterIdx());
+
+        model.addAttribute("board", boardDTO);
+        model.addAttribute("user", user);
+
         return "/vote/board/boardDetail";
     }
 }

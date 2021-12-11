@@ -6,6 +6,15 @@
         insert into tb_board(writer_idx, title, content)
         values (#{writerIdx}, #{title}, #{content});
     </insert>
+
+    <update id="updateBoardDetail" parameterType="BoardDTO">
+        update tb_board
+        set title = #{title},
+            content = #{content},
+            sysmoddate = #{sysmoddate}
+        where idx = #{idx}
+    </update>
+
     <select id="selectBoardList" parameterType="int" resultType="BoardDTO">
         SELECT c.*
         FROM (SELECT
@@ -19,6 +28,12 @@
         ORDER BY c.idx DESC,
         c.sysregdate DESC
         LIMIT #{start}, #{end};
+    </select>
+
+    <select id="selectBoardDetail" parameterType="int" resultType="BoardDTO">
+        SELECT *
+        FROM tb_board
+        WHERE idx = #{idx}
     </select>
 
     <select id="selectBoardTotalCount" parameterType="int" resultType="int">

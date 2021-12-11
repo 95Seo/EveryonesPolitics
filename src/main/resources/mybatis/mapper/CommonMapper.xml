@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hustar.edu.vote.mapper.CommonMapper">
+
+    <update id="viewCountUp">
+        <if test="table_nm == 'tb_board'">
+            update tb_board set view_cnt = view_cnt + 1 where idx = #{idx}
+        </if>
+        <if test="table_nm == 'tb_promise'">
+            update tb_promise set view_cnt = view_cnt + 1 where idx = #{idx}
+        </if>
+        <if test="table_nm == 'tb_behind'">
+            update tb_behind set view_cnt = view_cnt + 1 where idx = #{idx}
+        </if>
+    </update>
+
+    <select id="getLike" parameterType="LikeDTO" resultType="LikeDTO">
+        select like_yn
+        from tb_like
+        where writer_idx = #{writerIdx} AND
+            board_nm = #{boardNm} AND
+            board_idx = #{boardIdx}
+    </select>
+
+    <select id="getLikeCount" parameterType="LikeDTO" resultType="int">
+        select COUNT(*)
+        from tb_like
+        where board_nm = #{boardNm} AND
+            board_idx = #{boardIdx} AND
+              like_yn = 'Y'
+    </select>
+
+    <update id="updateLike" parameterType="LikeDTO">
+        update tb_like set like_yn = #{likeYn}
+        where writer_idx = #{writerIdx} AND
+              board_nm = #{boardNm} AND
+              board_idx = #{boardIdx}
+    </update>
+
+    <insert id="insertLike" parameterType="LikeDTO">
+        insert into tb_like(writer_idx, board_idx, board_nm, like_yn)
+        values (#{writerIdx}, #{boardIdx}, #{boardNm}, #{likeYn})
+    </insert>
+
+</mapper>

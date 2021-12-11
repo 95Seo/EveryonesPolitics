@@ -1959,22 +1959,17 @@ li .single_team_text p {
   padding-bottom: 50px;
 }
 
-.view-button-vote .view-vote {
-  width: 60px;
-  height: 60px;
-  border: 2px solid #c62368;
-  color: #c62368;
-  border-radius: 4px;
-  text-align: center;
-  margin: 20px 5px 0 0;
-}
-
 .view-button-vote .view-vote:hover{
   border: 2px solid #e74c3c;
   color: #e74c3c;
 }
 
-.view-button-vote .view-declare {
+.view-button-vote #active {
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.view-button-vote .view-vote {
   width: 60px;
   height: 60px;
   border: 2px solid #000;
@@ -1982,11 +1977,6 @@ li .single_team_text p {
   border-radius: 4px;
   text-align: center;
   margin: 20px 5px 0 0;
-}
-
-.view-button-vote .view-declare:hover{
-  border: 2px solid #e74c3c;
-  color: #e74c3c;
 }
 
 .view-button-vote a p {
