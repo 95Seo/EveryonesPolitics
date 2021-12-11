@@ -18,33 +18,58 @@ document.addEventListener('DOMContentLoaded', function() {
       initialView: 'dayGridMonth',   //초기 로드 될때 보이는 캘린더 화면( 기본 설정: 달)
       locale:'ko',                   //한국어 설정
 
+        eventDidMount: function (info) {
+            tippy(info.el,{
+
+                theme : 'tomato',
+                content: '<div class="CalendarTitle" style="background : '+info.event.backgroundColor+';" ><p>'
+                    + info.event.title + '</p></div>'
+                    + '<div class="CalendarInfo"><p><strong>후보자:</strong>' + info.event.title + '</p>'
+                    + '<p><strong>정&nbsp&nbsp당:</strong>' + info.event.extendedProps.groupname + '</p></div>'
+                    + '<div class ="CalendarContent"><p><strong>위치:</strong>' + info.event.extendedProps.location + '</p>'
+                    + '<p><strong>내용:</strong>' + info.event.extendedProps.description +  '</p></div>',
+                allowHTML: true,
+            })
+        },
 
 
+        eventClick: function (arg){
+            //있는 일정 클릭시,
+            console.log("#등록된 일정 클릭#");
+            console.log(arg.event);
 
-      eventClick: function (arg){
-        //있는 일정 클릭시,
-        console.log("#등록된 일정 클릭#");
-        console.log(arg.event);
+            if(arg.event.url){
+                window.open(arg.event.url);
+            }
+        },
+        editable: true,
+        dayMaxEvents: true, // 너무 많은 이벤트가 있을떄 "more" 링크 생기게 해주는 부분
+        events:[{"id":1,
+            "groupname":"민주당",
+            "title":"이재명",
+            "location":"더불어민주당 중앙당사 4층",
+            "description": '김관영.채이배 전 국회의원 입당식',
+            "url": 'https://twitter.com/TheMinjoo_Kr/status/1468883507019935747',
+            "start":"2021-12-07",
+            "end":"2021-12-08",
+            "allday":true,
+            "backgroundColor":"#0178ba",
+            "borderColor":"#0178ba"}]
 
-        if (confirm('Are you sure you want to delete this event?')){
-          arg.event.remove()
-        }
-      },
-      editable: true,
-      dayMaxEvents: true, // 너무 많은 이벤트가 있을떄 "more" 링크 생기게 해주는 부분
-      events: function(info, successCallback, failureCallback){
-            $.ajax({
-              type: "get",
-              url: "calendar.do?method=data",
-              dataType: 'json',
-
-                success: function(info) {
-                  successCallback(info);
-                }
-
-
-            }); //ajax end
-          }, //events:function end
+        // events: function(info, successCallback, failureCallback){
+        //     $.ajax({
+        //       type: "get",
+        //       url: "calendar.do?method=data",
+        //       dataType: 'json',
+        //
+        //
+        //         success: function(info) {
+        //           successCallback(info);
+        //         }
+        //
+        //
+        //     }); //ajax end
+        //   }, //events:function end
 
       //===================== ajax데이터 불러올 부분 ========================//
     });

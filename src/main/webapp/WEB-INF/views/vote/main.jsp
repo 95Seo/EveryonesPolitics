@@ -45,8 +45,8 @@
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
   <!-- fullcalendar 언어 CDN -->
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-  <script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script>
-  <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
   <!-- calendar custom JS-->
   <script src="../resources/js/calendar.js"></script>
 
