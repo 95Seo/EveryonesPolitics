@@ -163,52 +163,54 @@
         <div class="container">
           <div class="row">
             <div class="main_feature text-center">
-              <div class="col-sm-3">
-                <div class="single_feature">
-                  <div class="single_feature_icon">
-                    <i class="fa fa-clone"></i>
+
+              <a href="#history">
+                <div class="col-sm-3">
+                  <div class="single_feature">
+                    <div class="single_feature_icon">
+                      <i class="fa fa-clone"></i>
+                    </div>
+                    <h4>스케줄</h4>
+                    <div class="separator3"></div>
                   </div>
-
-                  <h4>스케줄</h4>
-                  <div class="separator3"></div>
-
                 </div>
-              </div>
+              </a>
 
-              <div class="col-sm-3">
-                <div class="single_feature">
-                  <div class="single_feature_icon">
-                    <i class="fa fa-heart-o"></i>
+              <a href="/vote/promiseList">
+                <div class="col-sm-3">
+                  <div class="single_feature">
+                    <div class="single_feature_icon">
+                      <i class="fa fa-heart-o"></i>
+                    </div>
+                    <h4>공약</h4>
+                    <div class="separator3"></div>
                   </div>
-
-                  <h4>공약</h4>
-                  <div class="separator3"></div>
-
                 </div>
-              </div>
+              </a>
 
-              <div class="col-sm-3">
-                <div class="single_feature">
-                  <div class="single_feature_icon">
-                    <i class="fa fa-lightbulb-o"></i>
+              <a href="/vote/behindList">
+                <div class="col-sm-3">
+                  <div class="single_feature">
+                    <div class="single_feature_icon">
+                      <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                    <h4>비하인드</h4>
+                    <div class="separator3"></div>
                   </div>
-                  <h4>비하인드</h4>
-                  <div class="separator3"></div>
-
                 </div>
-              </div>
+              </a>
 
-              <div class="col-sm-3">
-                <div class="single_feature">
-                  <div class="single_feature_icon">
-                    <i class="fa fa-comments-o"></i>
+              <a href="/vote/boardList">
+                <div class="col-sm-3">
+                  <div class="single_feature">
+                    <div class="single_feature_icon">
+                      <i class="fa fa-comments-o"></i>
+                    </div>
+                    <h4>게시판</h4>
+                    <div class="separator3"></div>
                   </div>
-
-                  <h4>게시판</h4>
-                  <div class="separator3"></div>
-
                 </div>
-              </div>
+              </a>
 
             </div>
 
@@ -282,9 +284,7 @@
           <img src="../resources/images/pf1.jpeg" alt="" />
           <a href="/vote/promiseList">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt/p>
             </div>
           </a>
         </div>
@@ -292,9 +292,7 @@
           <img src="../resources/images/pf2.jpeg" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>
@@ -302,9 +300,7 @@
           <img src="../resources/images/pf3.jpeg" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>
@@ -312,9 +308,7 @@
           <img src="../resources/images/pf4.jpeg" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>
@@ -322,9 +316,7 @@
           <img src="../resources/images/pf5.png" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>
@@ -333,9 +325,7 @@
           <img src="../resources/images/pf6.png" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>
@@ -343,9 +333,7 @@
           <img src="../resources/images/pf7.png" alt="" />
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
-              <div class="separator4"></div>
               <h3>자세히보기</h3>
-              <p>art / t-shirt</p>
             </div>
           </a>
         </div>

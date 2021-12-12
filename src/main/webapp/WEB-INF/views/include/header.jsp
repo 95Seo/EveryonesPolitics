@@ -81,8 +81,11 @@
   </head>
 
   <style>
-    .main_menu_bg .navbar-nav > li > a{
-      color: #000
+
+
+    .header{
+      background-color: #23272b;
+      margin-bottom: 35px;
     }
 
 
