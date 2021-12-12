@@ -255,9 +255,6 @@ section .subtitle h5 {
 
 section {
   width: 100vw;
-
-  display: flex;
-  align-items: center;
 }
 .parallax-section {
   max-width: 100%;
@@ -1711,7 +1708,7 @@ li .single_team_text p {
 
 .list-btn {
   text-align: right;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .list-btn a {
@@ -1868,6 +1865,42 @@ li .single_team_text p {
   border: 1px solid #f78928;
 }
 
+.board-list #fillter{
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.board-list #fillter ul{
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.board-list #fillter ul li input[type=radio]{
+  display: none;
+  margin: 10px;
+}
+
+.board-list #fillter ul li input[type=radio] + label{
+  display: inline-block;
+  padding: 8px 19px;
+  background-color: #fff;
+  border: 1px solid #a12c2f;
+  border-radius: 45px;
+  margin: 0px 5px;
+  font-size: 13px !important;
+  width: 110px;
+  text-align: center;
+}
+.board-list #fillter ul li input[type=radio] + label:hover{
+  background-color: #a12c2f;
+  color: #fff;
+}
+.board-list #fillter ul li input[type=radio] + label:active{
+  background-color: #a12c2f;
+  color: #fff;
+}
 
 /*=====================================================================
                     board-detail(view) section css

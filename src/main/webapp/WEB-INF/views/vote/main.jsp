@@ -496,7 +496,7 @@
 
 
   <!-- Blog Section (투표)-->
-  <section id="blog" class="blog">
+  <section id="blog" class="blog" style="display: flex;">
     <div class="container-fluid">
       <div class="row">
         <div class="main_blog sections">

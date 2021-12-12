@@ -102,12 +102,15 @@
 
 <!-- board Section(게시판 리스트)-->
 <section id="board-list" class="board-list">
+
     <div id="fillter">
-        <input type="radio" name="fill" value="5" checked>전체
-        <input type="radio" name="fill" value="1">이재명
-        <input type="radio" name="fill" value="2">윤석열
-        <input type="radio" name="fill" value="3">심상정
-        <input type="radio" name="fill" value="4">안철수
+        <ul>
+            <li><input type="radio" name="fill" id="radio1" value="5" checked><label for="radio1">전체</label></li>
+            <li><input type="radio" name="fill" id="radio2" value="1"><label for="radio2">이재명</label></li>
+            <li><input type="radio" name="fill" id="radio3" value="2"><label for="radio3">윤석열</label></li>
+            <li><input type="radio" name="fill" id="radio4" value="3"><label for="radio4">심상정</label></li>
+            <li><input type="radio" name="fill" id="radio5" value="4"><label for="radio5">안철수</label></li>
+        </ul>
     </div>
     <div class="promise-list-wrap">
         <div class="promise-wrap">
