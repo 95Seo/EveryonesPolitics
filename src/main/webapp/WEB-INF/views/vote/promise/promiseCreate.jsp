@@ -19,7 +19,12 @@
         <div class="input-group">
           <textarea class="form-control" id="content" name="content"></textarea>
           <script type="text/javascript">
-            CKEDITOR.replace("content", { height: 500, width: 1200 });
+            CKEDITOR.replace("content", {
+                height: 500,
+                width: 1200,
+                uploadUrl: "/image/drag",  // 이게 드래그 드롭을 위한 URL
+                filebrowserUploadUrl: "/image"  // 파일업로드를 위한 URL
+            });
           </script>
         </div>
       </div>

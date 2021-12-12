@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="view-profile-right">
-                        <a href="#none">글쓴이</a>
+                        <a href="#none"><c:out value="${promiseDetail.nickName}" /></a>
                         <p>14일전</p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="view-txt">
-                <p><c:out value="${promiseDetail.content}" /></p>
+                <p><c:out value="${promiseDetail.content}" escapeXml="false" /></p>
             </div>
             <div class="view-button-vote">
                 <a href="#none" class="view-vote">
