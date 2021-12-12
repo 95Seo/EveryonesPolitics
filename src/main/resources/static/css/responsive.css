@@ -221,6 +221,18 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Landscape phones and smaller */
 @media (max-width: 479px) {
+
+  .list-box>ul.list-hd>li>div{
+    font-size: 14px;
+  }
+
+  #fillter ul{
+    display:flex;
+    flex-wrap: wrap;
+  }
+  #fillter ul li{
+    padding: 5px;
+  }
   .myChart {
     width: 40vw;
   }
@@ -259,6 +271,21 @@ Author URI: http://www.bootstrapthemes.co
 }
 
 @media (max-width: 320px) {
+
+  .navbar-default .navbar-brand{
+    display: none;
+  }
+  .list-box>ul.list-hd>li>div{
+    font-size: 14px;
+  }
+
+  #fillter ul{
+    display:flex;
+    flex-wrap: wrap;
+  }
+  #fillter ul li{
+    padding: 5px;
+  }
   .chartview {
     width: 100vw;
   }
@@ -266,7 +293,7 @@ Author URI: http://www.bootstrapthemes.co
     width: 260px;
   }
   .swiper-slide-gallbox-pic01 {
-    height: 300px;
+    height: 500px
   }
   html {
     font-size: 60.5%;

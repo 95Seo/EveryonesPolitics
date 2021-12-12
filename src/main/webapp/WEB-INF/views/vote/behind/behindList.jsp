@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@include file="../../include/header.jsp"%>
 
-<section class="behind-page" id="behind">
+<section class="behind-page common-list" id="behind">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">

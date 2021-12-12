@@ -1,4 +1,6 @@
-  <!--Footer section-->
+
+
+<!--Footer section-->
   <section class="footer">
     <div class="container">
       <div class="row">

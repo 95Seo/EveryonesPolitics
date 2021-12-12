@@ -2,7 +2,7 @@
 <%@include file="../../include/header.jsp"%>
 
 <!-- board Section(게시판 리스트)-->
-<section id="board-list" class="board-list">
+<section id="board-list" class="board-list common-list">
     <div class="promise-list-wrap">
         <div class="promise-wrap">
             <div class="list-box">

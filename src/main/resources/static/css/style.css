@@ -7,6 +7,7 @@ Author URI: http://bootstrapthemes.co
    ========================================================================== */
 html,
 body {
+  min-height: 100%;
   background-color: #fff;
   font-size: 14px;
   color: #797979;
@@ -17,6 +18,10 @@ body {
   font-weight: 300;
   width: 100%;
   font-family: "ralewayregular";
+}
+
+.common-list{
+  min-height: calc(100vh - 100px);
 }
 .preloader {
   position: fixed;
@@ -1551,6 +1556,9 @@ li .single_team_text p {
 ===================================================================*/
 .footer {
   background: #000000;
+
+
+
 }
 .main_footer {
   overflow: hidden;
@@ -1641,7 +1649,8 @@ li .single_team_text p {
 }
 /*=====================================================================
                     board-list section css
-=======================================================================*/
+=================
+======================================================*/
 
 .promise-list-wrap {
   width: 100%;
@@ -1668,9 +1677,12 @@ li .single_team_text p {
 .list-box>ul>li>div.no {
   width: 10%;
 }
+.list-box>ul>li>div.candidate{
+  width: 10%;
+}
 
 .list-box>ul>li>div.subject {
-  width: 50%;
+  width: 40%;
 }
 
 .list-box>ul>li>div.date {
@@ -1700,6 +1712,7 @@ li .single_team_text p {
 
 .list-box>ul.list-bd>li>div.subject {
   text-align: left;
+  padding-left: 3%;
 }
 
 .list-bd li a:hover {
@@ -1867,7 +1880,7 @@ li .single_team_text p {
 
 .board-list #fillter{
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 35px;
 }
 
 .board-list #fillter ul{
@@ -1897,10 +1910,15 @@ li .single_team_text p {
   background-color: #a12c2f;
   color: #fff;
 }
-.board-list #fillter ul li input[type=radio] + label:active{
+
+.board-list #fillter ul li input[checked] + label {
   background-color: #a12c2f;
   color: #fff;
 }
+.pagination>.active>a{
+  background-color:#e74c3c;
+}
+.pagination > li:first-child > a
 
 /*=====================================================================
                     board-detail(view) section css
@@ -2203,3 +2221,10 @@ li .single_team_text p {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+/*=====================================================================
+                    Search section css
+=======================================================================*/
+
+
+
