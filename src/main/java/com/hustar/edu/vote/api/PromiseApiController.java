@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
+
 @RestController
 public class PromiseApiController {
 
@@ -26,6 +28,7 @@ public class PromiseApiController {
         promiseDTO.setWriterIdx(principal.getIdx());
 
         System.out.println("Content: " + promiseDTO.getContent());
+
         promiseServiceimpl.insertPromiseBoard(promiseDTO);
         promiseServiceimpl.getPromiseBoardList(cri);
         promiseServiceimpl.getPromiseBoardDetail(promiseDTO);

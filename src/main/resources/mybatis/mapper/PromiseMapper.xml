@@ -23,7 +23,7 @@
 
     <select id="selectPromiseBoardDetail" parameterType="PromiseDTO" resultType="PromiseDTO">
         select
-               a.IDX, a.TITLE, a.CONTENT, a.SYSREGDATE, a.CONTENT, a.VIEW_CNT, b.NICKNAME
+               a.IDX, a.TITLE, a.CONTENT, a.SYSREGDATE, a.CONTENT, a.LIKE_CNT, a.VIEW_CNT, b.NICKNAME
         from
              tb_promise a, tb_user b
         where

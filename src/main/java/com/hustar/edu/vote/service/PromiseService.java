@@ -1,6 +1,7 @@
 package com.hustar.edu.vote.service;
 
 import com.hustar.edu.vote.dto.PromiseDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.paging.Criteria;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface PromiseService {
     public int getPromiseTotal(Criteria cri);
 
     public PromiseDTO getPromiseBoardDetail(PromiseDTO promiseDTO);
+
 }

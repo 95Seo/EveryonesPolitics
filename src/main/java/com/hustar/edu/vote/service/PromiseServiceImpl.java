@@ -2,6 +2,7 @@ package com.hustar.edu.vote.service;
 
 
 import com.hustar.edu.vote.dto.PromiseDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.mapper.PromiseMapper;
 import com.hustar.edu.vote.paging.Criteria;
 import lombok.extern.slf4j.Slf4j;
@@ -50,4 +51,5 @@ public class PromiseServiceImpl implements PromiseService{
 
         return promiseMapper.selectPromiseBoardDetail(promiseDTO);
     }
+
 }

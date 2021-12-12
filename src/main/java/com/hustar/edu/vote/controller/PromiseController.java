@@ -1,7 +1,7 @@
 package com.hustar.edu.vote.controller;
 
-import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.PromiseDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.paging.Criteria;
 import com.hustar.edu.vote.service.PromiseServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.sql.Timestamp;
 
 @Slf4j
 @Controller
@@ -39,7 +40,11 @@ public class PromiseController {
 
         PromiseDTO promiseDetail = promiseServiceimpl.getPromiseBoardDetail(promiseDTO);
         System.out.println("promiseDetail : " + promiseDetail.getContent());
+        System.out.println("Time : " + promiseDetail.getSysregdate());
+
+        System.out.println("date : "+ Time.calculateTime(promiseDetail.getSysregdate()));
         model.addAttribute("promiseDetail", promiseDetail);
+        model.addAttribute("calcTime", Time.calculateTime(promiseDetail.getSysregdate()));
         return "/vote/promise/promiseDetail";
     }
 }
