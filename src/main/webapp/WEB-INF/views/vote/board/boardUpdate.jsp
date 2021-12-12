@@ -7,12 +7,14 @@
 
 <section class="board">
   <form action="/vote/boardUpdate" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="idx" value="<c:out value='${board.idx}' />" />
+    <input type="hidden" name="page" value="${cri.page}"/>
+    <input type="hidden" name="fill" value="${cri.fill}"/>
+    <input type="hidden" name="idx" value="${board.idx}" />
   <div class="board-wrap">
     <div class="board-title">
       <p>제목</p>
       <span>
-        <input type="text" name="title" value="<c:out value='${board.title}' />" />
+        <input type="text" name="title" value="${board.title}" />
       </span>
     </div>
     <div class="row justify-content-md-center">
@@ -41,7 +43,7 @@
             </span>
     </div>
     <div class="board-button">
-      <a href="/vote/boardDetail"><button>취소</button></a>
+      <a href="/vote/boardDetail?idx=${board.idx}&page=${cri.page}&fill=${cri.fill}"><button>취소</button></a>
       <a><button type="submit">확인</button></a>
     </div>
   </div>

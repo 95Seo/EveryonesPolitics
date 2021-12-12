@@ -7,8 +7,8 @@
     obj.dataType = "JSON";
     obj.error=function(e){console.log(e)};
 
-    showPage = JSON.parse ( ${json} ) ;  //보여줄 페이지
-    showFill = 5;
+    showPage = JSON.parse ( ${page} ) ;  //보여줄 페이지
+    showFill = JSON.parse ( ${fill} );
 
     listCall(showPage, showFill); //리스트 호출 함수
 
@@ -30,9 +30,7 @@
 
         obj.success= function(d){
             console.log(d);
-            listPrint(d.list); //리스트 그리기
-            showPage = d.currPage;
-
+            listPrint(d.list, d.currPage, d.fill); //리스트 그리기
             pagePrint(d.currPage,d.range, d.fill) //페이징 처리
         };
         ajaxCall(obj);
@@ -43,12 +41,12 @@
     }
 
     //받아온 리스트 그리기
-    function listPrint(list){
+    function listPrint(list, currPage, fill){
         var content="";
         list.forEach(function(item, idx){
             content += "<li>"
             content +="<div class='no'>"+item.rownum+"</div>"
-            content +="<div class='subject'><a href=/vote/boardDetail?idx="+item.idx+" style='color: #797979'>"+item.title+"</a></div>"
+            content +="<div class='subject'><a href=/vote/boardDetail?idx="+item.idx+"&page="+currPage+"&fill="+fill+" style='color: #797979'>"+item.title+"</a></div>"
             content +="<div class='date'>"+item.sysregdate+"</div>"
             content +="<div class='writer'>"+item.nickName+"</div>"
             content +="<div class='view-num'>"+item.viewCnt+"</div>"
