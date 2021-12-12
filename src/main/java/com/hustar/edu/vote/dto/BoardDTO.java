@@ -2,6 +2,7 @@ package com.hustar.edu.vote.dto;
 
 import lombok.Data;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 public class BoardDTO {
@@ -14,7 +15,7 @@ public class BoardDTO {
     private String topFix;
     private String useYn;
     private Date sysregdate;
-    private Date sysmoddate;
+    private Timestamp sysmoddate;
 
     private String totalCd;
     private int viewCnt;

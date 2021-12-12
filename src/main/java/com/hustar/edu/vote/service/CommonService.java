@@ -18,7 +18,7 @@ public class CommonService {
     /**
      조회수 중복 방지
      **/
-    public void viewCountUp(String table_nm, int id, HttpServletRequest request, HttpServletResponse response) {
+    public void viewCountUp(String boardNm, int id, HttpServletRequest request, HttpServletResponse response) {
         Long idx = Long.valueOf(id);
         Cookie oldCookie = null;
         Cookie[] cookies = request.getCookies();
@@ -31,16 +31,16 @@ public class CommonService {
         }
 
         if (oldCookie != null) {
-            if (!oldCookie.getValue().contains(table_nm + "_[" + idx.toString() + "]")) {
-                mapper.viewCountUp(table_nm, idx);
-                oldCookie.setValue(oldCookie.getValue() + "_" + table_nm + "_[" + idx + "]");
+            if (!oldCookie.getValue().contains(boardNm + "_[" + idx.toString() + "]")) {
+                mapper.viewCountUp(boardNm, idx);
+                oldCookie.setValue(oldCookie.getValue() + "_" + boardNm + "_[" + idx + "]");
                 oldCookie.setPath("/");
                 oldCookie.setMaxAge(60 * 60 * 24);
                 response.addCookie(oldCookie);
             }
         } else {
-            mapper.viewCountUp(table_nm, idx);
-            Cookie newCookie = new Cookie("postView",table_nm + "_[" + idx + "]");
+            mapper.viewCountUp(boardNm, idx);
+            Cookie newCookie = new Cookie("postView",boardNm + "_[" + idx + "]");
             newCookie.setPath("/");
             newCookie.setMaxAge(60 * 60 * 24);
             response.addCookie(newCookie);
@@ -60,5 +60,9 @@ public class CommonService {
     }
     public int getLikeCount(LikeDTO likeDTO) {
         return mapper.getLikeCount(likeDTO);
+    }
+
+    public void updateLikeCount(LikeDTO likeDTO) {
+        mapper.updateLikeCount(likeDTO);
     }
 }

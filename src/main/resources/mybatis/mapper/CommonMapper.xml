@@ -3,13 +3,13 @@
 <mapper namespace="com.hustar.edu.vote.mapper.CommonMapper">
 
     <update id="viewCountUp">
-        <if test="table_nm == 'tb_board'">
+        <if test="boardNm == 'tb_board'">
             update tb_board set view_cnt = view_cnt + 1 where idx = #{idx}
         </if>
-        <if test="table_nm == 'tb_promise'">
+        <if test="boardNm == 'tb_promise'">
             update tb_promise set view_cnt = view_cnt + 1 where idx = #{idx}
         </if>
-        <if test="table_nm == 'tb_behind'">
+        <if test="boardNm == 'tb_behind'">
             update tb_behind set view_cnt = view_cnt + 1 where idx = #{idx}
         </if>
     </update>
@@ -31,10 +31,23 @@
     </select>
 
     <update id="updateLike" parameterType="LikeDTO">
-        update tb_like set like_yn = #{likeYn}
+        update tb_like set like_yn = #{likeYn}, sysmoddate = #{sysmoddate}
         where writer_idx = #{writerIdx} AND
               board_nm = #{boardNm} AND
               board_idx = #{boardIdx}
+    </update>
+
+    <update id="updateLikeCount" parameterType="LikeDTO">
+        <if test="boardNm == 'tb_board'">
+            update tb_board set like_cnt = #{likeCnt}
+        </if>
+        <if test="boardNm == 'tb_promise'">
+            update tb_promise set like_cnt = #{likeCnt}
+        </if>
+        <if test="boardNm == 'tb_behind'">
+            update tb_behind set like_cnt = #{likeCnt}
+        </if>
+        where idx = #{boardIdx}
     </update>
 
     <insert id="insertLike" parameterType="LikeDTO">

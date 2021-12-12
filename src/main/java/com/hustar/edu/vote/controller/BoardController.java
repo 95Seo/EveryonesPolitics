@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 
 @Slf4j
 @Controller
@@ -50,13 +51,17 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardList")
-    public String GetBoardListController (@RequestParam(value = "showPage", required = false, defaultValue = "1") int showPage, Model model) {
+    public String GetBoardListController (@RequestParam(value = "page", required = false, defaultValue = "1") int showPage,
+                                          @RequestParam(value = "fill", required = false, defaultValue = "5") int showFill,
+                                          Model model) {
         log.info("GetBoardListPage");
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String jsonText = mapper.writeValueAsString(showPage);
-            model.addAttribute( "json", jsonText );
+            String page = mapper.writeValueAsString(showPage);
+            String fill = mapper.writeValueAsString(showFill);
+            model.addAttribute( "page", page );
+            model.addAttribute( "fill", fill );
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,22 +88,31 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardUpdate")
-    public String voteGetBoardUpdateController(int idx, Model model) {
+    public String voteGetBoardUpdateController(int idx, int page, int fill, Model model) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("page", page);
+        map.put("fill", fill);
+        model.addAttribute("cri", map);
+
         log.info("VoteBoardUpdatePage");
         model.addAttribute("board", boardService.selectBoardDetail(idx));
         return "/vote/board/boardUpdate";
     }
 
     @PostMapping("/vote/boardUpdate")
-    public String votePostBoardUpdateController(BoardDTO boardDTO) {
+    public String votePostBoardUpdateController(BoardDTO boardDTO, int page, int fill) {
         log.info("VoteBoardUpdatePage");
         boardService.updateBoardDetail(boardDTO);
-        return "redirect:/vote/boardDetail?idx="+boardDTO.getIdx();
+        return "redirect:/vote/boardDetail?idx="+boardDTO.getIdx()+"&page="+page+"&fill="+fill;
     }
 
     @GetMapping("/vote/boardDetail")
-    public String voteBoardDetailController(int idx, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String voteBoardDetailController(int idx, int page, int fill, Model model, HttpServletRequest request, HttpServletResponse response) {
         commonService.viewCountUp("tb_board", idx, request, response);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("page", page);
+        map.put("fill", fill);
+        model.addAttribute("cri", map);
         log.info("VoteBoardDetailPage");
         try {
             ObjectMapper mapper = new ObjectMapper();

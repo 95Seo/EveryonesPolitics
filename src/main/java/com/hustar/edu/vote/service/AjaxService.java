@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -104,9 +105,17 @@ public class AjaxService {
             commonService.insertLike(likeDTO);
             json.put("message", "InsertLike : " + likeDTO.getLikeYn());
         } else {
+            Date date = new Date();
+            java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+            likeDTO.setSysmoddate(sqlDate);
+
             commonService.updateLike(likeDTO);
             json.put("message", "UpdateLike : " + likeDTO.getLikeYn());
         }
+
+        likeDTO.setLikeCnt(commonService.getLikeCount(likeDTO));
+        System.out.println("getBoardNm:" + likeDTO.getBoardNm());
+        commonService.updateLikeCount(likeDTO);
 
         return json;
     }
