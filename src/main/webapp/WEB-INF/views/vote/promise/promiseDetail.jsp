@@ -15,8 +15,8 @@
                         </div>
                     </div>
                     <div class="view-profile-right">
-                        <a href="#none">글쓴이</a>
-                        <p>14일전</p>
+                        <a href="#none"><c:out value="${promiseDetail.nickName}" /></a>
+                        <p><c:out value="${calcTime}" /></p>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="view-txt">
-                <p><c:out value="${promiseDetail.content}" /></p>
+                <p><c:out value="${promiseDetail.content}" escapeXml="false" /></p>
             </div>
             <div class="view-button-vote">
                 <a href="#none" class="view-vote">
@@ -48,13 +48,6 @@
                         <span id="view-vote-count"><c:out value="${promiseDetail.likeCnt}" /></span>
                     </div>
                     <p>공감</p>
-                </a>
-                <a href="#none" class="view-declare">
-                    <div>
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span id="view-declare-count"><c:out value="${promiseDetail.dislikeCnt}" /></span>
-                    </div>
-                    <p>신고</p>
                 </a>
             </div>
             <div class="view-button-box">

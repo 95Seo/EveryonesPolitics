@@ -1,7 +1,8 @@
 package com.hustar.edu.vote.service;
 
-import com.hustar.edu.vote.dto.BoardDTO;
-import com.hustar.edu.vote.mapper.BoardMapper;
+
+import com.hustar.edu.vote.dto.PromiseDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.mapper.PromiseMapper;
 import com.hustar.edu.vote.paging.Criteria;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +22,13 @@ public class PromiseServiceImpl implements PromiseService{
     PromiseMapper promiseMapper;
 
    @Override
-    public void insertPromiseBoard(BoardDTO board) {
-        promiseMapper.insertPromiseBoard(board);
+    public void insertPromiseBoard(PromiseDTO promise) {
+        promiseMapper.insertPromiseBoard(promise);
     }
 
     @Override
-    public List<BoardDTO> getPromiseBoardList(Criteria criteria) {
-        List<BoardDTO> boardPromiseList = Collections.emptyList();
+    public List<PromiseDTO> getPromiseBoardList(Criteria criteria) {
+        List<PromiseDTO> boardPromiseList = Collections.emptyList();
 
         int boardTotalCount = promiseMapper.selectPromiseBoardTotalCount(criteria);
 
@@ -45,9 +46,10 @@ public class PromiseServiceImpl implements PromiseService{
     }
 
     @Override
-    public BoardDTO getPromiseBoardDetail(BoardDTO board) {
+    public PromiseDTO getPromiseBoardDetail(PromiseDTO promiseDTO) {
         log.info("get promiseDetail");
 
-        return promiseMapper.selectPromiseBoardDetail(board);
+        return promiseMapper.selectPromiseBoardDetail(promiseDTO);
     }
+
 }
