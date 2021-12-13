@@ -2,7 +2,7 @@
 <%@include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 
-<section class="myprofile-info" style="margin-top: 80px;">
+<section class="myprofile-info common-list" style="margin-top: 80px;">
     <div class="myprofile-info-wrap">
         <div class="myprofile-inner">
             <div class="myprofile-edit-title">
@@ -24,8 +24,7 @@
                             </div>
                             <div><button>삭제</button></div>
                         </li>
-                        <li><input type="file"></li>
-                        <li><p>가로 제한 길이: 90px, 세로 제한 길이 90px</p></li>
+                        <li><input type="file" placeholder="가로 세로 제한 길이: 90px"></li>
                         <li class="myprofile-edit-button">
                             <button>취소</button>
                             <button>등록</button>

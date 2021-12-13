@@ -5,7 +5,7 @@
       src="../resources/css/ckeditor/ckeditor.js"
     ></script>
 
-<section class="board common-list">
+<section class="board common-list" style="margin-top: 80px">
     <div class="container">
         <div class="row">
             <form action="/vote/boardCreate" method="post" enctype="multipart/form-data">

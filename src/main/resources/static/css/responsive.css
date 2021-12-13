@@ -221,6 +221,10 @@ Author URI: http://www.bootstrapthemes.co
 /* Landscape phones and smaller */
 @media (max-width: 479px) {
 
+  .myprofile-info .myprofile-box-02 a{
+    font-size:18px;
+  }
+
   .list-box>ul.list-hd>li>div{
     font-size: 14px;
   }
@@ -271,6 +275,9 @@ Author URI: http://www.bootstrapthemes.co
 
 @media (max-width: 320px) {
 
+  .myprofile-info .myprofile-box-02 a{
+    font-size:18px;
+  }
   .navbar-default .navbar-brand{
     display: none;
   }
