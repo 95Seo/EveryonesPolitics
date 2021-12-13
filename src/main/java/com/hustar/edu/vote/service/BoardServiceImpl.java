@@ -2,6 +2,7 @@ package com.hustar.edu.vote.service;
 
 import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.mapper.BoardMapper;
+import com.hustar.edu.vote.paging.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardDTO> getBoardList(int start, int end, int fill) {
+    public List<BoardDTO> selectBoardList(Criteria cri) {
         List<BoardDTO> boardList = Collections.emptyList();
 
-        int boardTotalCount = boardMapper.selectBoardTotalCount(fill);
+        int boardTotalCount = boardMapper.selectBoardTotalCount(cri);
 
         if (boardTotalCount > 0) {
-            boardList = boardMapper.selectBoardList(start, end, fill);
+            boardList = boardMapper.selectBoardList(cri);
         }
 
         return boardList;
@@ -49,8 +50,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int getTotal(int fill) {
+    public int getTotal(Criteria cri) {
         log.info("get total count");
-        return boardMapper.selectBoardTotalCount(fill);
+        return boardMapper.selectBoardTotalCount(cri);
     }
 }

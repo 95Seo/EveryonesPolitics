@@ -23,8 +23,8 @@
                             <script type="text/javascript">
                                 CKEDITOR.replace("p_content", {
                                     height: 500,
-                                    uploadUrl: "/image/drag",  // 이게 드래그 드롭을 위한 URL
-                                    filebrowserUploadUrl: "/image"  // 파일업로드를 위한 URL
+                                    uploadUrl: "/image/drag?dir=BOARD",  // 이게 드래그 드롭을 위한 URL
+                                    filebrowserUploadUrl: "/image?board_nm=board"  // 파일업로드를 위한 URL
                                 });
                             </script>
                         </div>

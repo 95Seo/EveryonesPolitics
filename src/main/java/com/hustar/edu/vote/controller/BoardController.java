@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.tb_user;
+import com.hustar.edu.vote.paging.Criteria;
 import com.hustar.edu.vote.service.BoardService;
 import com.hustar.edu.vote.service.CommonService;
 import com.hustar.edu.vote.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,27 +53,25 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardList")
-    public String GetBoardListController (@RequestParam(value = "page", required = false, defaultValue = "1") int showPage,
-                                          @RequestParam(value = "fill", required = false, defaultValue = "5") int showFill,
+    public String GetBoardListController (Criteria criteria,
                                           Model model) {
-        log.info("GetBoardListPage");
-
         try {
             ObjectMapper mapper = new ObjectMapper();
-            String page = mapper.writeValueAsString(showPage);
-            String fill = mapper.writeValueAsString(showFill);
-            model.addAttribute( "page", page );
-            model.addAttribute( "fill", fill );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        int total = boardService.getTotal(cri);
-//        cri.setRowStart((cri.getPageNum()-1) * cri.getAmount());
-//        List<BoardDTO> boardList = boardService.getBoardList(cri);
-//        log.info("nick : " + boardList.get(0).getNickName());
-//        model.addAttribute("boardList", boardList);
-//        model.addAttribute("pageMaker", new PageDTO(cri, total));
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("amount", criteria.getAmount());
+            map.put("page", criteria.getPage());
+            map.put("filter", criteria.getFilter());
+            map.put("keyword", criteria.getKeyword());
 
+            String json = mapper.writeValueAsString(map);
+            model.addAttribute( "json", json );
+            log.info("json:"+ json);
+
+            log.info("성공");
+        } catch(Exception e) {
+            e.printStackTrace();
+            log.info("실패");
+        }
         return "/vote/board/boardList";
     }
 
@@ -88,11 +88,10 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardUpdate")
-    public String voteGetBoardUpdateController(int idx, int page, int fill, Model model) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("page", page);
-        map.put("fill", fill);
-        model.addAttribute("cri", map);
+    public String voteGetBoardUpdateController(int idx, Criteria criteria, Model model) {
+        model.addAttribute( "page", criteria.getPage() );
+        model.addAttribute( "filter", criteria.getFilter() );
+        model.addAttribute( "keyword", criteria.getKeyword() );
 
         log.info("VoteBoardUpdatePage");
         model.addAttribute("board", boardService.selectBoardDetail(idx));
@@ -100,27 +99,25 @@ public class BoardController {
     }
 
     @PostMapping("/vote/boardUpdate")
-    public String votePostBoardUpdateController(BoardDTO boardDTO, int page, int fill) {
+    public String votePostBoardUpdateController(BoardDTO boardDTO, Criteria criteria, RedirectAttributes rttr) {
         log.info("VoteBoardUpdatePage");
         boardService.updateBoardDetail(boardDTO);
-        return "redirect:/vote/boardDetail?idx="+boardDTO.getIdx()+"&page="+page+"&fill="+fill;
+        rttr.addAttribute("page", criteria.getPage());
+        rttr.addAttribute("filter", criteria.getFilter());
+        rttr.addAttribute("keyword", criteria.getKeyword());
+        rttr.addAttribute("idx", boardDTO.getIdx());
+        return "redirect:/vote/boardDetail";
     }
 
     @GetMapping("/vote/boardDetail")
-    public String voteBoardDetailController(int idx, int page, int fill, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String voteBoardDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
         commonService.viewCountUp("tb_board", idx, request, response);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("page", page);
-        map.put("fill", fill);
-        model.addAttribute("cri", map);
-        log.info("VoteBoardDetailPage");
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonText = mapper.writeValueAsString(idx);
-            model.addAttribute( "json", jsonText );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        model.addAttribute( "page", criteria.getPage() );
+        model.addAttribute( "filter", criteria.getFilter() );
+        model.addAttribute( "keyword", criteria.getKeyword() );
+        model.addAttribute( "idx", idx );
+
         BoardDTO boardDTO = boardService.selectBoardDetail(idx);
         tb_user user = userService.getUser(boardDTO.getWriterIdx());
 

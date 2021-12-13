@@ -11,11 +11,11 @@ import java.util.List;
 public interface BoardMapper {
     void insertBoard(BoardDTO boardDTO) ;
 
-    public List<BoardDTO> selectBoardList(@Param("start")int start, @Param("end")int end, @Param("fill")int fill);
+    public List<BoardDTO> selectBoardList(Criteria cri);
 
     public BoardDTO selectBoardDetail(int idx);
 
-    public int selectBoardTotalCount(int fill);
+    public int selectBoardTotalCount(Criteria cri);
 
     public void updateBoardDetail(BoardDTO boardDTO);
 }

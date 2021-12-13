@@ -23,7 +23,7 @@ public class PageDTO {
         // 현재 pageNum이 12라면(현재 12페이지라면)
         // 현재 페이지 번호를 가지고 endPage 계산 (페이지 네비게이션에서 나올 끝 번호)
         // ( (12/10.0) = 2 ) * 10 = 20 (endPage=>페이지 네비게이션이 11, 12, 13,...20까지 나와야 된다)
-        this.endPage = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10;
+        this.endPage = (int) (Math.ceil(cri.getPage() / 10.0)) * 10;
 
         // 시작 번호 (페이지 네비게이션에서 나올 시작 번호)
         // 20 - 9 = 11 따라서 페이지 네비게이션이 11 부터 시작

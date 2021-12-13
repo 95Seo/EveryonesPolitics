@@ -15,19 +15,20 @@
         where idx = #{idx}
     </update>
 
-    <select id="selectBoardList" parameterType="int" resultType="BoardDTO">
+    <select id="selectBoardList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BoardDTO">
         SELECT c.*
         FROM (SELECT
-        @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt, total_cd
+        @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt, a.FILTER AS filter
         FROM tb_board a,
         tb_user b,
         (SELECT @ROWNUM := 0) TMP
         WHERE a.use_yn = 'Y'
-        <if test="fill != 5 ">AND a.total_cd = #{fill}</if>
+        <if test="filter != 'all' ">AND a.filter = #{filter}</if>
+        <if test='keyword != null'>AND a.title Like CONCAT('%', #{keyword}, '%')</if>
         AND a.WRITER_IDX = b.IDX) c
         ORDER BY c.idx DESC,
         c.sysregdate DESC
-        LIMIT #{start}, #{end};
+        LIMIT #{start}, #{amount};
     </select>
 
     <select id="selectBoardDetail" parameterType="int" resultType="BoardDTO">
@@ -36,10 +37,11 @@
         WHERE idx = #{idx}
     </select>
 
-    <select id="selectBoardTotalCount" parameterType="int" resultType="int">
+    <select id="selectBoardTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
         SELECT COUNT(*)
         FROM tb_board
         WHERE use_yn = 'Y'
-        <if test="fill != 5 ">AND total_cd = #{fill}</if>
+        <if test="filter != 'all' ">AND filter = #{filter}</if>
+        <if test='keyword != null'>AND title Like CONCAT('%', #{keyword}, '%')</if>
     </select>
 </mapper>

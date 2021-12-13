@@ -17,7 +17,7 @@ public class BoardDTO {
     private Date sysregdate;
     private Timestamp sysmoddate;
 
-    private String totalCd;
+    private String filter;
     private int viewCnt;
     private int likeCnt;
     private int dislikeCnt;

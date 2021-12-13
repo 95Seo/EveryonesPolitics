@@ -7,8 +7,9 @@
 
 <section class="board">
   <form action="/vote/boardUpdate" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="page" value="${cri.page}"/>
-    <input type="hidden" name="fill" value="${cri.fill}"/>
+    <input type="hidden" name="page" value="${page}"/>
+    <input type="hidden" name="filter" value="${filter}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
     <input type="hidden" name="idx" value="${board.idx}" />
   <div class="board-wrap">
     <div class="board-title">
@@ -43,7 +44,7 @@
             </span>
     </div>
     <div class="board-button">
-      <a href="/vote/boardDetail?idx=${board.idx}&page=${cri.page}&fill=${cri.fill}"><button>취소</button></a>
+      <a href="/vote/boardDetail?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}"><button>취소</button></a>
       <a><button type="submit">확인</button></a>
     </div>
   </div>

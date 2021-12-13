@@ -1,46 +1,22 @@
 package com.hustar.edu.vote.paging;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.web.util.UriComponentsBuilder;
+import lombok.Data;
 
-@ToString
-@Getter
-@Setter
+@Data
 public class Criteria {
 
-    private int pageNum;
-    private int amount;
-    private int rowStart;
+    private int page;    // 페이지 번호
+    private int amount;     // 한페이지 글 갯수
 
-    private String type;
-    private String keyword;
+    private String filter;  // 필터
+    private String keyword; // 키워드
+
+    private int start;
+    private int end;
 
     public Criteria() {
-        this.pageNum = 1;
+        this.page = 1;
         this.amount = 10;
-    }
-
-    public Criteria(int pageNum, int amount) {
-        this.pageNum = pageNum;
-        this.amount = amount;
-        this.rowStart = (pageNum-1) * amount;
-    }
-
-    public String[] getTypeArr() {
-
-        return type == null? new String[] {}: type.split("");
-    }
-
-    public String getListLink() {
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-                .queryParam("pageNum", this.getPageNum())
-                .queryParam("amount", this.getAmount())
-                .queryParam("type", this.getType())
-                .queryParam("keyword", this.getKeyword());
-
-        return builder.toUriString();
+        this.filter = "all";
     }
 }

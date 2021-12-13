@@ -30,18 +30,17 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;  // S3 버킷 이름
 
-    public UploadFile upload(MultipartFile multipartFile) throws IOException {
+    public UploadFile upload(MultipartFile multipartFile, String dir) throws IOException {
         System.out.println("오십니까1");
         File uploadFile = convert(multipartFile)  // 파일 변환할 수 없으면 에러
                 .orElseThrow(() -> new IllegalArgumentException("error: MultipartFile -> File convert fail"));
 
-        return upload(uploadFile);
+        return upload(uploadFile, dir);
     }
 
     // S3로 파일 업로드하기
-    private UploadFile upload(File uploadFile) {
-        System.out.println("오십니까2");
-        String fileName = "BOARD/IMAGES/"+UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름   // S3에 저장된 파일 이름
+    private UploadFile upload(File uploadFile, String dir) {
+        String fileName = dir+UUID.randomUUID() + uploadFile.getName();   // S3에 저장된 파일 이름   // S3에 저장된 파일 이름
         System.out.println("fileName : " + fileName);
         String uploadImageUrl = putS3(uploadFile, fileName); // s3로 업로드
         System.out.println("uploadImageUrl : " + uploadImageUrl);
