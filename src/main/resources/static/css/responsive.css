@@ -137,6 +137,19 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Landscape phones and portrait tablets */
 @media (max-width: 768px) {
+  .col-sm-3{
+    width:50%;
+  }
+  .vote-Card{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .vote-Card .vote-Row{
+    display:flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
   .chartview {
     width: 100vw;
   }
@@ -220,6 +233,25 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Landscape phones and smaller */
 @media (max-width: 479px) {
+  .col-sm-3{
+    width:100%;
+    margin-bottom:30px;
+  }
+  .vote-Card .vote-Row{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .votepage-title .votepage-title-icon{
+    display:none;
+  }
+  .votepage-title .subtitle{
+    display:none;
+  }
+  .votepage-title span{
+    display:flex;
+    flex-direction: column;
+  }
 
   .myprofile-info .myprofile-box-02 a{
     font-size:18px;
@@ -274,6 +306,28 @@ Author URI: http://www.bootstrapthemes.co
 }
 
 @media (max-width: 320px) {
+
+  .col-sm-3{
+    width:100%;
+    margin-bottom:30px;
+  }
+  .vote-Card .vote-Row{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .votepage-title .votepage-title-icon{
+    display:none;
+  }
+  .votepage-title .subtitle{
+    display:none;
+  }
+  .votepage-title span{
+    display:flex;
+    flex-direction: column;
+  }
+
+
 
   .myprofile-info .myprofile-box-02 a{
     font-size:18px;

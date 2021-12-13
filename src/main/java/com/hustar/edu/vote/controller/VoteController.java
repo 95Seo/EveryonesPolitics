@@ -23,6 +23,11 @@ public class VoteController {
 //		log.info("VotePromiseListPage");
 //
 //	}
+	@GetMapping("/vote/voting")
+	public String voteVotingController(){
+		log.info("VoteVotingPage");
+		return "/vote/voting/voting";
+	}
 
 	@GetMapping("/vote/myProfileWrite")
 	public String voteMyProfileWriteController() {

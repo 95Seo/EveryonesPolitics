@@ -1,0 +1,218 @@
+.votepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+.votepage-title {
+    padding-bottom: 30px;
+}
+
+.votepage-title-icon{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    right: 70px;
+    margin-bottom: 10px;
+}
+
+.votepage-title-icon i{
+    font-size: 20px;
+    color: #e74c3c;
+    padding-right: 20px;
+}
+
+.votepage .votepage-title h2 {
+    font-size: 50px;
+    font-weight: 600;
+    color: #e74c3c;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.votepage-title span {
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 30px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+
+.votepage-title .subtitle {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.votepage-title .subtitle p {
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+}
+
+.comon-candidate{
+    border-radius: 20px;
+    width: 100%;
+    height: 380px;
+}
+
+.comon-candidate a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.comon-candidate h2 {
+    left: 0;
+    width: 100%;
+    top: 20%;
+    color: #fff;
+    font-size: 40px;
+    padding: 10%;
+}
+
+.comon-candidate p {
+    left: 0;
+    width: 100%;
+    top: 30%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding-left: 10%;
+}
+
+
+.vote-date-expirebox p{
+    font-size: 40px;
+    text-align: center;
+    margin-top: 50px;
+    color: #fff;
+}
+
+.vote-date-expirebox i {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto;
+    margin-top: 50px;
+    color: #e74c3c;;
+}
+
+.candidate01 {
+    background: url("../images/behind01.jpg");
+    background-size: 100% 100%;
+    
+}
+
+.candidate01:hover {
+    display: block;
+    animation: up 0.5s;
+    animation-fill-mode: both;
+}
+
+.candidate01 a:hover {
+    background: rgba(131, 226, 255, 0.7);
+    border-radius: 20px;
+}
+
+.candidate01:hover h2 {
+    color: black;
+}
+
+.candidate01:hover p {
+    color: black;
+}
+
+
+@keyframes up {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-30px);
+    }
+}
+
+.candidate02 {
+    background: url("../images/behind02.jpg");
+    background-size: 100% 100%;
+    
+}
+
+.candidate02:hover {
+    display: block;
+    animation: up 0.5s;
+    animation-fill-mode: both;
+}
+
+.candidate02 a:hover {
+    background: rgba(216, 33, 45, 0.7);
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.candidate02:hover h2 {
+    color: black;
+}
+
+.candidate02:hover p {
+    color: black;
+}
+
+.candidate03 {
+    background: url("../images/behind03.jpg");
+    background-size: 100% 100%;
+    
+}
+
+.candidate03:hover {
+    display: block;
+    animation: up 0.5s;
+    animation-fill-mode: both;
+}
+
+.candidate03:hover a {
+    background: rgba(255, 202, 44, 0.7);
+    border-radius: 20px;
+}
+
+.candidate03:hover h2 {
+    color: black;
+}
+
+.candidate03:hover p {
+    color: black;
+}
+
+.candidate04 {
+    background: url("../images/behind04.jpg");
+    background-size: 100% 100%;
+    
+}
+
+.candidate04:hover {
+    display: block;
+    animation: up 0.5s;
+    animation-fill-mode: both;
+}
+
+.candidate04:hover a {
+    background: rgba(234, 85, 4, 0.7);
+    border-radius: 20px;
+}
+
+.candidate04:hover h2 {
+    color: black;
+}
+
+.candidate04:hover p {
+    color: black;
+}
+
+/* Team section css */

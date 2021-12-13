@@ -517,7 +517,7 @@
             <canvas id="myChart"></canvas>
           </div>
 
-          <a href="../board/board.html?bbs_code=JS20">
+          <a href="/vote/voting">
             <div class="votelink" title="투표하기">
               <span class="label">투표하기</span>
             </div>
