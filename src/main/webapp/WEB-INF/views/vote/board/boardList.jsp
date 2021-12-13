@@ -120,6 +120,9 @@
 
 
 <style>
+    .board-list{
+        margin-top:90px;
+    }
     .search-box{
         display: flex;
         justify-content: flex-end;

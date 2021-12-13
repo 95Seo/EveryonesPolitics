@@ -119,7 +119,7 @@
                       </sec:authorize>
                       <sec:authorize access="isAuthenticated()">
                         <a href="#">로그아웃</a>
-                        <a href="/vote/myProfileInfo"><p><c:out value="${principal.username}"/>님 환영합니다.</p></a>
+                        <a href="/vote/myProfileInfo">마이페이지</a>
                       </sec:authorize>
                     </li>
                   </ul>

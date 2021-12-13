@@ -113,7 +113,7 @@ Author URI: http://www.bootstrapthemes.co
     float: none !important;
 
     margin: 7.5px 0 0 0;
-    background-color: #2b28298c;
+    background-color: rgba(34, 61, 97, 0.64);
   }
   .navbar-nav > li {
     float: none;
@@ -192,7 +192,7 @@ Author URI: http://www.bootstrapthemes.co
   .navbar-nav {
     float: none !important;
     margin: 7.5px 0 0 0;
-    background-color: #2b28298c;
+    background-color: rgba(34, 61, 97, 0.64);
   }
   .main_menu_bg .navbar-default .navbar-nav > .active > a,
   .navbar-default .navbar-nav > .active > a:hover,

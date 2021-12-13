@@ -62,7 +62,6 @@
     <script src="../resources/js/custom.js"></script>
 
     <script src="../resources/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="../resources/js/vendor/bootstrap.min.js"></script>
 
     <script src="../resources/js/jquery.magnific-popup.js"></script>
     <script src="../resources/js/jquery.mixitup.min.js"></script>
@@ -84,8 +83,7 @@
 
 
     .header{
-      background-color: #23272b;
-      margin-bottom: 35px;
+      background-color: rgba(34, 61, 97, 0.64);
     }
 
 
@@ -99,7 +97,7 @@
       <div class="loaded">&nbsp;</div>
     </div>
     <div class="culmn">
-      <header id="main_menu" class="header ">
+      <header id="main_menu" class="header navbar-fixed-top ">
         <div class="main_menu_bg">
           <div class="container">
             <div class="row">
@@ -132,7 +130,6 @@
                       id="bs-example-navbar-collapse-1"
                     >
                       <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/">메인</a></li>
                         <li><a href="#history">대선 스케줄</a></li>
                         <li><a href="/vote/promiseList">대선 공약</a></li>
                         <li><a href="/vote/behindList">대선 비하인드</a></li>
@@ -145,7 +142,7 @@
                           </c:when>
                           <c:otherwise>
                             <a href="#">로그아웃</a>
-                            <p><c:out value="${principal.username}"/>님 환영합니다.</p>
+                            <a href="/vote/myProfileInfo">마이페이지</a>
                           </c:otherwise>
 
                         </c:choose>
