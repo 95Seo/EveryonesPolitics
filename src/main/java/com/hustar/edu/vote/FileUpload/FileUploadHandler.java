@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 @RestController
@@ -20,18 +22,25 @@ public class FileUploadHandler {
 
     @RequestMapping(value = "/image/drag", produces = MediaType.APPLICATION_JSON_VALUE, method= RequestMethod.POST)
     @ResponseBody
-    public Object handleFileUpload(@RequestParam("upload") MultipartFile uploadfile) {
-        
-        System.out.println("오십니까");
+    public Object handleFileUpload(@RequestParam("upload") MultipartFile uploadfile, String dir) {
+
+        // 현재 날짜 구하기
+        LocalDate now = LocalDate.now();
+        // 포맷 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        // 포맷 적용
+        String formatedNow = now.format(formatter);
+
+        dir += "/IMAGES/" + formatedNow;
+
+        System.out.println("dir_nm : " + dir + "/IMAGES/" + formatedNow + "/");
 
         System.out.println("uploadName : "+uploadfile.getOriginalFilename());
 
         HashMap<String, Object> map = new HashMap<>();
 
         try {
-            System.out.println("오십니까3");
-            UploadFile uploadedFile = s3Uploader.upload(uploadfile);
-            System.out.println("오십니까4");
+            UploadFile uploadedFile = s3Uploader.upload(uploadfile, dir);
             map.put("uploaded", 1);
             map.put("url", uploadedFile.getFile_dir());
             map.put("fileName", uploadedFile.getFile_nm());
@@ -48,20 +57,29 @@ public class FileUploadHandler {
     }
 
     @PostMapping("/image")
-    public void handleFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload) {
+    public void handleFileUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam MultipartFile upload, String dir) {
         OutputStream out = null;
         PrintWriter printWriter = null;
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+
+        // 현재 날짜 구하기
+        LocalDate now = LocalDate.now();
+        // 포맷 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        // 포맷 적용
+        String formatedNow = now.format(formatter);
+
+        dir += "/IMAGES/" + formatedNow;
+
+        System.out.println("dir_nm : " + dir + "/IMAGES/" + formatedNow + "/");
 
         System.out.println("uploadName : "+upload.getOriginalFilename());
 
         try {
             String callback = request.getParameter("CKEditorFuncNum");
 
-            System.out.println("오십니까5");
-            UploadFile uploadedFile = s3Uploader.upload(upload);
-            System.out.println("오십니까6");
+            UploadFile uploadedFile = s3Uploader.upload(upload, dir);
 
             System.out.println("uri1 : " + uploadedFile.getFile_dir());
             System.out.println("file_nm1 : " + uploadedFile.getFile_nm());

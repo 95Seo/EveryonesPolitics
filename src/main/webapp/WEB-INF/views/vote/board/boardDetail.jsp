@@ -10,7 +10,7 @@
     obj.error=function(e){console.log(e)};
 
     board_nm = "tb_board"; //보여줄 페이지
-    board_idx = JSON.parse ( ${json} );
+    board_idx = JSON.parse ( ${idx} );
 
     detailCall(board_nm, board_idx); //리스트 호출 함수
 
@@ -137,13 +137,13 @@
                         </div>
                         <div class="view-button-box">
                             <div class="view-list-button">
-                                <a href="/vote/boardList?&page=${cri.page}&fill=${cri.fill}">
+                                <a href="/vote/boardList?&page=${page}&filter=${filter}&keyword=${keyword}">
                                     <button>목록</button>
                                 </a>
                             </div>
                             <c:if test="${board.writerIdx==principal.idx}">
                                 <div class="view-write-button">
-                                    <a href="/vote/boardUpdate?idx=${board.idx}&page=${cri.page}&fill=${cri.fill}">
+                                    <a href="/vote/boardUpdate?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
                                         <button>수정</button>
                                     </a>
                                 </div>

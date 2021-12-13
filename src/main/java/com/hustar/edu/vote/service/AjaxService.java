@@ -3,6 +3,7 @@ package com.hustar.edu.vote.service;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.LikeDTO;
+import com.hustar.edu.vote.paging.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,19 @@ public class AjaxService {
     @Autowired
     CommonService commonService;
 
-    public HashMap<String, Object> pagingList(int page, int cnt, int fill) {
+    public HashMap<String, Object> pagingList(Criteria cri) {
         // page 페이지 번호 = pageNum
         // cnt 페이지당 글 갯수 = amount
 
+        System.out.println(cri.getFilter());
+        int page = cri.getPage();
+
         //총 게시물 수
-        int allCnt = boardService.getTotal(fill);
+        int allCnt = boardService.getTotal(cri);
 
         // = 생성 가능 페이지 수 (나머지가 있으면 페이지 하나 더 생성)
-        int range = allCnt % cnt>0 ?
-                Math.round(allCnt/cnt)+1 : allCnt/cnt;
+        int range = allCnt % cri.getAmount()>0 ?
+                Math.round(allCnt/cri.getAmount())+1 : allCnt/cri.getAmount();
         logger.info("총 게시물 수 : {}", allCnt);
         logger.info("생성 가능 페이지 수 : {}", range);
 
@@ -42,15 +46,17 @@ public class AjaxService {
             page = range;
         }
 //        int end = page * cnt; // 5페이지 일때 200
-        int start = (page-1) * cnt; //5페이지 일때 첫 페이지 번호 81
-
-
+        int start = (page-1) * cri.getAmount(); //5페이지 일때 첫 페이지 번호 81
+        System.out.println("필터 : "+cri.getFilter());
+        cri.setStart(start);
         HashMap<String, Object> json = new HashMap<>();
         json.put("range",range);       //생성 가능한 총 페이지 수
-        json.put("fill",fill);
-        json.put("list", boardService.getBoardList(start,cnt,fill)); //요청한 게시물
+        json.put("fill",cri.getFilter());
+        System.out.println("키워드 : "+cri.getKeyword());
+        json.put("keyword",cri.getKeyword());
+        json.put("list", boardService.selectBoardList(cri)); //요청한 게시물
 
-        List<BoardDTO> list = boardService.getBoardList(start,cnt,fill);
+        List<BoardDTO> list = boardService.selectBoardList(cri);
 
         json.put("currPage", page);//현재 페이지
         return json;
