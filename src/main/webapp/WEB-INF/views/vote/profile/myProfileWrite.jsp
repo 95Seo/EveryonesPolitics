@@ -2,7 +2,7 @@
 <%@include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 
-<section class="myprofile-info">
+<section class="myprofile-info" style="margin-top: 90px;">
     <div class="myprofile-write-wrap">
         <div class="myprofile-inner">
             <div class="myprofile-box-01">

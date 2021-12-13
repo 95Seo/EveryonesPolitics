@@ -117,11 +117,12 @@
                         <a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">로그인</a>
                       <%--<sec:authentication property="name" />님 안녕하세요 ^^ 예외--%>
                       </sec:authorize>
-                      <sec:authorize access="isAuthenticated()">
-                        <a href="#">로그아웃</a>
-                        <a href="/vote/myProfileInfo">마이페이지</a>
-                      </sec:authorize>
                     </li>
+                      <sec:authorize access="isAuthenticated()">
+                       <li><a href="#">로그아웃</a></li>
+                        <li><a href="/vote/myProfileInfo">마이페이지</a></li>
+                      </sec:authorize>
+
                   </ul>
                 </div>
               </div>
