@@ -1,7 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
+<style>
 
+    .myprofile-info h3{
+        color: black;
+        font-size: 22px;
+        margin-bottom: 15px;
+        padding-left: 5px;
+    }
+
+    .myprofile-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .myprofile-right button {
+        font-size: 1rem;
+        width: 100%;
+        height: 40px;
+        padding: 0px 20px;
+        color: white;
+        background-color: rgba(216, 33, 45, 0.7);
+        border-radius: 25px;
+        border: solid 1px #999;
+    }
+
+    .myprofile-right button:hover {
+        color: white;
+        background-color: rgba(216, 33, 45);
+    }
+
+
+    <!--   -->
+    .myprofile-box-02{
+        display:flex;
+    }
+    .myprofile-box-02 a{
+        position: relative;
+        justify-content: center;
+        width: 50%;
+        height: 50px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items:center;
+        text-decoration: none;
+        background: #72839a6b;
+        margin: 15px 10px;
+
+    }
+    .myprofile-box-02 a::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #e74c3c;
+        transition: 0.5s ease-in-out;
+    }
+    .myprofile-box-02 a::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: #e74c3c;
+        transition: 0.5s ease-in-out;
+    }
+    .myprofile-box-02 a:nth-child(2)::before,
+    .myprofile-box-02 a:nth-child(2)::after
+    {
+        background: #e03b4c;
+
+    }
+    .myprofile-box-02 a:hover::before,
+    .myprofile-box-02 a:hover::after
+    {
+        ;
+        width: 50%;
+    }
+
+    .myprofile-box-02 a span{
+        position: absolute;
+        z-index: 1;
+        color: #fff;
+    }
+
+</style>
 <section class="myprofile-info common-list" style="margin-top: 105px;">
     <div class="myprofile-info-wrap">
         <div class="myprofile-inner">
@@ -17,11 +105,14 @@
                 </div>
             </div>
             <div class="myprofile-box-02">
-                <ul>
-                    <li><a href="/vote/myProfileInfo">회원정보 보기</a>
-                    </li>
-                    <li><a href="/vote/myProfileWrite">작성 글 보기</a></li>
-                </ul>
+                <a href="/vote/myProfileInfo">
+                    <span>나의정보 보기</span>
+                    <span>나의정보 보기</span>
+                </a>
+                <a href="/vote/myProfileWrite">
+                    <span>작성 글 보기</span>
+                    <span>작성 글 보기</span>
+                </a>
             </div>
             <hr>
             <div class="myprofile-info-box-03">
