@@ -3,6 +3,13 @@
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 <style>
 
+    .myprofile-info h3{
+        color: black;
+        font-size: 22px;
+        margin-bottom: 15px;
+        padding-left: 5px;
+    }
+
     .myprofile-right {
         display: flex;
         flex-direction: column;
@@ -12,18 +19,21 @@
     .myprofile-right button {
         font-size: 1rem;
         width: 100%;
-        height: 50px;
-        padding: 3px;
+        height: 40px;
+        padding: 0px 20px;
         color: white;
-        background-color: #72839a;
-        border-radius: 15px;
+        background-color: rgba(216, 33, 45, 0.7);
+        border-radius: 25px;
         border: solid 1px #999;
     }
 
     .myprofile-right button:hover {
         color: white;
-        background-color: #e74c3c;
+        background-color: rgba(216, 33, 45);
     }
+
+
+    <!--   -->
     .myprofile-box-02{
         display:flex;
     }
@@ -32,11 +42,11 @@
         justify-content: center;
         width: 50%;
         height: 50px;
-        font-size: 1rem;
+        font-size: 1.3rem;
         display: flex;
         align-items:center;
         text-decoration: none;
-        background: #72839a;
+        background: #72839a6b;
         margin: 15px 10px;
 
     }
@@ -63,11 +73,13 @@
     .myprofile-box-02 a:nth-child(2)::before,
     .myprofile-box-02 a:nth-child(2)::after
     {
-        background: #fe1a6f;
+        background: #e03b4c;
+
     }
     .myprofile-box-02 a:hover::before,
     .myprofile-box-02 a:hover::after
     {
+        ;
         width: 50%;
     }
 
@@ -75,8 +87,8 @@
         position: absolute;
         z-index: 1;
         color: #fff;
-
     }
+
 </style>
 <section class="myprofile-info common-list" style="margin-top: 105px;">
     <div class="myprofile-info-wrap">
