@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hustar.edu.vote.mapper.BehindMapper">
+
+    <insert id="insertBehind" parameterType="BehindDTO">
+        insert into tb_behind(writer_idx, title, content, file_url)
+        values (#{writerIdx}, #{title}, #{content}, #{fileUrl});
+    </insert>
+
+    <update id="updateBehindDetail" parameterType="BehindDTO">
+        update tb_behind
+        set title = #{title},
+            content = #{content},
+            sysmoddate = #{sysmoddate}
+        where idx = #{idx}
+    </update>
+
+    <select id="selectBehindList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BehindDTO">
+        SELECT c.*
+        FROM (SELECT
+        @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.file_url as fileUrl, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt, a.FILTER AS filter
+        FROM tb_behind a,
+        tb_user b,
+        (SELECT @ROWNUM := 0) TMP
+        WHERE a.use_yn = 'Y'
+        <if test="filter != 'all' ">AND a.filter = #{filter}</if>
+        <if test='keyword != null'>AND a.title Like CONCAT('%', #{keyword}, '%')</if>
+        AND a.WRITER_IDX = b.IDX) c
+        ORDER BY c.idx DESC,
+        c.sysregdate DESC
+        LIMIT #{start}, #{amount};
+    </select>
+
+    <select id="selectBehindDetail" parameterType="int" resultType="BehindDTO">
+        SELECT *
+        FROM tb_behind
+        WHERE idx = #{idx}
+    </select>
+
+    <select id="selectBehindTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_behind
+        WHERE use_yn = 'Y'
+        <if test="filter != 'all' ">AND filter = #{filter}</if>
+        <if test='keyword != null'>AND title Like CONCAT('%', #{keyword}, '%')</if>
+    </select>
+</mapper>

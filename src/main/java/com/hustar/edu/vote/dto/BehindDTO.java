@@ -1,11 +1,12 @@
 package com.hustar.edu.vote.dto;
 
 import lombok.Data;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Data
-public class BoardDTO {
+public class BehindDTO {
     private int idx;
     private String nickName;
     private int writerIdx;
