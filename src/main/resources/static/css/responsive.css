@@ -5,6 +5,10 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Portrait tablets and medium desktops */
 @media (max-width: 1199px) {
+  #b_list .col-lg-4{
+    width:49%
+  }
+
   .chartview {
     width: 100vw;
   }
@@ -31,6 +35,10 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Portrait tablets and small desktops */
 @media (max-width: 991px) {
+  #b_list .col-lg-4{
+    width:49%
+  }
+
   .chartview {
     width: 100vw;
   }

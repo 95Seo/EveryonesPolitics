@@ -2,8 +2,8 @@
 <%@include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 
-<section class="myprofile-info common-list" style="margin-top: 90px;">
-    <div class="myprofile-write-wrap">
+<section class="myprofile-info common-list" style="margin-top: 105px;">
+    <div class="myprofile-info-wrap">
         <div class="myprofile-inner">
             <div class="myprofile-box-01">
                 <div class="myprofile-left">
@@ -17,25 +17,24 @@
                 </div>
             </div>
             <div class="myprofile-box-02">
-                <ul>
-                    <li><a href="/vote/myProfileInfo">회원정보 보기</a>
-                    </li>
-                    <li><a href="/vote/myProfileWrite">작성 글 보기</a>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <div class="myprofile-write-box-03">
-                <h3>작성 글 보기</h3>
+                <a href="/vote/myProfileInfo">
+                    <span>나의정보 보기</span>
+                    <span>나의정보 보기</span>
+                </a>
+                <a href="/vote/myProfileWrite">
+                    <span>작성 글 보기</span>
+                    <span>작성 글 보기</span>
+                </a>
             </div>
             <!-- board Section(게시판 리스트)-->
             <div class="myprofile-list">
                 <div class="myprofile-list-wrap">
                     <div class="promise-wrap">
-                        <div class="list-box">
+                        <div class="list-box" style="max-width: 100%;">
                             <ul class="list-hd">
                                 <li>
                                     <div class="no">번호</div>
+                                    <div class="candidate">후보</div>
                                     <div class="subject">제목</div>
                                     <div class="date">등록일</div>
                                     <div class="writer">글쓴이</div>
@@ -46,6 +45,7 @@
                             <ul class="list-bd">
                                 <li>
                                     <div class="no">1</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-31</div>
                                     <div class="writer">백동채</div>
@@ -54,6 +54,7 @@
                                 </li>
                                 <li>
                                     <div class="no">2</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-23</div>
                                     <div class="writer">백동채</div>
@@ -63,6 +64,7 @@
                                 </li>
                                 <li>
                                     <div class="no">3</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-23</div>
                                     <div class="writer">백동채</div>
@@ -71,6 +73,7 @@
                                 </li>
                                 <li>
                                     <div class="no">4</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-23</div>
                                     <div class="writer">백동채</div>
@@ -79,6 +82,7 @@
                                 </li>
                                 <li>
                                     <div class="no">5</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-23</div>
                                     <div class="writer">백동채</div>
@@ -87,6 +91,7 @@
                                 </li>
                                 <li>
                                     <div class="no">6</div>
+                                    <div class="candidate">신주영</div>
                                     <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
                                     <div class="date">2021-12-23</div><div class="writer">백동채</div>
                                     <div class="view-num">4</div>

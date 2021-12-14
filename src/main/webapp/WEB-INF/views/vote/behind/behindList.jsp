@@ -19,6 +19,14 @@
   .behind-contents {
     height: 50px;
   }
+
+  .behind-Cardview{
+      display: flex;
+      align-content: center;
+      justify-content: center;
+  }
+
+
 </style>
 
 <script>
@@ -120,7 +128,7 @@
       content += '<div class="down-content"><div class="behind-title">'
       content += '<h4>'+view_title+'</h4></div>';
       content += '<div class="behind-contents">'+view_content;
-      content += '</div><div><span>'+item.sysregdate+'</span><span><i class="far fa-comment-dots"></i>3</span>';
+      content += '</div><div><span>'+item.sysregdate+'</span><span style="margin-left: 6px;"><i class="far fa-comment-dots"></i>3</span>';
       content += '</div>';
       content += '</div>';
       content += '</a></div>';
@@ -192,8 +200,7 @@
 
 <section class="behind-page common-list" id="behind">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
+
         <div class="row">
           <div class="col-lg-12">
             <div id="fillter">
@@ -206,33 +213,33 @@
               </ul>
             </div>
           </div>
+        </div>
 
-          <div class="row">
+        <div class="row behind-Cardview">
             <ul>
               <li id="b_list">
 
               </li>
             </ul>
-          </div>
+        </div>
 
+        <div class="row">
           <div class="col-lg-12">
             <div class="pagination">
               <ul>
                 <li>
                   <a href="#"><i class="fa fa-angle-left"></i></a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li class="active"><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li class="active"><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li>
                   <a href="#"><i class="fa fa-angle-right"></i></a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   </div>
   <a href="/vote/behindCreate">글 쓰기</a>
 </section>
