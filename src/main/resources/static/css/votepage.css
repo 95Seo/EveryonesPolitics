@@ -62,10 +62,15 @@
     height: 380px;
 }
 
-.comon-candidate a {
-    display: block;
+.comon-candidate input {
+    display: none;
+}
+
+.comon-candidate label {
+    display: inline-block;
     width: 100%;
     height: 100%;
+    padding-top: 180px;
 }
 
 .comon-candidate h2 {
@@ -86,28 +91,42 @@
     font-weight: 600;
     padding-left: 10%;
 }
-
+.vote-date-expirebox ul{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
 
 .vote-date-expirebox p{
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     margin-top: 50px;
     color: #fff;
 }
 
-.vote-date-expirebox i {
+.vote-date-expirebox ul li {
     display: flex;
-    justify-content: center;
+    align-items: center;
+}
+
+.vote-date-expirebox ul li i {
     font-size: 40px;
-    margin: 0 auto;
-    margin-top: 50px;
-    color: #e74c3c;;
+    padding-right: 20px;
+    color: #e74c3c;
+}
+
+.vote-date-expirebox ul li input {
+    font-size: 35px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #e74c3c;
 }
 
 .candidate01 {
+    display: inline-block;
     background: url("../images/behind01.jpg");
     background-size: 100% 100%;
-    
+
 }
 
 .candidate01:hover {
@@ -116,9 +135,10 @@
     animation-fill-mode: both;
 }
 
-.candidate01 a:hover {
+.candidate01 label:hover {
     background: rgba(131, 226, 255, 0.7);
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .candidate01:hover h2 {
@@ -140,9 +160,10 @@
 }
 
 .candidate02 {
+    display: inline-block;
     background: url("../images/behind02.jpg");
     background-size: 100% 100%;
-    
+
 }
 
 .candidate02:hover {
@@ -151,7 +172,7 @@
     animation-fill-mode: both;
 }
 
-.candidate02 a:hover {
+.candidate02 label:hover {
     background: rgba(216, 33, 45, 0.7);
     cursor: pointer;
     border-radius: 20px;
@@ -166,9 +187,10 @@
 }
 
 .candidate03 {
+    display: inline-block;
     background: url("../images/behind03.jpg");
     background-size: 100% 100%;
-    
+
 }
 
 .candidate03:hover {
@@ -177,9 +199,10 @@
     animation-fill-mode: both;
 }
 
-.candidate03:hover a {
+.candidate03:hover label {
     background: rgba(255, 202, 44, 0.7);
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .candidate03:hover h2 {
@@ -191,9 +214,10 @@
 }
 
 .candidate04 {
+    display: inline-block;
     background: url("../images/behind04.jpg");
     background-size: 100% 100%;
-    
+
 }
 
 .candidate04:hover {
@@ -202,9 +226,10 @@
     animation-fill-mode: both;
 }
 
-.candidate04:hover a {
+.candidate04:hover label {
     background: rgba(234, 85, 4, 0.7);
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .candidate04:hover h2 {
@@ -214,5 +239,3 @@
 .candidate04:hover p {
     color: black;
 }
-
-/* Team section css */
