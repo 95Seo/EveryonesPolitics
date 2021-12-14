@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@include file="../../include/header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 <style>
 
@@ -88,7 +89,11 @@
         z-index: 1;
         color: #fff;
     }
-
+    .myprofile-inner > .myprofile-inner-wrap-01 > .myprofile-left > .myprofile-left-img > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 </style>
 <section class="myprofile-info common-list" style="margin-top: 105px;">
     <div class="myprofile-info-wrap">
@@ -96,11 +101,11 @@
             <div class="myprofile-box-01">
                 <div class="myprofile-left">
                     <div class="myprofile-left-img">
-                        <img src="../resources/images/behind01.jpg" alt="">
+                        <img src="<c:out value='${info.profile_img}'/>" alt="">
                     </div>
                 </div>
                 <div class="myprofile-right">
-                    <h3>서영준</h3>
+                    <h3><c:out value='${info.name}'/></h3>
                     <a href="/vote/myProfileUpdate"><button>회원정보변경</button></a>
                 </div>
             </div>
@@ -121,7 +126,7 @@
                         <h4>이메일 주소</h4>
                     </li>
                     <li>
-                        <p>test@iact.com</p>
+                        <p><c:out value="${info.email}"/></p>
                     </li>
                 </ul>
             </div>
@@ -132,7 +137,7 @@
                         <h4>닉네임</h4>
                     </li>
                     <li>
-                        <p>그란데녹차프라페</p>
+                        <p><c:out value="${info.nickname}"/></p>
                     </li>
                 </ul>
             </div>
@@ -143,7 +148,7 @@
                         <h4>이름</h4>
                     </li>
                     <li>
-                        <p>서영준</p>
+                        <p><c:out value="${info.name}"/></p>
                     </li>
                 </ul>
             </div>
@@ -154,7 +159,7 @@
                         <h4>프로필사진</h4>
                     </li>
                     <li class="myprofile-info-box-06-li">
-                        <img src="../resources/images/behind01.jpg" alt="">
+                        <img src="<c:out value='${info.profile_img}'/>">
                     </li>
                 </ul>
             </div>
@@ -166,14 +171,12 @@
                     </li>
                     <li>
                         <p>
-                            2021-12-03
+                            <c:out value="${info.sysregdate}"/>
                         </p>
                     </li>
                 </ul>
             </div>
             <hr>
-
-
         </div>
     </div>
 </section>

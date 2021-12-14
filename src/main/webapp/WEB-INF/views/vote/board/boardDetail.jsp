@@ -85,6 +85,13 @@
         $(".likeCnt").append(like_cnt);
     }
 </script>
+<style>
+    .view-inner-wrap > .view-inner-wrap-01 > .view-profile > .view-profile-left > .view-profile-left-img > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 <section class="board-detail common-list">
     <div class="container">
         <div class="row">
@@ -98,10 +105,11 @@
                             <div class="view-profile">
                                 <div class="view-profile-left">
                                     <div class="view-profile-left-img">
+                                        <img src="<c:out value='${user.profile_img}'/>">
                                     </div>
                                 </div>
                                 <div class="view-profile-right">
-                                    <a href="<c:out value="${user.profile_img}"/>"><c:out value="${user.nickname}"/></a>
+                                    <a href=""><c:out value="${user.nickname}"/></a>
                                     <p>14일전</p>
                                 </div>
                             </div>

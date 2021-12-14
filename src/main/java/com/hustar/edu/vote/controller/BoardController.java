@@ -121,6 +121,8 @@ public class BoardController {
         BoardDTO boardDTO = boardService.selectBoardDetail(idx);
         tb_user user = userService.getUser(boardDTO.getWriterIdx());
 
+        System.out.println("getProfile_img:" + user.getProfile_img());
+
         model.addAttribute("board", boardDTO);
         model.addAttribute("user", user);
 
