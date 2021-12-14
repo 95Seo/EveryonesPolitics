@@ -3,6 +3,7 @@ package com.hustar.edu.vote.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BoardDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.paging.Criteria;
 import com.hustar.edu.vote.service.BoardService;
@@ -121,8 +122,11 @@ public class BoardController {
         BoardDTO boardDTO = boardService.selectBoardDetail(idx);
         tb_user user = userService.getUser(boardDTO.getWriterIdx());
 
+        System.out.println("getProfile_img:" + user.getProfile_img());
+
         model.addAttribute("board", boardDTO);
         model.addAttribute("user", user);
+        model.addAttribute("calcTime", Time.calculateTime(boardDTO.getSysregdate()));
 
         return "/vote/board/boardDetail";
     }

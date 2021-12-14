@@ -85,6 +85,16 @@
         $(".likeCnt").append(like_cnt);
     }
 </script>
+<style>
+    .view-inner-wrap > .view-inner-wrap-01 > .view-profile > .view-profile-left > .view-profile-left-img > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .view-profile-right > a {
+        color: black;
+    }
+</style>
 <section class="board-detail common-list" style="margin-top: 90px;">
     <div class="container">
         <div class="row">
@@ -98,11 +108,12 @@
                             <div class="view-profile">
                                 <div class="view-profile-left">
                                     <div class="view-profile-left-img">
+                                        <img src="<c:out value='${user.profile_img}'/>">
                                     </div>
                                 </div>
                                 <div class="view-profile-right">
-                                    <a href="<c:out value="${user.profile_img}"/>"><c:out value="${user.nickname}"/></a>
-                                    <p>14일전</p>
+                                    <a href=""><c:out value="${user.nickname}"/></a>
+                                    <p><c:out value="${calcTime}"/></p>
                                 </div>
                             </div>
                             <div class="view-inner-content">
@@ -129,7 +140,7 @@
                         <div class="view-button-vote">
                             <div name="like" class="view-vote">
                                 <div>
-                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
                                     <span id="view-vote-count" class="likeCnt"></span>
                                 </div>
                                 <p>공감</p>
