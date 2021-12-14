@@ -1,7 +1,7 @@
 package com.hustar.edu.vote.service;
 
-import com.hustar.edu.vote.dto.BoardDTO;
-import com.hustar.edu.vote.mapper.BoardMapper;
+import com.hustar.edu.vote.dto.BehindDTO;
+import com.hustar.edu.vote.mapper.BehindMapper;
 import com.hustar.edu.vote.paging.Criteria;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class BoardServiceImpl implements BoardService {
+public class BehindServiceImpl implements BehindService {
     @Autowired
-    BoardMapper boardMapper;
+    BehindMapper behindMapper;
 
     @Autowired
     CommonService commonService;
@@ -26,21 +26,21 @@ public class BoardServiceImpl implements BoardService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public void insertBoard(BoardDTO boardDTO) {
-        boardMapper.insertBoard(boardDTO);
+    public void insertBehind(BehindDTO behindDTO) {
+        behindMapper.insertBehind(behindDTO);
     }
 
     @Override
-    public HashMap<String, Object> selectBoardList(Criteria cri) {
+    public HashMap<String, Object> selectBehindList(Criteria cri) {
         HashMap<String, Object> json = new HashMap<>();
-        List<BoardDTO> boardList = Collections.emptyList();
+        List<BehindDTO> behindList = Collections.emptyList();
 
         // page 페이지 번호 = pageNum
         // cnt 페이지당 글 갯수 = amount
         int page = cri.getPage();
 
         //총 게시물 수
-        int allCnt = boardMapper.selectBoardTotalCount(cri);
+        int allCnt = behindMapper.selectBehindTotalCount(cri);
 
         // = 생성 가능 페이지 수 (나머지가 있으면 페이지 하나 더 생성)
         int range = allCnt % cri.getAmount()>0 ?
@@ -57,13 +57,13 @@ public class BoardServiceImpl implements BoardService {
             int start = (page-1) * cri.getAmount(); //5페이지 일때 첫 페이지 번호 81
             cri.setStart(start);
 
-            boardList = boardMapper.selectBoardList(cri);
+            behindList = behindMapper.selectBehindList(cri);
 
             json.put("message", "success");
             json.put("range",range);       //생성 가능한 총 페이지 수
             json.put("fill",cri.getFilter());
             json.put("keyword",cri.getKeyword());
-            json.put("list", boardList); //요청한 게시물
+            json.put("list", behindList); //요청한 게시물
 
             json.put("currPage", page);//현재 페이지
             return json;
@@ -73,23 +73,23 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
-    public BoardDTO selectBoardDetail(int idx) {
-        return boardMapper.selectBoardDetail(idx);
+    public BehindDTO selectBehindDetail(int idx) {
+        return behindMapper.selectBehindDetail(idx);
     }
 
-    public void updateBoardDetail(BoardDTO boardDTO) {
+    public void updateBehindDetail(BehindDTO behindDTO) {
         Date date = new Date();
 
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
 
-        boardDTO.setSysmoddate(sqlDate);
+        behindDTO.setSysmoddate(sqlDate);
 
-        boardMapper.updateBoardDetail(boardDTO);
+        behindMapper.updateBehindDetail(behindDTO);
     }
 
     @Override
     public int getTotal(Criteria cri) {
         log.info("get total count");
-        return boardMapper.selectBoardTotalCount(cri);
+        return behindMapper.selectBehindTotalCount(cri);
     }
 }

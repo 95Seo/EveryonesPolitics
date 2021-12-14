@@ -49,8 +49,16 @@
             success : function(result) {
                 console.log(d);
                 var d = JSON.parse(result);
-                listPrint(d.list, d.currPage); //리스트 그리기
-                pagePrint(d.currPage,d.range); //페이징 처리
+                message = d.message;
+                if (message == "fail") {
+                    var content = "<div class='no_object'>게시물이 없습니다.</div>";
+                    //내용 붙이기
+                    $("#list").empty();
+                    $("#list").append(content);
+                } else {
+                    listPrint(d.list, d.currPage); //리스트 그리기
+                    pagePrint(d.currPage,d.range); //페이징 처리
+                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 alert("ERROR : " + textStatus + " : " + errorThrown);
@@ -142,8 +150,12 @@
     }
 </script>
 
-
 <style>
+    .no_object {
+        margin: 10% 0;
+        text-align: center;
+        font-size: 20px;
+    }
     .board-list {
         margin-top: 90px;
     }

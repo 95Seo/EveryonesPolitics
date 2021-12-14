@@ -1878,25 +1878,25 @@ li .single_team_text p {
   border: 1px solid #f78928;
 }
 
-.board-list #fillter{
+#fillter{
   text-align: center;
   margin-top: 35px;
   margin-bottom: 35px;
 }
 
-.board-list #fillter ul{
+#fillter ul{
   display: flex;
   justify-content: center;
 }
 
 
 
-.board-list #fillter ul li input[type=radio]{
+#fillter ul li input[type=radio]{
   display: none;
   margin: 10px;
 }
 
-.board-list #fillter ul li input[type=radio] + label{
+#fillter ul li input[type=radio] + label{
   display: inline-block;
   padding: 8px 19px;
   background-color: #fff;
@@ -1907,12 +1907,12 @@ li .single_team_text p {
   width: 110px;
   text-align: center;
 }
-.board-list #fillter ul li input[type=radio] + label:hover{
+#fillter ul li input[type=radio] + label:hover{
   background-color: #a12c2f;
   color: #fff;
 }
 
-.board-list #fillter ul li input[checked] + label {
+#fillter ul li input[checked] + label {
   background-color: #a12c2f;
   color: #fff;
 }

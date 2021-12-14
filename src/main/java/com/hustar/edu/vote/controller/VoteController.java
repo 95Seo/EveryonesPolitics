@@ -44,10 +44,4 @@ public class VoteController {
 		log.info("VoteMyProfileInfoPage");
 		return "/vote/profile/myProfileInfo";
 	}
-
-	@GetMapping("/vote/behindList")
-	public String voteBehindListController() {
-		log.info("VoteBehindListPage");
-		return "/vote/behind/behindList";
-	}
 }

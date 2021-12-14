@@ -1,354 +1,220 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@include file="../../include/header.jsp"%>
 
+<style>
+  .templatemo-item-col .behind-item {
+    border: solid 1px #797979;
+    border-radius: 18px;
+  }
+  .templatemo-item-col .behind-item a {
+    color: black;
+  }
+  .behind-title {
+    height: 70px;
+  }
+  .behind-img {
+    width: 100%;
+    height: 200px;
+  }
+  .behind-contents {
+    height: 50px;
+  }
+</style>
+
+<script>
+  var obj={};
+  obj.dataType = "JSON";
+  obj.error=function(e){console.log(e)};
+
+  map = JSON.stringify(${json});
+
+  cri = JSON.parse(map);
+
+  showPage = cri.page;  //보여줄 페이지
+
+  showAmount = cri.amount;
+
+  var showFill = cri.filter;
+
+  var keyWord = cri.keyword;
+
+  listCall(showPage); //리스트 호출 함수
+
+  $(document).on("change","input[type=radio]",function(){
+    showFill=$('input[name=fill]:checked').val();
+    keyWord = "";
+    //라디오 버튼 값을 가져온다.
+    listCall(showPage);
+  });
+
+  $(document).on("click","input[name=search]",function(){
+    keyWord=$('input[name=keyword]').val();
+    listCall(showPage);
+  });
+
+  // /listSub/{pagePerCnt}/{page}
+  function listCall(page){
+    var param = {};
+    param = {"amount":showAmount, "page":page, "filter":showFill, "keyword":keyWord};
+
+    $.ajax({
+      anyne:true,
+      type:'POST',
+      data: JSON.stringify(param),
+      contentType: 'application/json',
+      // contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+      url:"/vote/getBehindPagingList/",
+      dataType: "text",
+      success : function(result) {
+        console.log(d);
+        var d = JSON.parse(result);
+        message = d.message;
+        if (message == "fail") {
+          var content = "<div class='no_object'>게시물이 없습니다.</div>";
+          //내용 붙이기
+          $("#list").empty();
+          $("#list").append(content);
+        } else {
+          listPrint(d.list, d.currPage); //리스트 그리기
+          pagePrint(d.currPage,d.range); //페이징 처리
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("ERROR : " + textStatus + " : " + errorThrown);
+      }
+    });
+  }
+
+  //받아온 리스트 그리기
+  function listPrint(list, currPage){
+    if(keyWord == null || keyWord == "") {
+      keyWord = "";
+      $('#keyword').val('');
+    } else {
+      $('#keyword').val(keyWord);
+    }
+
+    content ="";
+
+    list.forEach(function(item, idx){
+      view_title = "";
+      if (item.title.length > 30) {
+        view_title = item.title.substr(0, 30) + "...";
+      } else {
+        view_title = item.title;
+      }
+
+      view_content = "";
+      var newText = item.content.replace(/(<([^>]+)>)/ig,"");
+      if (newText.length > 40) {
+        view_content = newText.substr(0, 40) + "...";
+      } else {
+        view_content = newText
+      }
+
+      content += '<div class="col-lg-4 templatemo-item-col all">';
+      content += '<div class="behind-item"><a href="/vote/behind/behindDetail">';
+      content += '<div class="thumb">';
+      content += '<div class="price"><span>'+item.filter+'</span></div>';
+      content += '<img class="behind-img" src="'+item.fileUrl+'"/></div>'
+      content += '<div class="down-content"><div class="behind-title">'
+      content += '<h4>'+view_title+'</h4></div>';
+      content += '<div class="behind-contents">'+view_content;
+      content += '</div><div><span>'+item.sysregdate+'</span><span><i class="far fa-comment-dots"></i>3</span>';
+      content += '</div>';
+      content += '</div>';
+      content += '</a></div>';
+      content += '</div>';
+    });
+
+    //내용 붙이기
+    $("#b_list").empty();
+    $("#b_list").append(content);
+  }
+
+
+  //페이징 그리기 => 플러그인을 사용하면 쓸 필요가 없음.
+  function pagePrint(currPage,range){
+    //이전
+    var start =1;
+    var end = 5;
+    var content="";
+
+    if(currPage>5){
+      //end = currPage + 4; 일 경우 페이지 변화 시 마다 페이징이 이동된다.
+      //우리가 원하는 것은 5 단위로 움직일때 새로운 페이징 생성
+      end = Math.ceil(currPage/5)*5; //생성가능 페이지수? 6,11,16 씩 대입해 보자
+      start= end - 4;
+      content +="<li><a onclick='listCall("+(start-1)+")' class='fa fa-angle-left cursor_pointer'>이전</a> |</li> ";
+    }
+
+    $("input:radio[name='fill']").attr("checked", false);
+
+    if(showFill == '이재명') {
+      $("input:radio[id='radio1']").attr("checked", true);
+    } else if(showFill == '윤석열') {
+      $("input:radio[id='radio2']").attr("checked", true);
+    } else if(showFill == '심상정') {
+      $("input:radio[id='radio3']").attr("checked", true);
+    } else if(showFill == '안철수') {
+      $("input:radio[id='radio4']").attr("checked", true);
+    } else {
+      $("input:radio[id='radio5']").attr("checked", true);
+    }
+
+    for(var i=start; i<=end;i++){
+      //i는 절대 생성 가능 페이지보다 크면 안된다.
+      if(i <= range){
+        if(currPage == i){
+          content += "<li  class='active'><a style='color: white'>"+i+"</a></li>"
+        }else{
+          content += "<li><a class='cursor_pointer' onclick='listCall("+i+")' style='color: black'>"+i+"</a></li>"
+        }
+      }
+    }
+
+    //다음 (range가 5보다 클 경우)
+    if(end < range){
+      content += " <li><a onclick='listCall("+(end+1)+")' class='fa fa-angle-right cursor_pointer'>다음</a></li>"
+    }
+    $("#paging").empty();
+    $("#paging").append(content);
+  }
+
+  function create_btn() {
+    if(isNaN(${principal.idx})) {
+      alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
+    } else {
+      location.href = "/vote/boardCreate";
+    }
+  }
+</script>
+
 <section class="behind-page common-list" id="behind">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-12">
-            <div class="filters">
+            <div id="fillter">
               <ul>
-                <li data-filter="*" class="active">전체</li>
-                <li data-filter=".lee">이재명</li>
-                <li data-filter=".yun">윤석열</li>
-                <li data-filter=".an">안철수</li>
-                <li data-filter=".sim">심상정</li>
+                <li><input type="radio" name="fill" id="radio5" value="all"><label for="radio5" class="cursor_pointer" >전체</label></li>
+                <li><input type="radio" name="fill" id="radio1" value="이재명"><label for="radio1" class="cursor_pointer">이재명</label></li>
+                <li><input type="radio" name="fill" id="radio2" value="윤석열"><label for="radio2" class="cursor_pointer">윤석열</label></li>
+                <li><input type="radio" name="fill" id="radio3" value="심상정"><label for="radio3" class="cursor_pointer">심상정</label></li>
+                <li><input type="radio" name="fill" id="radio4" value="안철수"><label for="radio4" class="cursor_pointer">안철수</label></li>
               </ul>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div class="row grid">
-              <ul>
-                <li>
-                  <div class="col-lg-4 templatemo-item-col all lee">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>이재명</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-01.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              대한민국 항우주산업, 통 크게 지원하겠습니다
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col-lg-4 templatemo-item-col all yun">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>윤석열</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-02.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [보도자료] 윤석열 후보의 비전(10):돌봄 편
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div class="row">
+            <ul>
+              <li id="b_list">
 
-                  <div class="col-lg-4 templatemo-item-col all yun">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>윤석열</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-03.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [보도자료] 윤석열 후보의 비전(9):임신 - 출산
-                              편
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="col-lg-4 templatemo-item-col all an">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>안철수</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-04.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [발언자료] 국내 대표 OTT플랫폼기업
-                              “왓챠(WATCHA)” 방문 안철수 국민의당 대통령
-                              후보 현장발언
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 templatemo-item-col all an">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>안철수</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-02.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [발언자료] 한국생명공학연구원 연구현장 방문
-                              현장발언
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 templatemo-item-col all sim">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>심상정</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-03.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [개인자료] 영화 〈너에게 가는 길〉 보고
-                              왔습니다.
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="col-lg-4 templatemo-item-col all lee">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>이재명</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-01.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [개인자료] 대우조선 합병, 이해관계 최대한
-                              조정하고 합리적인 길을 찾아보겠습니다.
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 templatemo-item-col all sim">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>심상정</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-02.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [공약발표] 심상정 정부의 정의로운
-                              노동국가비전.
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4 templatemo-item-col all an">
-                    <div class="behind-item">
-                      <div class="thumb">
-                        <div class="price">
-                          <span>안철수</span>
-                        </div>
-                        <a href="meeting-details.html"
-                        ><img src="../resources/images/meeting-01.jpg" alt=""
-                        /></a>
-                      </div>
-                      <div class="down-content">
-                        <div>
-                          <a href="meeting-details.html">
-                            <h4>
-                              [보도자료] 안철수 후보, 북한 단거리
-                              탄도미사일, 도발인가? 단순위협인가?
-                              정책세미나 참여.
-                            </h4>
-                          </a>
-                        </div>
-                        <div class="behind-contents">
-                              <span
-                              >10월 21일 누리호 발사, 역사적인 사건입니다.
-                                우리는 지구상에서 가장 먼 곳으로
-                                비행체를...</span
-                              >
-                          <div>
-                                <span>2021.11.14</span
-                                ><span
-                          ><i class="far fa-comment-dots"></i>3</span
-                          >
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+              </li>
+            </ul>
           </div>
+
           <div class="col-lg-12">
             <div class="pagination">
               <ul>
@@ -368,6 +234,7 @@
       </div>
     </div>
   </div>
+  <a href="/vote/behindCreate">글 쓰기</a>
 </section>
 
 <!-- Scripts -->
