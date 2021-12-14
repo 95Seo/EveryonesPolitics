@@ -20,11 +20,6 @@
     height: 50px;
   }
 
-  .behind-Cardview{
-      display: flex;
-      align-content: center;
-      justify-content: center;
-  }
 
 
 </style>
@@ -240,8 +235,10 @@
             </div>
           </div>
         </div>
+      <div class="more1"><a href="/vote/behindCreate"><i class="fas fa-pen fa-2x"></i></a></div>
   </div>
-  <a href="/vote/behindCreate">글 쓰기</a>
+
+
 </section>
 
 <!-- Scripts -->

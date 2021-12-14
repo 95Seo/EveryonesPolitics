@@ -6,7 +6,8 @@ Author URI: http://www.bootstrapthemes.co
 /* Portrait tablets and medium desktops */
 @media (max-width: 1199px) {
   #b_list .col-lg-4{
-    width:49%
+    width:49%;
+    float: left;
   }
 
   .chartview {
@@ -36,7 +37,8 @@ Author URI: http://www.bootstrapthemes.co
 /* Portrait tablets and small desktops */
 @media (max-width: 991px) {
   #b_list .col-lg-4{
-    width:49%
+    width:49%;
+    float: left;
   }
 
   .chartview {
@@ -241,6 +243,11 @@ Author URI: http://www.bootstrapthemes.co
 
 /* Landscape phones and smaller */
 @media (max-width: 479px) {
+  #b_list .col-lg-4{
+    width:100%;
+    float: none;
+  }
+
   .col-sm-3{
     width:100%;
     margin-bottom:30px;
@@ -311,7 +318,10 @@ Author URI: http://www.bootstrapthemes.co
 }
 
 @media (max-width: 320px) {
-
+  #b_list .col-lg-4{
+    width:100%;
+    float: none;
+  }
   .col-sm-3{
     width:100%;
     margin-bottom:30px;

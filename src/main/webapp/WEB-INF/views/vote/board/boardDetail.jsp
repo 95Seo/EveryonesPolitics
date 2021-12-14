@@ -85,7 +85,7 @@
         $(".likeCnt").append(like_cnt);
     }
 </script>
-<section class="board-detail common-list">
+<section class="board-detail common-list" style="margin-top: 90px;">
     <div class="container">
         <div class="row">
             <div class="view-wrap">
