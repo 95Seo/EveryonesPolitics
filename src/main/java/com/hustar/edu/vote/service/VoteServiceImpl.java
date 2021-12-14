@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class VoteServiceImpl implements VoteService {
@@ -14,8 +16,14 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public int getVotingCount() {
-        log.info("get selectVoing");
-        return voteMapper.selectVoting();
+        log.info("get selectVoingCount");
+        return voteMapper.selectVotingCount();
+    }
+
+    @Override
+    public void getupdateVoting(tb_user user) {
+        log.info("get updateVoting");
+        voteMapper.updateVoting(user);
     }
 
 

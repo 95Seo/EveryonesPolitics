@@ -2,13 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hustar.edu.vote.mapper.VoteMapper">
 
-    <select id="selectVoting" resultType="int">
+    <select id="selectVotingCount" resultType="int">
         SELECT
             COUNT(vote)
         FROM
             tb_user
         WHERE
             vote is not null and use_yn = 'Y';
+    </select>
+
+    <select id="updateVoting" parameterType="tb_user">
+        UPDATE
+            tb_user
+        SET
+            vote = #{vote}
+        WHERE
+            idx = #{idx};
     </select>
 
 </mapper>
