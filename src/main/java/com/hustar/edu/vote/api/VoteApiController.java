@@ -22,6 +22,8 @@ public class VoteApiController {
 
         System.out.println("Vote : " + user.getVote());
 
+        voteServiceimpl.getupdateVoting(user);
+
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 }
