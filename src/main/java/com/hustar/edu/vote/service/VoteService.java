@@ -7,4 +7,5 @@ import java.util.List;
 public interface VoteService {
     public int getVotingCount();
     public void getupdateVoting(tb_user user);
+    public List<Integer> getselectVotingList();
 }

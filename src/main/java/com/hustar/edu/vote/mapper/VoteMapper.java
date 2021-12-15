@@ -9,4 +9,5 @@ import java.util.List;
 public interface VoteMapper {
     public int selectVotingCount();
     public void updateVoting(tb_user user);
+    public List<Integer> selectVotingList();
 }

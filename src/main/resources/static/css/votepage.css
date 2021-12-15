@@ -148,6 +148,24 @@
 .candidate01:hover p {
     color: black;
 }
+#voting li:active {
+    animation: up;
+    animation-fill-mode: both;
+    animation-play-state: paused;
+    background: rgba(131, 226, 255, 0.7);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#voting input[checked] + label {
+    animation: up;
+    animation-fill-mode: both;
+    animation-play-state: paused;
+    background: rgba(131, 226, 255, 0.7);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
 
 
 @keyframes up {
