@@ -49,6 +49,10 @@ public class PrincipalDetail implements UserDetails {
         return user.getVote();
     }
 
+    public String getRole() {
+        return user.getRole();
+    }
+
     // 계정이 만료되지 않았는지 리턴한다(true : 만료안됨)
     @Override
     public boolean isAccountNonExpired() {

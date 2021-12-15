@@ -75,8 +75,8 @@
         if (message == "fail") {
           var content = "<div class='no_object'>게시물이 없습니다.</div>";
           //내용 붙이기
-          $("#list").empty();
-          $("#list").append(content);
+          $("#b_list").empty();
+          $("#b_list").append(content);
         } else {
           listPrint(d.list, d.currPage); //리스트 그리기
           pagePrint(d.currPage,d.range); //페이징 처리
@@ -116,7 +116,7 @@
       }
 
       content += '<div class="col-lg-4 templatemo-item-col all">';
-      content += '<div class="behind-item"><a href="/vote/behind/behindDetail">';
+      content += "<div class='behind-item'><a href=/vote/behindDetail?idx="+item.idx+"&page="+currPage+"&filter="+showFill+"&keyword="+keyWord+">";
       content += '<div class="thumb">';
       content += '<div class="price"><span>'+item.filter+'</span></div>';
       content += '<img class="behind-img" src="'+item.fileUrl+'"/></div>'
@@ -218,24 +218,21 @@
             </ul>
         </div>
 
+      <div class="paging">
+          <!--  Pagination 시작 -->
+          <ul class="pagination" id="paging">
+          </ul>
+          <!--  Pagination 끝 -->
+      </div>
+
         <div class="row">
           <div class="col-lg-12">
-            <div class="pagination">
-              <ul>
-                <li>
-                  <a href="#"><i class="fa fa-angle-left"></i></a>
-                  </li>
-                  <li><a href="#">1</a></li>
-                  <li class="active"><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li>
-                  <a href="#"><i class="fa fa-angle-right"></i></a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-      <div class="more1"><a href="/vote/behindCreate"><i class="fas fa-pen fa-2x"></i></a></div>
+
+      <c:if test="${principal.role == 'ADMIN'}">
+          <div class="more1"><a href="/vote/behindCreate"><i class="fas fa-pen fa-2x"></i></a></div>
+      </c:if>
   </div>
 
 

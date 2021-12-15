@@ -92,4 +92,56 @@ public class BoardServiceImpl implements BoardService {
         log.info("get total count");
         return boardMapper.selectBoardTotalCount(cri);
     }
+
+    @Override
+    public HashMap<String, Object> selectMyBoardList(Criteria cri, int idx) {
+        HashMap<String, Object> json = new HashMap<>();
+        List<BoardDTO> boardList = Collections.emptyList();
+
+        // page 페이지 번호 = pageNum
+        // cnt 페이지당 글 갯수 = amount
+        int page = cri.getPage();
+
+        //총 게시물 수
+        int allCnt = boardMapper.selectMyBoardTotalCount(idx);
+
+        // = 생성 가능 페이지 수 (나머지가 있으면 페이지 하나 더 생성)
+        int range = allCnt % cri.getAmount()>0 ?
+                Math.round(allCnt/cri.getAmount())+1 : allCnt/cri.getAmount();
+        logger.info("총 게시물 수 : {}", allCnt);
+        logger.info("생성 가능 페이지 수 : {}", range);
+
+        try {
+            //요청 페이지가 생성 가능 페이지 보다 클 경우 생성 가능 페이지로 적용
+            if(page >range) {
+                page = range;
+            }
+//        int end = page * cnt; // 5페이지 일때 200
+            int start = (page-1) * cri.getAmount(); //5페이지 일때 첫 페이지 번호 81
+            cri.setStart(start);
+
+            System.out.println("로그인 유저 : " + idx);
+            boardList = boardMapper.selectMyBoardList(start, cri.getAmount(), idx);
+            System.out.println("정보를 가져 오나요?" + boardList.get(0).getContent());
+
+            json.put("message", "success");
+            json.put("range",range);       //생성 가능한 총 페이지 수
+            json.put("fill",cri.getFilter());
+            json.put("keyword",cri.getKeyword());
+            json.put("list", boardList); //요청한 게시물
+            System.out.println("list : " + boardList);
+
+            json.put("currPage", page);//현재 페이지
+            return json;
+        } catch (Exception e) {
+            json.put("message", "fail");
+            return json;
+        }
+    }
+
+    @Override
+    public int selectMyBoardTotalCount(int idx) {
+        log.info("get total My Board Count");
+        return boardMapper.selectMyBoardTotalCount(idx);
+    }
 }

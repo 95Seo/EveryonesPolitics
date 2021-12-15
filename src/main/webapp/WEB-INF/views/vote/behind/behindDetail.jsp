@@ -9,10 +9,10 @@
     obj.dataType = "JSON";
     obj.error=function(e){console.log(e)};
 
-    board_nm = "tb_behind"; //보여줄 페이지
-    board_idx = JSON.parse ( ${idx} );
+    behind_nm = "tb_behind"; //보여줄 페이지
+    behind_idx = JSON.parse ( ${idx} );
 
-    detailCall(board_nm, board_idx); //리스트 호출 함수
+    detailCall(behind_nm, behind_idx); //리스트 호출 함수
 
     $(document).on("click","div[class=view-vote]",function(){
         check_id = this.id;
@@ -25,7 +25,7 @@
             } else if(check_id == 'no') {
                 like = 'Y'
             }
-            updateLike(board_nm, board_idx, like);
+            updateLike(behind_nm, behind_idx, like);
         }
     });
 
@@ -41,13 +41,13 @@
 
         obj.success= function(d){
             console.log(d);
-            detailCall(board_nm, board_idx);
+            detailCall(behind_nm, behind_idx);
         };
 
         ajaxCall(obj);
     }
 
-    // /vote/board/boardDetail/{page}/{idx}
+    // /vote/behind/behindDetail/{page}/{idx}
     // likeCnt - 좋아요 수
     // likeYn - 좋아요 여부
     function detailCall(page,idx){
@@ -85,24 +85,35 @@
         $(".likeCnt").append(like_cnt);
     }
 </script>
-<section class="board-detail common-list">
+<style>
+    .view-inner-wrap > .view-inner-wrap-01 > .view-profile > .view-profile-left > .view-profile-left-img > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .view-profile-right > a {
+        color: black;
+    }
+</style>
+<section class="behind-detail common-list" style="margin-top: 90px;">
     <div class="container">
         <div class="row">
             <div class="view-wrap">
                 <div class="view-box">
                     <div class="view-nav-title">
-                        <h2>자유게시판</h2>
+                        <h2>[<c:out value='${behind.filter}'/>]비하인드</h2>
                     </div>
                     <div class="view-inner-wrap">
                         <div class="view-inner-wrap-01">
                             <div class="view-profile">
                                 <div class="view-profile-left">
                                     <div class="view-profile-left-img">
+                                        <img src="<c:out value='${user.profileImg}'/>">
                                     </div>
                                 </div>
                                 <div class="view-profile-right">
-                                    <a href="<c:out value="${user.profile_img}"/>"><c:out value="${user.nickname}"/></a>
-                                    <p>14일전</p>
+                                    <a href=""><c:out value="${user.nickname}"/></a>
+                                    <p><c:out value="${calcTime}"/></p>
                                 </div>
                             </div>
                             <div class="view-inner-content">
@@ -129,23 +140,31 @@
                         <div class="view-button-vote">
                             <div name="like" class="view-vote">
                                 <div>
-                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
                                     <span id="view-vote-count" class="likeCnt"></span>
                                 </div>
                                 <p>공감</p>
                             </div>
                         </div>
+
                         <div class="view-button-box">
                             <div class="view-list-button">
                                 <a href="/vote/behindList?&page=${page}&filter=${filter}&keyword=${keyword}">
                                     <button>목록</button>
                                 </a>
                             </div>
-                            <c:if test="${behind.writerIdx==principal.idx}">
-                                <div class="view-write-button">
-                                    <a href="/vote/behindUpdate?idx=${behind.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
-                                        <button>수정</button>
-                                    </a>
+                            <c:if test="${principal.role == 'ADMIN'}">
+                                <div class="view-button-box-02">
+                                    <div class="view-delete-button">
+                                        <a href="/vote/behindDelete?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                            <button>삭제</button>
+                                        </a>
+                                    </div>
+                                    <div class="view-write-button">
+                                        <a href="/vote/behindUpdate?idx=${behind.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                            <button>수정</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </c:if>
                         </div>

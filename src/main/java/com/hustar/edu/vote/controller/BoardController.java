@@ -35,24 +35,6 @@ public class BoardController {
     @Autowired
     CommonService commonService;
 
-    @PostMapping("/vote/boardCreate")
-    public String PostBoardCreateController (@RequestParam("title") String title, @RequestParam("content") String content) {
-
-        log.info("PostBoardCreatePage");
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        PrincipalDetail userDetails = (PrincipalDetail)principal;
-
-        BoardDTO boardDTO = new BoardDTO();
-
-        boardDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
-        boardDTO.setTitle(title);
-        boardDTO.setContent(content);
-
-        boardService.insertBoard(boardDTO);
-        return "redirect:/vote/boardList";
-    }
-
     @GetMapping("/vote/boardList")
     public String GetBoardListController (Criteria criteria,
                                           Model model) {
@@ -86,6 +68,27 @@ public class BoardController {
         }
         log.info("VoteBoardPage");
         return "/vote/board/boardCreate";
+    }
+
+    @PostMapping("/vote/boardCreate")
+    public String PostBoardCreateController (@RequestParam("title") String title, @RequestParam("content") String content, String filter) {
+
+        log.info("PostBoardCreatePage");
+
+        System.out.println("filter:"+filter);
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDetail userDetails = (PrincipalDetail)principal;
+
+        BoardDTO boardDTO = new BoardDTO();
+
+        boardDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
+        boardDTO.setTitle(title);
+        boardDTO.setContent(content);
+        boardDTO.setFilter(filter);
+
+        boardService.insertBoard(boardDTO);
+        return "redirect:/vote/boardList";
     }
 
     @GetMapping("/vote/boardUpdate")
@@ -122,7 +125,7 @@ public class BoardController {
         BoardDTO boardDTO = boardService.selectBoardDetail(idx);
         tb_user user = userService.getUser(boardDTO.getWriterIdx());
 
-        System.out.println("getProfile_img:" + user.getProfile_img());
+        System.out.println("getProfile_img:" + user.getProfileImg());
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("user", user);

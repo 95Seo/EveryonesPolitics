@@ -35,9 +35,6 @@
   <!--Theme custom css -->
   <link rel="stylesheet" href="../resources/css/style.css" />
 
-  <!--Theme Responsive css-->
-  <link rel="stylesheet" href="../resources/css/responsive.css" />
-
   <script src="../resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
   <!-- fullcalendar CDN -->
@@ -68,7 +65,6 @@
   <style>
     .fc-day:hover{background: lightblue; cursor: pointer;}
   </style>
-
 
 </head>
 <sec:authorize access="isAuthenticated()">
@@ -686,6 +682,116 @@
       }
     }
   });
+</script>
+
+<script>
+  var obj={};
+  obj.dataType = "JSON";
+  obj.error=function(e){console.log(e)};
+
+  map = JSON.stringify(${json});
+
+  cri = JSON.parse(map);
+
+  showPage = cri.page;  //보여줄 페이지
+
+  showAmount = cri.amount;
+
+  var showFill = cri.filter;
+
+  var keyWord = cri.keyword;
+
+  listCall(showPage); //리스트 호출 함수
+
+  $(document).on("change","input[type=radio]",function(){
+    showFill=$('input[name=fill]:checked').val();
+    keyWord = "";
+    //라디오 버튼 값을 가져온다.
+    listCall(showPage);
+  });
+
+  // /listSub/{pagePerCnt}/{page}
+  function listCall(page){
+    var param = {};
+    param = {"amount":showAmount, "page":page, "filter":showFill, "keyword":keyWord};
+
+    $.ajax({
+      anyne:true,
+      type:'POST',
+      data: JSON.stringify(param),
+      contentType: 'application/json',
+      // contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+      url:"/vote/getMainPromiseList/",
+      dataType: "text",
+      success : function(result) {
+        alert(result)
+        console.log(d);
+        var d = JSON.parse(result);
+        message = d.message;
+        if (message == "fail") {
+          var content = "<div class='no_object'>게시물이 없습니다.</div>";
+          //내용 붙이기
+          $("#portfoliowork").empty();
+          $("#portfoliowork").append(content);
+        } else {
+          listPrint(d.list, d.currPage); //리스트 그리기
+          // $("input:radio[name='fill']").attr("checked", false);
+          //
+          // if(showFill == '이재명') {
+          //   $("input:radio[id='radio1']").attr("checked", true);
+          // } else if(showFill == '윤석열') {
+          //   $("input:radio[id='radio2']").attr("checked", true);
+          // } else if(showFill == '심상정') {
+          //   $("input:radio[id='radio3']").attr("checked", true);
+          // } else if(showFill == '안철수') {
+          //   $("input:radio[id='radio4']").attr("checked", true);
+          // } else {
+          //   $("input:radio[id='radio5']").attr("checked", true);
+          // }
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("ERROR : " + textStatus + " : " + errorThrown);
+      }
+    });
+  }
+
+  //받아온 리스트 그리기
+  function listPrint(list, currPage){
+    if(keyWord == null || keyWord == "") {
+      keyWord = "";
+      $('#keyword').val('');
+    } else {
+      $('#keyword').val(keyWord);
+    }
+
+    content ="";
+
+    list.forEach(function(item, idx){
+      // alert(item.title);
+      if(item.filter == "이재명") {
+        content += '<div class="single_portfolio tile scale-anm blue">';
+      } else if (item.filter == "윤석열") {
+        content += '<div class="single_portfolio tile scale-anm red">';
+      } else if(item.filter == "심상정") {
+        content += '<div class="single_portfolio tile scale-anm yellow">';
+      } else if(item.filter == "안철수") {
+        content += '<div class="single_portfolio tile scale-anm green">';
+      }
+      content +=    '<img src="'+item.fileUrl+'"/>';
+      content +=        '<a href="/vote/promiseList" class="portfolio-img">';
+      content +=            '<div class="grid_item_overlay">';
+      content +=                '<h3>자세히보기</h3>'
+      content +=            '</div>'
+      content +=        '</a>';
+      content += '</div>';
+    });
+    alert(content);
+
+    //내용 붙이기
+    $("#portfoliowork").empty();
+    $("#portfoliowork").append(content);
+  }
 </script>
 
 

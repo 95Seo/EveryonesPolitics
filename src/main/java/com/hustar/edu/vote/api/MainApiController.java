@@ -1,34 +1,28 @@
 package com.hustar.edu.vote.api;
 
-
+import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.paging.Criteria;
-import com.hustar.edu.vote.service.AjaxService;
+import com.hustar.edu.vote.service.BoardService;
 import com.hustar.edu.vote.service.PromiseService;
-import com.hustar.edu.vote.service.CommonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
 @RestController
-public class PromiseApiController {   //이름을 restcontroller로하면 에러 발생 -> 이름을 rest로 지으면 안됨
-    @Autowired
-    AjaxService service;
-
+public class MainApiController {
     @Autowired
     PromiseService promiseService;
 
     @Autowired
-    CommonService commonService;
+    BoardService boardService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /*	restful은 기본적으로 개발자간에 데이터 전송 형식을 API로 지정한다.
-     list/[페이지당 보여줄 수]/[페이지 번호]
-     일반적으로 restful은 url 형태로 데이터를 요청하기 때문에 조회에 국한(범위를 일정한 부분에 한정하는 것.)한다.*/
-    @RequestMapping(value="/vote/promise/promiseList/{amount}/{page}/{fill}")
+    @RequestMapping(value="/vote/getMainPromiseList/{amount}/{page}/{fill}")
     public HashMap<String, Object> listSub(@PathVariable int amount, @PathVariable int page, @PathVariable String fill) {
         Criteria cri = new Criteria();
         cri.setAmount(amount);
@@ -41,9 +35,9 @@ public class PromiseApiController {   //이름을 restcontroller로하면 에러
         return promiseService.selectPromiseList(cri);
     }
 
-    @RequestMapping(value="/vote/getPromisePagingList/", method= RequestMethod.POST)
-    public HashMap<String, Object> listSub(@RequestBody Criteria cri) {
-
+    @RequestMapping(value="/vote/getMainPromiseList/", method= RequestMethod.POST)
+    public HashMap<String, Object> postMainPromiseList(@RequestBody Criteria cri) {
+        System.out.println("getMainPromiseList");
         logger.info("amount :" + cri.getAmount());
         logger.info("page :"+ cri.getPage());
         logger.info("fill :"+ cri.getFilter());
@@ -52,11 +46,14 @@ public class PromiseApiController {   //이름을 restcontroller로하면 에러
         return promiseService.selectPromiseList(cri);
     }
 
-    @RequestMapping(value="/vote/promise/promiseDetail/{page}/{idx}")
-    public HashMap<String, Object> promiseDetail(@PathVariable String page, @PathVariable int idx) {
-        logger.info("게시판 :" + page);
-        logger.info("글번호 :"+ idx);
+    @RequestMapping(value="/vote/selectMyBoardList/", method= RequestMethod.POST)
+    public HashMap<String, Object> selectMyBoardList(@RequestBody Criteria cri, @AuthenticationPrincipal PrincipalDetail principal) {
 
-        return service.getLike(page, idx);
+        logger.info("amount :" + cri.getAmount());
+        logger.info("page :"+ cri.getPage());
+        logger.info("fill :"+ cri.getFilter());
+        logger.info("keyword :"+ cri.getKeyword());
+
+        return boardService.selectMyBoardList(cri, principal.getIdx());
     }
 }

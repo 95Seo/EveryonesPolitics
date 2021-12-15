@@ -887,9 +887,6 @@ button.btn-md:hover {
   -webkit-columns: 4;
   columns: 6;
 }
-.tile {
-  display: none;
-}
 .scale-anm {
   margin: 0px;
   width: 100%;
@@ -2045,8 +2042,12 @@ li .single_team_text p {
 
 .view-button-box {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-bottom: 50px;
+}
+
+.view-button-box-02 {
+  display: flex;
 }
 
 .view-list-button {
@@ -2054,7 +2055,7 @@ li .single_team_text p {
 }
 
 .view-list-button button {
-  width: 50px;
+  width: 80px;
   height: 30px;
   border: 1px solid #000;
   color: #000;
@@ -2064,13 +2065,35 @@ li .single_team_text p {
 }
 
 .view-list-button button:hover {
-  width: 50px;
-  height: 30px;
   border: 0;
   color: #fff;
   border-radius: 4px;
   text-align: center;
   background-color: #e74c3c;
+}
+
+.view-delete-button {
+  padding-right: 5px;
+}
+
+.view-delete-button button {
+  border:0;
+  width: 80px;
+  height: 30px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #e74c3c;
+}
+
+.view-delete-button button:hover {
+  border:0;
+  width: 80px;
+  height: 30px;
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  background-color: #ee7164;
 }
 
 .view-write-button button {
@@ -2090,7 +2113,7 @@ li .single_team_text p {
   color: #fff;
   border-radius: 4px;
   text-align: center;
-  background-color: #e74c3c;
+  background-color: #3e3e3e;
 }
 /*==============End board Section==========================*/
 

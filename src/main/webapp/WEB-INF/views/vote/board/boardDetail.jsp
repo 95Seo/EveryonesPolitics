@@ -108,7 +108,7 @@
                             <div class="view-profile">
                                 <div class="view-profile-left">
                                     <div class="view-profile-left-img">
-                                        <img src="<c:out value='${user.profile_img}'/>">
+                                        <img src="<c:out value='${user.profileImg}'/>">
                                     </div>
                                 </div>
                                 <div class="view-profile-right">
@@ -146,6 +146,8 @@
                                 <p>공감</p>
                             </div>
                         </div>
+
+
                         <div class="view-button-box">
                             <div class="view-list-button">
                                 <a href="/vote/boardList?&page=${page}&filter=${filter}&keyword=${keyword}">
@@ -153,10 +155,17 @@
                                 </a>
                             </div>
                             <c:if test="${board.writerIdx==principal.idx}">
+                                <div class="view-button-box-02">
+                                <div class="view-delete-button">
+                                    <a href="/vote/boardDelete?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                        <button>삭제</button>
+                                    </a>
+                                </div>
                                 <div class="view-write-button">
                                     <a href="/vote/boardUpdate?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
                                         <button>수정</button>
                                     </a>
+                                </div>
                                 </div>
                             </c:if>
                         </div>

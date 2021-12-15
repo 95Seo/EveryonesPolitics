@@ -89,11 +89,6 @@
         z-index: 1;
         color: #fff;
     }
-    .myprofile-inner > .myprofile-inner-wrap-01 > .myprofile-left > .myprofile-left-img > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 </style>
 <section class="myprofile-info common-list" style="margin-top: 105px;">
     <div class="myprofile-info-wrap">
@@ -101,7 +96,7 @@
             <div class="myprofile-box-01">
                 <div class="myprofile-left">
                     <div class="myprofile-left-img">
-                        <img src="<c:out value='${info.profile_img}'/>" alt="">
+                        <img src="<c:out value='${info.profileImg}'/>" alt="">
                     </div>
                 </div>
                 <div class="myprofile-right">
@@ -159,7 +154,7 @@
                         <h4>프로필사진</h4>
                     </li>
                     <li class="myprofile-info-box-06-li">
-                        <img src="<c:out value='${info.profile_img}'/>">
+                        <img src="<c:out value='${info.profileImg}'/>">
                     </li>
                 </ul>
             </div>

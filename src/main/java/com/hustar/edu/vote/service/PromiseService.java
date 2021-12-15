@@ -1,17 +1,15 @@
 package com.hustar.edu.vote.service;
 
 import com.hustar.edu.vote.dto.PromiseDTO;
-import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.paging.Criteria;
 
-import java.util.List;
+import java.util.HashMap;
 
 public interface PromiseService {
-    public void insertPromiseBoard(PromiseDTO promiseDTO);
-    public List<PromiseDTO> getPromiseBoardList(Criteria criteria);
+    public void insertPromise(PromiseDTO promiseDTO);
+    public HashMap<String, Object> selectPromiseList(Criteria cri);
+    public PromiseDTO selectPromiseDetail(int idx);
     //추가(전체 글 개수)
-    public int getPromiseTotal(Criteria cri);
-
-    public PromiseDTO getPromiseBoardDetail(PromiseDTO promiseDTO);
-
+    public int getTotal(Criteria cri);
+    public void updatePromiseDetail(PromiseDTO promiseDTO);
 }

@@ -5,9 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 //@DinamicInsert 어노테이션을 붙이면 null값을 제외하고 전송한다.
 @Data
@@ -22,19 +24,20 @@ public class tb_user {
 
     private String name;
 
-    @Column(nullable = false, length = 100)  // null 여부와 길이제한
+    @Column(name="username", nullable = false, length = 100)  // null 여부와 길이제한
     private String username;
 
-    @Column(nullable = false, length = 100)  // 123456 -> 해쉬(비밀번호 암호화)
+    @Column(name="password", nullable = false, length = 100)  // 123456 -> 해쉬(비밀번호 암호화)
     private String password;
 
-    @Column(length = 100)
+    @Column(name="email", length = 100)
     private String email;
 
+    @Column(name="nickname", length = 100)
     private String nickname;
 
-    @ColumnDefault("none.jpg")
-    private String profile_img = "none.jpg";
+    @Column(name="profile_img", nullable = false, length = 500)
+    private String profileImg = "https://vote-web-bucket.s3.ap-northeast-2.amazonaws.com/USER/PROFILE/DEFAULT/vote_img.png";
 
     // 1 - Y (default), 2 - N
     @ColumnDefault("Y")
@@ -51,7 +54,7 @@ public class tb_user {
     @CreationTimestamp  // 시간이 자동 입력
     private Date sysregdate;
 
-    private Date sysmoddate;
+    private Timestamp sysmoddate;
 
     @Builder
     public tb_user(String name, String username, String password, String email, String nickname, String gender, String age_range, String use_yn, String profile_img) {

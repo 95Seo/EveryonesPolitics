@@ -3,8 +3,8 @@
 <mapper namespace="com.hustar.edu.vote.mapper.BoardMapper">
 
     <insert id="insertBoard" parameterType="BoardDTO">
-        insert into tb_board(writer_idx, title, content)
-        values (#{writerIdx}, #{title}, #{content});
+        insert into tb_board(writer_idx, title, content, filter)
+        values (#{writerIdx}, #{title}, #{content}, #{filter});
     </insert>
 
     <update id="updateBoardDetail" parameterType="BoardDTO">
@@ -31,6 +31,21 @@
         LIMIT #{start}, #{amount};
     </select>
 
+    <select id="selectMyBoardList" parameterType="int" resultType="BoardDTO">
+        SELECT c.*
+        FROM (SELECT
+        @ROWNUM := @ROWNUM + 1 AS rownum, a.idx as idx, b.NICKNAME as nick_name, a.title as title, a.CONTENT as content , a.SYSREGDATE as sysregdate, a.VIEW_CNT as view_cnt, a.LIKE_CNT AS like_cnt, a.FILTER AS filter
+        FROM tb_board a,
+        tb_user b,
+        (SELECT @ROWNUM := 0) TMP
+        WHERE a.use_yn = 'Y'
+        AND a.WRITER_IDX = #{idx}
+        AND a.WRITER_IDX = b.IDX
+        ORDER BY a.idx DESC,
+        a.sysregdate DESC) c
+        LIMIT #{start}, #{amount};
+    </select>
+
     <select id="selectBoardDetail" parameterType="int" resultType="BoardDTO">
         SELECT *
         FROM tb_board
@@ -43,5 +58,12 @@
         WHERE use_yn = 'Y'
         <if test="filter != 'all' ">AND filter = #{filter}</if>
         <if test='keyword != null'>AND title Like CONCAT('%', #{keyword}, '%')</if>
+    </select>
+
+    <select id="selectMyBoardTotalCount" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_board
+        WHERE use_yn = 'Y'
+        AND writer_idx = #{idx}
     </select>
 </mapper>
