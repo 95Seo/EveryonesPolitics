@@ -26,5 +26,11 @@ public class VoteServiceImpl implements VoteService {
         voteMapper.updateVoting(user);
     }
 
+    @Override
+    public List<Integer> getselectVotingList() {
+        log.info("get selectVotingList");
+        return voteMapper.selectVotingList();
+    }
+
 
 }

@@ -8,7 +8,7 @@
         FROM
             tb_user
         WHERE
-            vote is not null and use_yn = 'Y';
+            vote != 0 and use_yn = 'Y';
     </select>
 
     <select id="updateVoting" parameterType="tb_user">
@@ -18,6 +18,19 @@
             vote = #{vote}
         WHERE
             idx = #{idx};
+    </select>
+
+    <select id="selectVotingList" resultType="int">
+        SELECT
+            COUNT(vote) , vote
+        FROM
+            tb_user
+        WHERE
+            VOTE != 0
+        GROUP BY
+            vote
+        ORDER BY
+            VOTE ASC;
     </select>
 
 </mapper>

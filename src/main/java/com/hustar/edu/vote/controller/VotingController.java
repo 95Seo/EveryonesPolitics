@@ -1,20 +1,25 @@
 package com.hustar.edu.vote.controller;
 
+import com.google.gson.Gson;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.tb_user;
+import com.hustar.edu.vote.service.VoteService;
 import com.hustar.edu.vote.service.VoteServiceImpl;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Controller
+@Log
 public class VotingController {
     @Autowired
     VoteServiceImpl voteServiceimpl;
@@ -39,4 +44,19 @@ public class VotingController {
 
         return "redirect:/";
     }
+
+//    private static final Logger logger = LoggerFactory.getLogger(VotingController.class);
+//
+//    @RequestMapping(value = "/qweqwe", method = RequestMethod.GET)
+//    public String votemain(Locale locale, Model model) {
+//        return "redirect:/";
+//    }
+//
+//    @RequestMapping(value = "/asdsada", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+//    public @ResponseBody String main(Locale locale, Model model) {
+//        Gson gson= new Gson();
+//        List<tb_user> votingListView = voteServiceimpl.getselectVotingList();
+//
+//        return gson.toJson(votingListView);
+//    }
 }

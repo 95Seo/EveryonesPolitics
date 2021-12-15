@@ -625,44 +625,57 @@
   });
 </script>
 
+<!--JavaScript chart voteListView -->
+
+
 
 <!-- JavaScript for BarChart-->
 <script type="text/javascript">
-  var context = document
-          .getElementById('myChart')
-          .getContext('2d');
-  var myChart = new Chart(context, {
-    type: 'bar', // 차트의 형태
-    data: { // 차트에 들어갈 데이터
-      labels: [
-        //x 축
-        '이재명','윤석열','심상정','안철수'
-      ],
-      datasets: [
-        { //데이터
-          label: '모의 투표', //차트 제목
-          fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-          data: [
-            15,42,25,20 //x축 label에 대응되는 데이터 값
-          ],
-          backgroundColor: [
-            //색상
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
+  $.ajax({
+    type: "get",
+    url: "/vote/votingListView",
+    dataType: 'json',
 
-          ],
-          borderColor: [
-            //경계선 색상
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
 
-          ],
-          borderWidth: 2 //경계선 굵기
-        }/* ,
+    success: function(info) {
+      chartData(info);
+    }
+  }); //ajax end
+
+  function chartData(data) {
+    var context = document
+            .getElementById('myChart')
+            .getContext('2d');
+    var myChart = new Chart(context, {
+      type: 'bar', // 차트의 형태
+      data: { // 차트에 들어갈 데이터
+        labels: [
+          //x 축
+          '이재명','윤석열','심상정','안철수'
+        ],
+        datasets: [
+          { //데이터
+            label: '모의 투표', //차트 제목
+            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+            data:data,
+            backgroundColor: [
+              //색상
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+
+            ],
+            borderColor: [
+              //경계선 색상
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 99, 132, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+
+            ],
+            borderWidth: 2 //경계선 굵기
+          }/* ,
               {
                   label: 'test2',
                   fill: false,
@@ -672,20 +685,21 @@
                   backgroundColor: 'rgb(157, 109, 12)',
                   borderColor: 'rgb(157, 109, 12)'
               } */
-      ]
-    },
-    options: {
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
-          }
         ]
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
       }
-    }
-  });
+    });
+  }
 </script>
 
 

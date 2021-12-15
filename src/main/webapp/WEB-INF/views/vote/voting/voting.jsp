@@ -5,11 +5,10 @@
 <link rel="stylesheet" href="../resources/css/votepage.css" />
 
 <script>
-    var showFill = cri.filter;
-
-    $(document).on("change","input[type=radio]",function() {
-        showFill = $('input[name=fill]:checked').val();
-        keyWord = "";
+    $(document).on("click","input[type=radio]",function(){
+        showFill=$('input[name=fill]:checked').val();
+        //라디오 버튼 값을 가져온다.
+        chang_fill(showFill);
     });
 
     function vote_btn() {
@@ -24,14 +23,18 @@
         }
     }
 
-    if(showFill == '이재명') {
-        $("input:radio[id='radio1']").attr("checked", true);
-    } else if(showFill == '윤석열') {
-        $("input:radio[id='radio2']").attr("checked", true);
-    } else if(showFill == '심상정') {
-        $("input:radio[id='radio3']").attr("checked", true);
-    } else if(showFill == '안철수') {
-        $("input:radio[id='radio4']").attr("checked", true);
+    function chang_fill(fill) {
+        $("input:radio[name='fill']").attr("checked", false);
+
+        if(fill == '이재명') {
+            $("input:radio[id='radio1']").attr("checked", true);
+        } else if(fill == '윤석열') {
+            $("input:radio[id='radio2']").attr("checked", true);
+        } else if(fill == '심상정') {
+            $("input:radio[id='radio3']").attr("checked", true);
+        } else if(fill == '안철수') {
+            $("input:radio[id='radio4']").attr("checked", true);
+        }
     }
 </script>
 
@@ -57,7 +60,7 @@
                 <div class="vote-Row" id="voting">
                     <div class="col-sm-3">
                         <li class="candidate01 comon-candidate">
-                            <input type="radio" name="vote" id="radio1" value="1">
+                            <input type="radio" name="fill" id="radio1" value="이재명">
                             <label for="radio1" class="cursor_pointer">
                                 <h2>이재명</h2>
                                 <p>새로운 대한민국<br />이재명은 합니다!</p>
@@ -67,7 +70,7 @@
 
                     <div class="col-sm-3">
                         <li class="candidate02 comon-candidate">
-                            <input type="radio" name="vote" id="radio2" value="2">
+                            <input type="radio" name="fill" id="radio2" value="윤석열">
                             <label for="radio2" class="cursor_pointer">
                                 <h2>윤석열</h2>
                                 <p>공정과 상식의 나라<br />되찾겠습니다.</p>
@@ -76,10 +79,10 @@
                     </div>
                 </div>
 
-                <div class="vote-Row">
+                <div class="vote-Row" id="voting">
                     <div class="col-sm-3">
                         <li class="candidate03 comon-candidate">
-                            <input type="radio" name="vote" id="radio3" value="3">
+                            <input type="radio" name="fill" id="radio3" value="심상정">
                             <label for="radio3" class="cursor_pointer">
                                 <h2>심상정</h2>
                                 <p>정의로운 복지국가,<br />정의당이 시작합니다</p>
@@ -89,7 +92,7 @@
 
                     <div class="col-sm-3">
                         <li class="candidate04 comon-candidate">
-                            <input type="radio" name="vote" id="radio4" value="4">
+                            <input type="radio" name="fill" id="radio4" value="안철수">
                             <label for="radio4" class="cursor_pointer">
                                 <h2>안철수</h2>
                                 <p>말과 행동이 같은 정당</p>
