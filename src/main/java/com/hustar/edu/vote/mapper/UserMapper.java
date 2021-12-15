@@ -2,8 +2,11 @@ package com.hustar.edu.vote.mapper;
 
 import com.hustar.edu.vote.dto.tb_user;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,6 +21,5 @@ public interface UserMapper extends JpaRepository<tb_user, Integer> {
     @Query(value = "SELECT * FROM tb_user WHERE idx = ?1", nativeQuery = true)
     tb_user getUser(int idx);
 
-    @Query(value = "UPDATE user SET nickname=?1, update_date=now() WHERE username = ?3", nativeQuery = true)
-    void updateUser(String nickname, String username);
+//    int updateUser(@Param("user") tb_user user);
 }

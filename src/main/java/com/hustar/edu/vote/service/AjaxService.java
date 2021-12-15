@@ -16,9 +16,6 @@ import java.util.List;
 
 @Service
 public class AjaxService {
-
-
-
     @Autowired
     BoardService boardService;
 

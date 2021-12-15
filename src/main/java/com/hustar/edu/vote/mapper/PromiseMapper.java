@@ -1,7 +1,6 @@
 package com.hustar.edu.vote.mapper;
 
 import com.hustar.edu.vote.dto.PromiseDTO;
-import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,13 +8,13 @@ import java.util.List;
 
 @Mapper
 public interface PromiseMapper {
-    public void insertPromiseBoard(PromiseDTO promiseDTO);
+    void insertPromise(PromiseDTO promiseDTO) ;
 
-    public List<PromiseDTO> selectPromiseBoardList(Criteria criteria);
+    public List<PromiseDTO> selectPromiseList(Criteria cri);
 
-    public int selectPromiseBoardTotalCount(Criteria criteria);
+    public PromiseDTO selectPromiseDetail(int idx);
 
-    public PromiseDTO selectPromiseBoardDetail(PromiseDTO promiseDTO);
+    public int selectPromiseTotalCount(Criteria cri);
 
-    public Time selectPromiseBoardDetail(Time time);
+    public void updatePromiseDetail(PromiseDTO promiseDTO);
 }

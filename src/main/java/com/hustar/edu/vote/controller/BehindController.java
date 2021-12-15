@@ -41,36 +41,13 @@ public class BehindController {
     @Autowired
     ThumbnailUploadHandler thumbnailUploadHandler;
 
-    @PostMapping("/vote/behindCreate")
-    public String PostBehindCreateController (@RequestParam("title") String title, @RequestParam("content") String content,
-                                              @RequestParam MultipartFile multipartFile) {
-
-        log.info("PostBehindCreatePage");
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        PrincipalDetail userDetails = (PrincipalDetail)principal;
-
-        BehindDTO behindDTO = new BehindDTO();
-
-        UploadFile file_url = thumbnailUploadHandler.handleFileUpload(multipartFile, "BEHIND");
-        System.out.println("file_url : " + file_url.getFile_dir());
-
-        behindDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
-        behindDTO.setTitle(title);
-        behindDTO.setContent(content);
-        behindDTO.setFileUrl(file_url.getFile_dir());
-
-        behindService.insertBehind(behindDTO);
-        return "redirect:/vote/behindList";
-    }
-
     @GetMapping("/vote/behindList")
     public String GetBehindListController (Criteria criteria,
                                           Model model) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             HashMap<String, Object> map = new HashMap<>();
-            map.put("amount", criteria.getAmount());
+            map.put("amount", 9);
             map.put("page", criteria.getPage());
             map.put("filter", criteria.getFilter());
             map.put("keyword", criteria.getKeyword());
@@ -85,40 +62,6 @@ public class BehindController {
             log.info("실패");
         }
         return "/vote/behind/behindList";
-    }
-
-    @GetMapping("/vote/behindCreate")
-    public String voteBehindCreateController() {
-//        try {
-//            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//            PrincipalDetail userDetails = (PrincipalDetail) principal;
-//        } catch (Exception e) {
-//            return "redirect:/vote/behindList";
-//        }
-        log.info("VoteBehindPage");
-        return "/vote/behind/behindCreate";
-    }
-
-    @GetMapping("/vote/behindUpdate")
-    public String voteGetBehindUpdateController(int idx, Criteria criteria, Model model) {
-        model.addAttribute( "page", criteria.getPage() );
-        model.addAttribute( "filter", criteria.getFilter() );
-        model.addAttribute( "keyword", criteria.getKeyword() );
-
-        log.info("VoteBehindUpdatePage");
-        model.addAttribute("behind", behindService.selectBehindDetail(idx));
-        return "/vote/behind/behindUpdate";
-    }
-
-    @PostMapping("/vote/behindUpdate")
-    public String votePostBehindUpdateController(BehindDTO behindDTO, Criteria criteria, RedirectAttributes rttr) {
-        log.info("VoteBehindUpdatePage");
-        behindService.updateBehindDetail(behindDTO);
-        rttr.addAttribute("page", criteria.getPage());
-        rttr.addAttribute("filter", criteria.getFilter());
-        rttr.addAttribute("keyword", criteria.getKeyword());
-        rttr.addAttribute("idx", behindDTO.getIdx());
-        return "redirect:/vote/behindDetail";
     }
 
     @GetMapping("/vote/behindDetail")
@@ -137,5 +80,60 @@ public class BehindController {
         model.addAttribute("user", user);
 
         return "/vote/behind/behindDetail";
+    }
+
+    @GetMapping("/vote/behindCreate")
+    public String voteBehindCreateController() {
+
+        log.info("VoteBehindPage");
+        return "/vote/behind/behindCreate";
+    }
+
+    @PostMapping("/vote/behindCreate")
+    public String PostBehindCreateController (@RequestParam("title") String title, @RequestParam("content") String content,
+                                              @RequestParam MultipartFile multipartFile, String filter) {
+
+        log.info("PostBehindCreatePage");
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        PrincipalDetail userDetails = (PrincipalDetail)principal;
+
+        BehindDTO behindDTO = new BehindDTO();
+
+        UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
+        System.out.println("file_url : " + file_url.getFile_dir());
+
+        behindDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
+        behindDTO.setTitle(title);
+        behindDTO.setContent(content);
+        behindDTO.setFileUrl(file_url.getFile_dir());
+        behindDTO.setFilter(filter);
+
+        behindService.insertBehind(behindDTO);
+        return "redirect:/vote/behindList";
+    }
+
+    @GetMapping("/vote/behindUpdate")
+    public String voteGetBehindUpdateController(int idx, Criteria criteria, Model model) {
+        model.addAttribute( "page", criteria.getPage() );
+        model.addAttribute( "filter", criteria.getFilter() );
+        model.addAttribute( "keyword", criteria.getKeyword() );
+
+        log.info("VoteBehindUpdatePage");
+        model.addAttribute("behind", behindService.selectBehindDetail(idx));
+        return "/vote/behind/behindUpdate";
+    }
+
+    @PostMapping("/vote/behindUpdate")
+    public String votePostBehindUpdateController(BehindDTO behindDTO, Criteria criteria, RedirectAttributes rttr, @RequestParam MultipartFile multipartFile) {
+        log.info("VoteBehindUpdatePage");
+        UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
+        behindDTO.setFileUrl(file_url.getFile_dir());
+        behindService.updateBehindDetail(behindDTO);
+        rttr.addAttribute("page", criteria.getPage());
+        rttr.addAttribute("filter", criteria.getFilter());
+        rttr.addAttribute("keyword", criteria.getKeyword());
+        rttr.addAttribute("idx", behindDTO.getIdx());
+        return "redirect:/vote/behindDetail";
     }
 }

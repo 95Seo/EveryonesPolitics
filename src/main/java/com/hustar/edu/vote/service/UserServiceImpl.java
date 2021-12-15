@@ -8,6 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 
 @Slf4j
 @Service
@@ -48,7 +52,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUser(idx);
     }
 
-    public void updateUser(String nickname, String username) {
-        userMapper.updateUser(nickname, username);
+    public void updateUser(tb_user user) {
+
+//        userMapper.updateUser(user);
     }
 }

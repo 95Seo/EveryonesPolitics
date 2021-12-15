@@ -1,7 +1,9 @@
 package com.hustar.edu.vote.dto;
 
 import lombok.Data;
+
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 public class PromiseDTO {
@@ -10,13 +12,13 @@ public class PromiseDTO {
     private int writerIdx;
     private String title;
     private String content;
-    private int fileId;
+    private String fileUrl;
     private String topFix;
     private String useYn;
     private Date sysregdate;
-    private Date sysmoddate;
+    private Timestamp sysmoddate;
 
-    private String totalCd;
+    private String filter;
     private int viewCnt;
     private int likeCnt;
     private int dislikeCnt;

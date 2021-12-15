@@ -13,4 +13,6 @@ public interface BoardService {
     //추가(전체 글 개수)
     public int getTotal(Criteria cri);
     public void updateBoardDetail(BoardDTO boardDTO);
+    public HashMap<String, Object> selectMyBoardList(Criteria cri, int idx);
+    public int selectMyBoardTotalCount(int idx);
 }

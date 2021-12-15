@@ -7,5 +7,5 @@ public interface UserService {
     public tb_user login(String username, String password);
     public tb_user searchUser(String username);
     public tb_user getUser(int idx);
-    public void updateUser(String nickname, String username);
+    public void updateUser(tb_user user);
 }

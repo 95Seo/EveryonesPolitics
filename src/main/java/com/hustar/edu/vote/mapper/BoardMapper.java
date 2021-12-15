@@ -18,4 +18,8 @@ public interface BoardMapper {
     public int selectBoardTotalCount(Criteria cri);
 
     public void updateBoardDetail(BoardDTO boardDTO);
+
+    public List<BoardDTO> selectMyBoardList(@Param("start")int start, @Param("amount")int amount, @Param("idx")int idx);
+
+    public int selectMyBoardTotalCount(int idx);
 }
