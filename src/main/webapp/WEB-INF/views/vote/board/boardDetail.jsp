@@ -161,26 +161,10 @@
                             </c:if>
                         </div>
                     </div>
-                    <div class="comment-wrap">
-                        <div id="form-commentInfo">
-                            <div id="comment-count">댓글<span id="count">0</span>
-                            </div>
-                            <div class="comment-submit">
-                                <input id="comment-input" placeholder="댓글을 입력해 주세요.">
-                                <div class="button-submit">
-                                    <button id="submit">등록</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id=comments>
-                        </div>
-
-                        <script src="../resources/js/comment.js"></script>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
+
 <%@include file="../../include/footer.jsp"%>

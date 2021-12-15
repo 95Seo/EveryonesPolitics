@@ -161,15 +161,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div id=comments>
-                        </div>
-
-                        <script src="../resources/js/comment.js"></script>
                     </div>
+                    <!--  댓글  -->
+                    <div class="container">
+                        <label for="content">comment</label>
+                        <form name="commentInsertForm">
+                            <div class="input-group">
+                                <input type="hidden" name="bno" value="${detail.bno}"/>
+                                <input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="container">
+                        <div class="commentList"></div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 댓글 기능 -->
+    <%@include file="../../vote/comment/commentS.jsp"%>
 
 </section>
 <%@include file="../../include/footer.jsp"%>

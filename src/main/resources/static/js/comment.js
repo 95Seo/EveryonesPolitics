@@ -14,7 +14,9 @@ function generateTime() {
     const sec = date.getSeconds();
     const time = year + '-' + month + '-' + wDate + ' ' + hour + ':' + min + ':' + sec;
     return time;
-} //유저이름 발생기 //유저이름은 8글자로 제한. 
+}
+
+//유저이름 발생기 //유저이름은 8글자로 제한.
 function generateUserName() {
     let alphabet = 'abcdefghijklmnopqrstuvwxyz';
     var makeUsername = '';
@@ -45,7 +47,9 @@ function deleteComments(event) {
     } else {
         mainCommentCount.innerHTML--;
     }
-} //댓글보여주기 
+}
+
+//댓글보여주기
 function showComment(comment) {
     const userName = document.createElement('div');
     const inputValue = document.createElement('span');
@@ -79,6 +83,7 @@ function showComment(comment) {
     voteDown.innerHTML = '↓';
     voteDiv.appendChild(voteUp);
     voteDiv.appendChild(voteDown);
+
     //댓글뿌려주기 
     commentList.appendChild(userName);
     commentList.appendChild(inputValue);
@@ -90,6 +95,7 @@ function showComment(comment) {
     delBtn.addEventListener("click", deleteComments);
     console.dir(rootDiv);
 }
+
 //버튼만들기+입력값 전달 
 function pressBtn() {
     const currentVal = inputBar.value;
