@@ -9,7 +9,10 @@ public class CommentVO {
 
     private int cno;
     private int bno;
+    private int writer;
     private String content;
-    private String writer;
     private Date reg_date;
+
+    private String profileImg;
+    private String nickname;
 }

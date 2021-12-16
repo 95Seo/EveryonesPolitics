@@ -13,8 +13,8 @@ public class CommentServiceImpl implements CommentService{
     CommentMapper mCommentMapper;
 
     @Override
-    public List<CommentVO> commentListService() throws Exception {
-        return mCommentMapper.commentList();
+    public List<CommentVO> commentListService(CommentVO comment) throws Exception {
+        return mCommentMapper.commentList(comment);
     }
 
     @Override
