@@ -495,16 +495,16 @@
           <!-- End off Head_title -->
           <div class="work_menu text-center">
             <div id="filters2" class="toolbar mb2 mt2">
-              <button onclick="chartbtn_click()" class="btn-md fil-cat filter active" data-filter="all">
+              <button onclick="click_btn('all')" class="btn-md fil-cat filter active" data-filter="all">
                 ALL</button>/
-              <button onclick="chartbtn_click1()" class="btn-md fil-cat filter"  data-filter=".blue">
-                10~20대</button>/
-              <button onclick="chartbtn_click2()" class="btn-md fil-cat filter"  data-filter=".red">
-                20~30대</button>/
-              <button onclick="chartbtn_click3()" class="btn-md fil-cat filter"  data-filter=".yellow">
-                30~40대</button>/
-              <button onclick="chartbtn_click4()" class="btn-md fil-cat filter"  data-filter=".bcards">
-                40~80대</button>/
+              <button onclick="click_btn('10~19')" class="btn-md fil-cat filter"  data-filter=".blue">
+                10대</button>/
+              <button onclick="click_btn('20~29')" class="btn-md fil-cat filter"  data-filter=".red">
+                20대</button>/
+              <button onclick="click_btn('30~39')" class="btn-md fil-cat filter"  data-filter=".yellow">
+                30대</button>/
+              <button onclick="click_btn('40~49')" class="btn-md fil-cat filter"  data-filter=".bcards">
+                40대</button>/
             </div>
           </div>
 
@@ -626,19 +626,26 @@
 
 <!-- JavaScript for BarChart-->
 <script type="text/javascript">
-  $.ajax({
-    type: "get",
-    url: "/vote/votingListView",
-    dataType: 'json',
 
+  click_btn("all");
 
-    success: function(info) {
-      chartbtn_click(info);
-      <%--if (${voteChartView} == 1 )--%>
-    }
-  }); //ajax end
+  function click_btn(r) {
+    var param = {};
+    param = {age_range:r};
+    $.ajax({
+      type: "get",
+      contentType: 'application/json',
+      url: "/vote/votingListView",
+      dataType: 'json',
+      data: param,
+      success: function(info) {
+        print_chart(info);
+        <%--if (${voteChartView} == 1 )--%>
+      }
+    }); //ajax end
+  }
 
-  function chartbtn_click(data) {
+  function print_chart(data) {
     var context = document
             .getElementById('myChart')
             .getContext('2d');
@@ -653,7 +660,7 @@
           { //데이터
             label: '모의 투표', //차트 제목
             fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-            data:data,
+            data: data,
             backgroundColor: [
               //색상
               'rgba(54, 162, 235, 0.2)',

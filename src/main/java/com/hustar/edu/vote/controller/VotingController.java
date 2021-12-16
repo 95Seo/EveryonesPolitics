@@ -40,14 +40,4 @@ public class VotingController {
 
         return "redirect:/";
     }
-
-    @GetMapping("/vote/votingChartView")
-    public int GetselectChartView(int vote, String age_range, tb_user user, Model model){
-
-        log.info("get GetselectChartView");
-
-        int voteChartView = voteServiceimpl.getselectChartView(vote, age_range);
-        model.addAttribute("voteChartView", voteChartView);
-        return voteChartView;
-    }
 }
