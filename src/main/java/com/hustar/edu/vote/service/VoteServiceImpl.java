@@ -27,12 +27,6 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public List<Integer> getselectVotingList() {
-        log.info("get selectVotingLIst");
-        return voteMapper.selectVotingList();
-    }
-
-    @Override
     public int getselectChartView(int vote, String age_range) {
         log.info("get selectChartView");
         return voteMapper.selectChartView(vote, age_range);

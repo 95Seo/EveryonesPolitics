@@ -34,10 +34,10 @@ public class VoteApiController {
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }
 
-    @RequestMapping(value="/vote/votingListView", method = RequestMethod.GET)
-    public List<Integer> GetselectVotingList(@RequestParam String age_range, Model model){
+    @RequestMapping(value="/vote/voteChartView", method = RequestMethod.GET)
+    public List<Integer> GetselectVoteChartView(@RequestParam String age_range, Model model){
 
-        log.info("get GetselectVotingList");
+        log.info("get GetselectChartView");
 
         List<Integer> list = new ArrayList<Integer>();
 

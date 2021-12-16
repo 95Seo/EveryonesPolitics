@@ -20,19 +20,6 @@
             idx = #{idx};
     </select>
 
-    <select id="selectVotingList" resultType="int">
-        SELECT
-            COUNT(vote) , vote
-        FROM
-            tb_user
-        WHERE
-            VOTE != 0
-        GROUP BY
-            vote
-        ORDER BY
-            VOTE ASC;
-    </select>
-
     <select id="selectChartView" resultType="int">
         select count(vote)
         from tb_user

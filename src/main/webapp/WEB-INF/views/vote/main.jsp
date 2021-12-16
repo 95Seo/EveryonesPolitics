@@ -630,17 +630,19 @@
   click_btn("all");
 
   function click_btn(r) {
+
     var param = {};
     param = {age_range:r};
+
     $.ajax({
       type: "get",
       contentType: 'application/json',
-      url: "/vote/votingListView",
+      url: "/vote/voteChartView",
       dataType: 'json',
       data: param,
+
       success: function(info) {
         print_chart(info);
-        <%--if (${voteChartView} == 1 )--%>
       }
     }); //ajax end
   }
