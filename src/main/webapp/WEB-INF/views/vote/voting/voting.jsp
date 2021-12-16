@@ -38,6 +38,119 @@
     }
 </script>
 
+<style>
+    .candidate01 {
+        display: inline-block;
+        background: url("../resources/images/behind01.jpg");
+        background-size: 100% 100%;
+
+    }
+
+
+    .candidate01 label:hover {
+        background: rgba(131, 226, 255, 0.7);
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .candidate01:hover h2 {
+        color: black;
+    }
+
+    .candidate01:hover p {
+        color: black;
+    }
+
+
+
+    #voting input[checked] + label {
+        animation-play-state: paused;
+        background: rgb(231 76 60 / 84%);
+        border-radius: 20px;
+        cursor: pointer;
+
+    }
+
+
+
+    @keyframes up {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY(-30px);
+        }
+    }
+
+    .candidate02 {
+        display: inline-block;
+        background: url("../resources/images/behind02.jpg");
+        background-size: 100% 100%;
+
+    }
+
+
+    .candidate02 label:hover {
+        background: rgba(216, 33, 45, 0.7);
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    .candidate02:hover h2 {
+        color: black;
+    }
+
+    .candidate02:hover p {
+        color: black;
+    }
+
+    .candidate03 {
+        display: inline-block;
+        background: url("../resources/images/behind03.jpg");
+        background-size: 100% 100%;
+
+    }
+
+
+
+    .candidate03:hover label {
+        background: rgba(255, 202, 44, 0.7);
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .candidate03:hover h2 {
+        color: black;
+    }
+
+    .candidate03:hover p {
+        color: black;
+    }
+
+    .candidate04 {
+        display: inline-block;
+        background: url("../resources/images/behind04.jpg");
+        background-size: 100% 100%;
+
+    }
+
+
+
+    .candidate04:hover label {
+        background: rgba(234, 85, 4, 0.7);
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    .candidate04:hover h2 {
+        color: black;
+    }
+
+    .candidate04:hover p {
+        color: black;
+    }
+
+</style>
 <section id="votepage" class="votepage sections">
     <div class="container">
         <div class="row">
