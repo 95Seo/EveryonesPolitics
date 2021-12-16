@@ -2,24 +2,25 @@
 <%@include file="../../include/header.jsp"%>
 
 <style>
-  .templatemo-item-col .behind-item {
-    border: solid 1px #797979;
-    border-radius: 18px;
-  }
+
   .templatemo-item-col .behind-item a {
     color: black;
   }
   .behind-title {
-    height: 70px;
+    height: 50px;
   }
   .behind-img {
     width: 100%;
     height: 200px;
   }
-  .behind-contents {
-    height: 50px;
+
+  .down-clock{
+      font-family: "Open Sans", sans-serif;
   }
 
+  .behind-Cardview{
+      padding: 20px 0px;
+  }
 
 
 </style>
@@ -107,23 +108,14 @@
         view_title = item.title;
       }
 
-      view_content = "";
-      var newText = item.content.replace(/(<([^>]+)>)/ig,"");
-      if (newText.length > 40) {
-        view_content = newText.substr(0, 40) + "...";
-      } else {
-        view_content = newText
-      }
-
-      content += '<div class="col-lg-4 templatemo-item-col all">';
+      content += '<div class="col-lg-3 templatemo-item-col all">';
       content += "<div class='behind-item'><a href=/vote/promiseDetail?idx="+item.idx+"&page="+currPage+"&filter="+showFill+"&keyword="+keyWord+">";
       content += '<div class="thumb">';
       content += '<div class="price"><span>'+item.filter+'</span></div>';
       content += '<img class="behind-img" src="'+item.fileUrl+'"/></div>'
       content += '<div class="down-content"><div class="behind-title">'
       content += '<h4>'+view_title+'</h4></div>';
-      content += '<div class="behind-contents">'+view_content;
-      content += '</div><div><span>'+item.sysregdate+'</span><span style="margin-left: 6px;"><i class="far fa-comment-dots"></i>3</span>';
+      content += '<div class="down-clock"><span>'+item.sysregdate+'</span><span style="margin-left: 6px;"><i class="far fa-comment-dots" style="margin: 0px 5px;"></i>3</span>';
       content += '</div>';
       content += '</div>';
       content += '</a></div>';
