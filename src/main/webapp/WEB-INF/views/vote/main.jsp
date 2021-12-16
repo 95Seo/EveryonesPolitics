@@ -495,16 +495,16 @@
           <!-- End off Head_title -->
           <div class="work_menu text-center">
             <div id="filters2" class="toolbar mb2 mt2">
-              <button class="btn-md fil-cat filter active" data-filter="all">
+              <button onclick="chartbtn_click()" class="btn-md fil-cat filter active" data-filter="all">
                 ALL</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".blue">
+              <button onclick="chartbtn_click1()" class="btn-md fil-cat filter"  data-filter=".blue">
                 10~20대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".red">
+              <button onclick="chartbtn_click2()" class="btn-md fil-cat filter"  data-filter=".red">
+                20~30대</button>/
+              <button onclick="chartbtn_click3()" class="btn-md fil-cat filter"  data-filter=".yellow">
                 30~40대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".yellow">
-                50~60대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".bcards">
-                70~80대</button>/
+              <button onclick="chartbtn_click4()" class="btn-md fil-cat filter"  data-filter=".bcards">
+                40~80대</button>/
             </div>
           </div>
 
@@ -621,8 +621,7 @@
   });
 </script>
 
-<!--JavaScript chart voteListView -->
-
+<!--JavaScript chart voteChartView -->
 
 
 <!-- JavaScript for BarChart-->
@@ -634,11 +633,12 @@
 
 
     success: function(info) {
-      chartData(info);
+      chartbtn_click(info);
+      <%--if (${voteChartView} == 1 )--%>
     }
   }); //ajax end
 
-  function chartData(data) {
+  function chartbtn_click(data) {
     var context = document
             .getElementById('myChart')
             .getContext('2d');

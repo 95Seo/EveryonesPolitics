@@ -33,4 +33,12 @@
             VOTE ASC;
     </select>
 
+    <select id="selectChartView" resultType="int">
+        select vote, count(vote), age_range
+        from tb_user
+        where AGE_RANGE IS not null
+          and vote = #{vote}
+          and AGE_RANGE = #{age_range};
+    </select>
+
 </mapper>

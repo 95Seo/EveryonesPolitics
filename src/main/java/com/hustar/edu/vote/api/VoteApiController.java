@@ -37,9 +37,9 @@ public class VoteApiController {
     }
 
     @RequestMapping("/vote/votingListView")
-    public List<Integer> GetselectvotingList(tb_user user, Model model){
+    public List<Integer> GetselectVotingList(tb_user user, Model model){
 
-        log.info("get GetselectvotingList");
+        log.info("get GetselectVotingList");
 
         List<Integer> voteList = voteServiceimpl.getselectVotingList();
         model.addAttribute("voteList", voteList);
