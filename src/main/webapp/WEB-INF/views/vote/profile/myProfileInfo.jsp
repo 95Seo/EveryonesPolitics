@@ -96,7 +96,7 @@
             <div class="myprofile-box-01">
                 <div class="myprofile-left">
                     <div class="myprofile-left-img">
-                        <img src="<c:out value='${info.profileImg}'/>" alt="">
+                        <img src="<c:out value='${info.profile_img}'/>" alt="">
                     </div>
                 </div>
                 <div class="myprofile-right">
@@ -154,7 +154,7 @@
                         <h4>프로필사진</h4>
                     </li>
                     <li class="myprofile-info-box-06-li">
-                        <img src="<c:out value='${info.profileImg}'/>">
+                        <img src="<c:out value='${info.profile_img}'/>">
                     </li>
                 </ul>
             </div>

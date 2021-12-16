@@ -139,6 +139,10 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
+    public List<BoardDTO> selectLikeBoardList() {
+        return boardMapper.selectLikeBoardList();
+    }
+
     @Override
     public int selectMyBoardTotalCount(int idx) {
         log.info("get total My Board Count");

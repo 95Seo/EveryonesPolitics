@@ -4,12 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hustar.edu.vote.FileUpload.ThumbnailUploadHandler;
 import com.hustar.edu.vote.FileUpload.UploadFile;
 import com.hustar.edu.vote.auth.PrincipalDetail;
+import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.paging.Criteria;
+import com.hustar.edu.vote.service.BoardService;
 import com.hustar.edu.vote.service.UserService;
+import com.sun.istack.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -25,6 +34,9 @@ public class VoteController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	BoardService boardService;
 
 	@Autowired
 	ThumbnailUploadHandler thumbnailUploadHandler;
@@ -49,15 +61,20 @@ public class VoteController {
 			e.printStackTrace();
 			log.info("실패");
 		}
+		List<BoardDTO> list = boardService.selectLikeBoardList();
+
+		model.addAttribute("list", list);
 
 		return "/vote/main";
 	}
+
 	@GetMapping("/vote/myProfileInfo")
 	public String voteMyProfileInfoController(@AuthenticationPrincipal PrincipalDetail principal, Model model) {
 		log.info("VoteMyProfileInfoPage");
 		model.addAttribute("info",userService.searchUser(principal.getUsername()));
 		return "/vote/profile/myProfileInfo";
 	}
+
 	@GetMapping("/vote/myProfileUpdate")
 	public String GetMyProfileUpdateController(@AuthenticationPrincipal PrincipalDetail principal, Model model) {
 		log.info("VoteMyProfileUpdatePage");
@@ -65,15 +82,21 @@ public class VoteController {
 		model.addAttribute("info",userService.searchUser(principal.getUsername()));
 		return "/vote/profile/myProfileUpdate";
 	}
+
 	@PostMapping("/vote/myProfileUpdate")
-	public String PostMyProfileUpdateController(tb_user user, @RequestParam MultipartFile profileImg) {
+	public String PostMyProfileUpdateController(tb_user user, @RequestParam @Nullable MultipartFile profileImg) {
 		log.info("VoteMyProfileUpdatePage");
 
-		UploadFile file_url = thumbnailUploadHandler.profileFileUpload(profileImg, "USER", user.getIdx());
-		user.setProfileImg(file_url.getFile_dir());
+		if(profileImg == null) {
+			UploadFile file_url = thumbnailUploadHandler.profileFileUpload(profileImg, "USER", user.getIdx());
+			System.out.println("dir : " + file_url.getFile_dir());
+			user.setProfile_img(file_url.getFile_dir());
+		}
+
 		userService.updateUser(user);
 		return "redirect:/vote/myProfileInfo";
 	}
+
 	@GetMapping("/vote/myProfileWrite")
 	public String voteMyProfileWriteController(Criteria criteria, @AuthenticationPrincipal PrincipalDetail principal, Model model) {
 		log.info("VoteMyProfileWritePage");
@@ -98,5 +121,14 @@ public class VoteController {
 		model.addAttribute("info",userService.searchUser(principal.getUsername()));
 
 		return "/vote/profile/myProfileWrite";
+	}
+
+	@GetMapping(value = "/logout")
+	public String loout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "/vote/main";
 	}
 }

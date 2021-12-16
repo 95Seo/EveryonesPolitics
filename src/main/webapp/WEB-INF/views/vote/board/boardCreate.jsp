@@ -35,12 +35,40 @@
             $("input:radio[id='radio4']").attr("checked", true);
         }
     }
+
+    function submit() {
+        // if($("#title").val()=="") {
+        //     alert($("#p_content").text());
+        //     alert("제목을 입력해 주세요.");
+        // } else if($("#p_content").val()=="") {
+        //     alert("내용을 입력해 주세요.");
+        // } else {
+        //     $('#frm').submit();
+        // }
+    }
+
+    function cancel() {
+
+    }
 </script>
+
+<style>
+    .board-button > a {
+        cursor: pointer;
+        background: #efefef;
+        display: inline-block;
+        border: 1px solid #dcdcdc;
+        width: 150px;
+        height: 70px;
+        line-height: 70px;
+        color: black;
+    }
+</style>
 
 <section class="board common-list" style="margin-top: 80px">
     <div class="container">
         <div class="row">
-            <form action="/vote/boardCreate" method="post" enctype="multipart/form-data">
+            <form action="/vote/boardCreate" method="POST" id="frm">
                 <div class="board-wrap">
                     <div id="fillter">
                         <ul>
@@ -53,7 +81,7 @@
                     <div class="board-title">
                         <p>제목</p>
                         <span>
-                    <input type="text" name="title" />
+                    <input type="text" id="title" name="title" />
                     </span>
                     </div>
 
@@ -70,24 +98,24 @@
                         </div>
                     </div>
 
-
                     <div class="board-upload">
-            <span>
-              <div class="row justify-content-md-center">
-                <div class="input-group mb-3">
-                  <div class="custom-file">
-<%--                    &nbsp;<input--%>
-<%--                          type="file"--%>
-<%--                          class="form-control-file"--%>
-<%--                          id="exampleFormControlFile1"--%>
-<%--                  />--%>
-                  </div>
-                </div>
-            </span>
+                    <span>
+                      <div class="row justify-content-md-center">
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+        <%--                    &nbsp;<input--%>
+        <%--                          type="file"--%>
+        <%--                          class="form-control-file"--%>
+        <%--                          id="exampleFormControlFile1"--%>
+        <%--                  />--%>
+                          </div>
+                          </div>
+                        </div>
+                    </span>
                     </div>
                     <div class="board-button">
-                        <a href="/vote/boardList"><button>돌아가기</button></a>
-                        <a><button type="submit">등록하기</button></a>
+                        <a onclick="cancel()">돌아가기</a>
+                        <a id="submit" onclick="submit()">등록하기</a>
                     </div>
                 </div>
             </form>

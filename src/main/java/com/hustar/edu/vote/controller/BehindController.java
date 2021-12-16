@@ -6,6 +6,7 @@ import com.hustar.edu.vote.FileUpload.ThumbnailUploadHandler;
 import com.hustar.edu.vote.FileUpload.UploadFile;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BehindDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.paging.Criteria;
 import com.hustar.edu.vote.service.BehindService;
@@ -64,24 +65,6 @@ public class BehindController {
         return "/vote/behind/behindList";
     }
 
-    @GetMapping("/vote/behindDetail")
-    public String voteBehindDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
-        commonService.viewCountUp("tb_behind", idx, request, response);
-
-        model.addAttribute( "page", criteria.getPage() );
-        model.addAttribute( "filter", criteria.getFilter() );
-        model.addAttribute( "keyword", criteria.getKeyword() );
-        model.addAttribute( "idx", idx );
-
-        BehindDTO behindDTO = behindService.selectBehindDetail(idx);
-        tb_user user = userService.getUser(behindDTO.getWriterIdx());
-
-        model.addAttribute("behind", behindDTO);
-        model.addAttribute("user", user);
-
-        return "/vote/behind/behindDetail";
-    }
-
     @GetMapping("/vote/behindCreate")
     public String voteBehindCreateController() {
 
@@ -135,5 +118,24 @@ public class BehindController {
         rttr.addAttribute("keyword", criteria.getKeyword());
         rttr.addAttribute("idx", behindDTO.getIdx());
         return "redirect:/vote/behindDetail";
+    }
+
+    @GetMapping("/vote/behindDetail")
+    public String voteBehindDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
+        commonService.viewCountUp("tb_behind", idx, request, response);
+
+        model.addAttribute( "page", criteria.getPage() );
+        model.addAttribute( "filter", criteria.getFilter() );
+        model.addAttribute( "keyword", criteria.getKeyword() );
+        model.addAttribute( "idx", idx );
+
+        BehindDTO behindDTO = behindService.selectBehindDetail(idx);
+        tb_user user = userService.getUser(behindDTO.getWriterIdx());
+
+        model.addAttribute("behind", behindDTO);
+        model.addAttribute("user", user);
+        model.addAttribute("calcTime", Time.calculateTime(behindDTO.getSysregdate()));
+
+        return "/vote/behind/behindDetail";
     }
 }

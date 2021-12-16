@@ -122,7 +122,7 @@
             <div class="myprofile-box-01">
                 <div class="myprofile-left">
                     <div class="myprofile-left-img">
-                        <img src=<c:out value="${info.profileImg}"/> />
+                        <img src=<c:out value="${info.profile_img}"/> />
                     </div>
                 </div>
                 <div class="myprofile-right">

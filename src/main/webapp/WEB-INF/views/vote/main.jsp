@@ -116,10 +116,9 @@
                       </sec:authorize>
                     </li>
                       <sec:authorize access="isAuthenticated()">
-                       <li><a href="#">로그아웃</a></li>
+                       <li><a href="/logout">로그아웃</a></li>
                         <li><a href="/vote/myProfileInfo">마이페이지</a></li>
                       </sec:authorize>
-
                   </ul>
                 </div>
               </div>
@@ -228,12 +227,9 @@
       <div class="row">
         <div class="main_history">
           <div class="col-sm-12">
-
             <div id="calendar"></div>
 
           </div>
-
-
         </div>
       </div>
       <!--End of row -->
@@ -259,18 +255,16 @@
           </div>
           <div class="work_menu text-center">
             <div id="filters" class="toolbar mb2 mt2">
-              <button class="btn-md fil-cat filter active" data-filter="all">
+              <button class="btn-md fil-cat filter" data-filter=".all" onclick="change_filter('all')">
                 ALL</button>/
-              <button class="btn-md fil-cat filter" data-rel="blue" data-filter=".blue">
+              <button class="btn-md fil-cat filter" data-rel="blue" data-filter=".blue" onclick="change_filter('이재명')">
                 이재명</button>/
-              <button class="btn-md fil-cat filter" data-rel="red" data-filter=".red">
+              <button class="btn-md fil-cat filter" data-rel="red" data-filter=".red" onclick="change_filter('윤석열')">
                 윤석열</button>/
-              <button class="btn-md fil-cat filter" data-rel="yellow" data-filter=".yellow">
+              <button class="btn-md fil-cat filter" data-rel="yellow" data-filter=".yellow" onclick="change_filter('심상정')">
                 심상정</button>/
-              <button class="btn-md fil-cat filter" data-rel="bcards" data-filter=".bcards">
+              <button class="btn-md fil-cat filter" data-rel="bcards" data-filter=".bcards" onclick="change_filter('안철수')">
                 안철수</button>/
-              <button class="btn-md fil-cat filter" data-rel="photo" data-filter=".photo">
-                유승민</button>/
             </div>
           </div>
         </div>
@@ -278,16 +272,16 @@
 
 
       <div id="portfoliowork">
-        <div class="single_portfolio tile scale-anm  red ">
-          <img src="../resources/images/pf1.jpeg" alt="" />
+        <div class="single_portfolio tile scale-anm red ">
+          <img src="../resources/images/pf1.jpeg"/>
           <a href="/vote/promiseList">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
             </div>
           </a>
         </div>
-        <div class="single_portfolio tile scale-anm red">
-          <img src="../resources/images/pf2.jpeg" alt="" />
+        <div class="single_portfolio">
+          <img src="../resources/images/pf2.jpeg"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -295,7 +289,7 @@
           </a>
         </div>
         <div class="single_portfolio tile scale-anm red">
-          <img src="../resources/images/pf3.jpeg" alt="" />
+          <img src="../resources/images/pf3.jpeg"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -303,7 +297,7 @@
           </a>
         </div>
         <div class="single_portfolio tile scale-anm red ">
-          <img src="../resources/images/pf4.jpeg" alt="" />
+          <img src="../resources/images/pf4.jpeg"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -311,7 +305,7 @@
           </a>
         </div>
         <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf5.png" alt="" />
+          <img src="../resources/images/pf5.png"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -320,7 +314,7 @@
         </div>
 
         <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf6.png" alt="" />
+          <img src="../resources/images/pf6.png"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -328,7 +322,7 @@
           </a>
         </div>
         <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf7.png" alt="" />
+          <img src="../resources/images/pf7.png"/>
           <a href="/vote/promiseList" class="portfolio-img">
             <div class="grid_item_overlay">
               <h3>자세히보기</h3>
@@ -429,39 +423,39 @@
                 <div class="list1">
                   <ul>
 
-                    <a href="/vote/boardList">
+                    <a href="/vote/boardDetail?idx=${list[0].idx}">
                       <li>
                         <div class="cont">
-                          <span class="label">윤석열</span><span class="date">2021.11.30</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>정말로 이번에 정권 교체되나?</h3>
+                          <span class="label">${list[0].filter}</span><span class="date">${list[0].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
+                          <h3>${list[0].title}</h3>
                         </div>
                       </li>
                     </a>
 
-                    <a href="/vote/boardList">
+                    <a href="/vote/boardDetail?idx=${list[1].idx}">
                       <li>
                         <div class="cont">
-                          <span class="label">이재명</span><span class="date">2021.11.15</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>종부세 부과전략에 대해서 내생각은..</h3>
+                          <span class="label">${list[1].filter}</span><span class="date">${list[1].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
+                          <h3>${list[1].title}</h3>
                         </div>
                       </li>
                     </a>
 
-                    <a href="/vote/boardList">
+                    <a href="/vote/boardDetail?idx=${list[2].idx}">
                       <li>
                         <div class="cont">
-                          <span class="label">심상정</span><span class="date">2021.11.30</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>정말로 이번에 정권 교체되나?</h3>
+                          <span class="label">${list[2].filter}</span><span class="date">${list[2].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
+                          <h3>${list[2].title}</h3>
                         </div>
                       </li>
                     </a>
 
 
-                    <a href="../board/board_view.html?num=145676">
+                    <a href="/vote/boardDetail?idx=${list[3].idx}">
                       <li>
                         <div class="cont">
-                          <span class="label">안철수</span><span class="date">2021.11.15</span><i class="fas fa-chevron-right fa-2x"></i><br>
-                          <h3>이번에야 말로 기회인 이유</h3>
+                          <span class="label">${list[3].filter}</span><span class="date">${list[3].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                          <h3>${list[3].title}</h3>
                         </div>
                       </li>
                     </a>
@@ -519,15 +513,9 @@
               <span class="label">투표하기</span>
             </div>
           </a>
-
         </div>
-
-
-
-
       </div>
     </div>
-
     <!-- End off container -->
   </section>
   <!-- End off Blog Section(투표 끝) -->
@@ -727,7 +715,7 @@
 
   showPage = cri.page;  //보여줄 페이지
 
-  showAmount = cri.amount;
+  showAmount = 12;
 
   var showFill = cri.filter;
 
@@ -735,12 +723,12 @@
 
   listCall(showPage); //리스트 호출 함수
 
-  $(document).on("change","input[type=radio]",function(){
-    showFill=$('input[name=fill]:checked').val();
-    keyWord = "";
-    //라디오 버튼 값을 가져온다.
-    listCall(showPage);
-  });
+  function change_filter(filter) {
+    showFill = filter;
+    $("#portfoliowork").fadeOut(500, function (){
+      listCall(showPage);
+    });
+  }
 
   // /listSub/{pagePerCnt}/{page}
   function listCall(page){
@@ -756,7 +744,6 @@
       url:"/vote/getMainPromiseList/",
       dataType: "text",
       success : function(result) {
-        alert(result)
         console.log(d);
         var d = JSON.parse(result);
         message = d.message;
@@ -766,20 +753,20 @@
           $("#portfoliowork").empty();
           $("#portfoliowork").append(content);
         } else {
-          listPrint(d.list, d.currPage); //리스트 그리기
-          // $("input:radio[name='fill']").attr("checked", false);
-          //
-          // if(showFill == '이재명') {
-          //   $("input:radio[id='radio1']").attr("checked", true);
-          // } else if(showFill == '윤석열') {
-          //   $("input:radio[id='radio2']").attr("checked", true);
-          // } else if(showFill == '심상정') {
-          //   $("input:radio[id='radio3']").attr("checked", true);
-          // } else if(showFill == '안철수') {
-          //   $("input:radio[id='radio4']").attr("checked", true);
-          // } else {
-          //   $("input:radio[id='radio5']").attr("checked", true);
-          // }
+          listPrint(d.list); //리스트 그리기
+          $("button[class='btn-md']").attr("checked", false);
+
+          if(showFill == '이재명') {
+            $("input:radio[id='radio1']").attr("checked", true);
+          } else if(showFill == '윤석열') {
+            $("input:radio[id='radio2']").attr("checked", true);
+          } else if(showFill == '심상정') {
+            $("input:radio[id='radio3']").attr("checked", true);
+          } else if(showFill == '안철수') {
+            $("input:radio[id='radio4']").attr("checked", true);
+          } else {
+            $("input:radio[id='radio5']").attr("checked", true);
+          }
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -789,7 +776,7 @@
   }
 
   //받아온 리스트 그리기
-  function listPrint(list, currPage){
+  function listPrint(list){
     if(keyWord == null || keyWord == "") {
       keyWord = "";
       $('#keyword').val('');
@@ -802,32 +789,29 @@
     list.forEach(function(item, idx){
       // alert(item.title);
       if(item.filter == "이재명") {
-        content += '<div class="single_portfolio tile scale-anm blue">';
+        content += '<div class="single_portfolio blue">';
       } else if (item.filter == "윤석열") {
-        content += '<div class="single_portfolio tile scale-anm red">';
+        content += '<div class="single_portfolio red">';
       } else if(item.filter == "심상정") {
-        content += '<div class="single_portfolio tile scale-anm yellow">';
+        content += '<div class="single_portfolio yellow">';
       } else if(item.filter == "안철수") {
-        content += '<div class="single_portfolio tile scale-anm green">';
+        content += '<div class="single_portfolio green">';
       }
       content +=    '<img src="'+item.fileUrl+'"/>';
-      content +=        '<a href="/vote/promiseList" class="portfolio-img">';
+      content +=        '<a href="/vote/promiseDetail?idx='+item.idx+'" class="portfolio-img">';
       content +=            '<div class="grid_item_overlay">';
       content +=                '<h3>자세히보기</h3>'
       content +=            '</div>'
       content +=        '</a>';
       content += '</div>';
     });
-    alert(content);
 
     //내용 붙이기
     $("#portfoliowork").empty();
     $("#portfoliowork").append(content);
+
+    $("#portfoliowork").fadeIn(500);
   }
 </script>
-
-
-
 </body>
-
 </html>
