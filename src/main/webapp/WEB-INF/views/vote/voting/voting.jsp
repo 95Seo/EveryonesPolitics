@@ -14,10 +14,10 @@
     function vote_btn() {
         if(isNaN(${principal.idx})) {
             alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
-            location.href ="/";
+            location.href ="/vote/voting";
         } else if(!isNaN(${principal.vote})) {
             alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
-            location.href ="/";
+            location.href ="/vote/voting";
         } else {
             alert("투표에 성공하였습니다 !.");
         }
@@ -213,24 +213,23 @@
                         </li>
                     </div>
                 </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="vote-date-expirebox">
-                    <ul class="vote-icon">
-                        <li><i class="fas fa-vote-yea"></i></li>
-                        <li><input type="submit" onclick="vote_btn()" value="투표하기"></li>
-                    </ul>
-                    <div class="vote-date-expire">
-                        <p>투표 기간</p>
-                        <p>12/17~12/24</p>
-                        <p>총 투표 수 : <c:out value="${voteCount}" /></p>
+            </form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="vote-date-expirebox">
+                        <ul class="vote-icon">
+                            <li><a href="#none"><input type="submit" onclick="vote_btn()" class="votingbtn" value="투표하기"></a>
+                            </li>
+                        </ul>
+                        <div class="vote-date-expire">
+                            <p>투표 기간</p>
+                            <p>12/17~12/24</p>
+                            <p>총 투표 수 : <c:out value="${voteCount}" /></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </form>
     </div>
 </section>
 
