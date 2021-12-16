@@ -241,7 +241,7 @@
 
   <!-- Portfolio section (공약)-->
   <section id="portfolio" class="portfolio sections">
-    <div class="container">
+    <div class="container" style="height: 584px;">
       <div class="row">
         <div class="main_portfolio">
           <div class="col-md-12">
