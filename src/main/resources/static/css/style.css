@@ -2247,8 +2247,18 @@ li .single_team_text p {
 }
 
 /*=====================================================================
-                    Search section css
+                    Footer section css
 =======================================================================*/
+.copyleft-text{
+  color: #fff;
+  line-height: 25px;
+  max-width: 100%;
+  padding-top: 15px;
+  font-weight: 400;
+}
 
-
-
+.footer a{
+  color: #868e96;
+  font-size: 1rem;
+  text-decoration: none;
+}

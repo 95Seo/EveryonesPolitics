@@ -173,7 +173,7 @@
                         <!--                     추가                         -->
                         <!--  댓글  -->
 
-                        <label for="content" style="margin-bottom: 10px; color: #030303; font-weight: 400; font-size: 1.6rem;">댓글</label>
+                        <label for="comment_content" style="margin-bottom: 10px; color: #030303; font-weight: 400; font-size: 1.6rem;">댓글</label>
                         <form name="commentInsertForm" style="margin-bottom: 50px;">
                             <div class="input-group" style="display: flex">
                                 <div class="imput-group-left" >
@@ -181,7 +181,7 @@
                                 </div>
                                 <div class="input-group-right" style="width: 80%;">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
-                                    <input type="text" class="form-control" id="content" name="content" placeholder="공개 댓글 추가...">
+                                    <input type="text" class="form-control" id="comment_content" name="comment_content" placeholder="공개 댓글 추가...">
                                 </div>
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" name="commentInsertBtn" style="background:rgba(0, 0, 0, 0.05); color: rgba(0, 0, 0, 0.05); margin-top: 0px; padding: 10px; min-width: 100px">댓글</button>

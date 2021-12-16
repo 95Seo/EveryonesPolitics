@@ -530,21 +530,17 @@
           <div class="main_footer">
             <div class="row">
               <div class="col-sm-6 col-xs-12">
-                <div class="flowus">
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-instagram"></i></a>
-                  <a href=""><i class="fa fa-youtube"></i></a>
-                  <a href=""><i class="fa fa-dribbble"></i></a>
+                <div class="copyleft-text" style="text-align: left;">
+                  <a href="mailto:jooyoung.dev@gmail.com">운영자문의</a>
                 </div>
               </div>
+
 
               <div class="col-sm-6 col-xs-12">
                 <div class="copyright_text">
                   <p class="wow fadeInRight" data-wow-duration="1s">
-                    Made with <i class="fa fa-heart"></i> by
-                    <a href="https://bootstrapthemes.co">Bootstrap Themes</a>2016. All Rights Reserved
+                    본 사이트에서 제공되는 모든 정보는 참고자료이며, 서비스 이용에 따른 최종 책임은 이용자에게 있습니다.<br>
+                    Copyright © 2021 모두의정치. All rights reserved.
                   </p>
                 </div>
               </div>
