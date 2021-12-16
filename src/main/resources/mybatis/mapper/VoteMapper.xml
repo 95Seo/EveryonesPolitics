@@ -20,17 +20,14 @@
             idx = #{idx};
     </select>
 
-    <select id="selectVotingList" resultType="int">
-        SELECT
-            COUNT(vote) , vote
-        FROM
-            tb_user
-        WHERE
-            VOTE != 0
-        GROUP BY
-            vote
-        ORDER BY
-            VOTE ASC;
+    <select id="selectChartView" resultType="int">
+        select count(vote)
+        from tb_user
+        where AGE_RANGE IS not null
+        and vote = #{vote}
+        <if test="age_range != 'all'">
+          and AGE_RANGE = #{age_range};
+        </if>
     </select>
 
 </mapper>

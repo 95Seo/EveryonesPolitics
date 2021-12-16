@@ -62,6 +62,7 @@
 
 
 
+
   <style>
     .fc-day:hover{background: lightblue; cursor: pointer;}
   </style>
@@ -495,16 +496,16 @@
           <!-- End off Head_title -->
           <div class="work_menu text-center">
             <div id="filters2" class="toolbar mb2 mt2">
-              <button class="btn-md fil-cat filter active" data-filter="all">
+              <button onclick="click_btn('all')" class="btn-md ">
                 ALL</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".blue">
-                10~20대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".red">
-                30~40대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".yellow">
-                50~60대</button>/
-              <button class="btn-md fil-cat filter"  data-filter=".bcards">
-                70~80대</button>/
+              <button onclick="click_btn('10~19')" class="btn-md ">
+                10대</button>/
+              <button onclick="click_btn('20~29')" class="btn-md ">
+                20대</button>/
+              <button onclick="click_btn('30~39')" class="btn-md ">
+                30대</button>/
+              <button onclick="click_btn('40~49')" class="btn-md ">
+                40대</button>/
             </div>
           </div>
 
@@ -621,28 +622,44 @@
   });
 </script>
 
-<!--JavaScript chart voteListView -->
-
+<!--JavaScript chart voteChartView -->
 
 
 <!-- JavaScript for BarChart-->
 <script type="text/javascript">
-  $.ajax({
-    type: "get",
-    url: "/vote/votingListView",
-    dataType: 'json',
 
+  var myChart;
+  click_btn("all");
 
-    success: function(info) {
-      chartData(info);
-    }
-  }); //ajax end
+  function click_btn(r) {
 
-  function chartData(data) {
+    var param = {};
+    param = {age_range:r};
+
+    $.ajax({
+      type: "get",
+      contentType: 'application/json',
+      url: "/vote/voteChartView",
+      dataType: 'json',
+      data: param,
+
+      success: function(info) {
+        print_chart(info);
+      }
+    }); //ajax end
+  }
+
+  function print_chart(data) {
     var context = document
             .getElementById('myChart')
             .getContext('2d');
-    var myChart = new Chart(context, {
+    var context = document
+            .getElementById('myChart')
+            .getContext('2d');
+    if(myChart){
+      myChart.destroy();
+    }
+    myChart = new Chart(context, {
       type: 'bar', // 차트의 형태
       data: { // 차트에 들어갈 데이터
         labels: [
@@ -653,7 +670,7 @@
           { //데이터
             label: '모의 투표', //차트 제목
             fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-            data:data,
+            data: data,
             backgroundColor: [
               //색상
               'rgba(54, 162, 235, 0.2)',
@@ -684,6 +701,7 @@
         ]
       },
       options: {
+        legend: {display: false},
         scales: {
           yAxes: [
             {
