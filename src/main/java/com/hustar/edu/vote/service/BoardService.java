@@ -15,4 +15,5 @@ public interface BoardService {
     public void updateBoardDetail(BoardDTO boardDTO);
     public HashMap<String, Object> selectMyBoardList(Criteria cri, int idx);
     public int selectMyBoardTotalCount(int idx);
+    public List<BoardDTO> selectLikeBoardList();
 }

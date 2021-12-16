@@ -24,10 +24,10 @@ public class tb_user {
 
     private String name;
 
-    @Column(name="username", nullable = false, length = 100)  // null 여부와 길이제한
+    @Column(name="username", length = 100)  // null 여부와 길이제한
     private String username;
 
-    @Column(name="password", nullable = false, length = 100)  // 123456 -> 해쉬(비밀번호 암호화)
+    @Column(name="password", length = 100)  // 123456 -> 해쉬(비밀번호 암호화)
     private String password;
 
     @Column(name="email", length = 100)
@@ -36,8 +36,8 @@ public class tb_user {
     @Column(name="nickname", length = 100)
     private String nickname;
 
-    @Column(name="profile_img", nullable = false, length = 500)
-    private String profileImg = "https://vote-web-bucket.s3.ap-northeast-2.amazonaws.com/USER/PROFILE/DEFAULT/vote_img.png";
+    @Column(name="profile_img", length = 500)
+    private String profile_img = "https://vote-web-bucket.s3.ap-northeast-2.amazonaws.com/USER/PROFILE/DEFAULT/vote_img.png";
 
     // 1 - Y (default), 2 - N
     @ColumnDefault("Y")

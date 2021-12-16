@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 
 
 @Slf4j
@@ -53,7 +54,17 @@ public class UserServiceImpl implements UserService {
     }
 
     public void updateUser(tb_user user) {
+        Optional<tb_user> original = userMapper.findByUsername(user.getUsername());
 
-//        userMapper.updateUser(user);
+        Date date = new Date();
+
+        java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
+
+        original.ifPresent(selectUser->{
+                selectUser.setNickname(user.getNickname());
+                selectUser.setProfile_img(user.getProfile_img());
+                selectUser.setSysmoddate(sqlDate);
+            userMapper.save(selectUser);
+        });
     }
 }

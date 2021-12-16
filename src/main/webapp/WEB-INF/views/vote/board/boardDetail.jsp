@@ -108,7 +108,7 @@
                             <div class="view-profile">
                                 <div class="view-profile-left">
                                     <div class="view-profile-left-img">
-                                        <img src="<c:out value='${user.profileImg}'/>">
+                                        <img src="<c:out value='${user.profile_img}'/>">
                                     </div>
                                 </div>
                                 <div class="view-profile-right">

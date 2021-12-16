@@ -5,6 +5,7 @@ import com.hustar.edu.vote.FileUpload.ThumbnailUploadHandler;
 import com.hustar.edu.vote.FileUpload.UploadFile;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.PromiseDTO;
+import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.paging.Criteria;
 import com.hustar.edu.vote.service.PromiseService;
@@ -62,24 +63,6 @@ public class PromiseController {
             log.info("실패");
         }
         return "/vote/promise/promiseList";
-    }
-
-    @GetMapping("/vote/promiseDetail")
-    public String votePromiseDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
-        commonService.viewCountUp("tb_promise", idx, request, response);
-
-        model.addAttribute( "page", criteria.getPage() );
-        model.addAttribute( "filter", criteria.getFilter() );
-        model.addAttribute( "keyword", criteria.getKeyword() );
-        model.addAttribute( "idx", idx );
-
-        PromiseDTO promiseDTO = promiseService.selectPromiseDetail(idx);
-        tb_user user = userService.getUser(promiseDTO.getWriterIdx());
-
-        model.addAttribute("promise", promiseDTO);
-        model.addAttribute("user", user);
-
-        return "/vote/promise/promiseDetail";
     }
 
     @GetMapping("/vote/promiseCreate")
@@ -140,5 +123,24 @@ public class PromiseController {
         rttr.addAttribute("keyword", criteria.getKeyword());
         rttr.addAttribute("idx", promiseDTO.getIdx());
         return "redirect:/vote/promiseDetail";
+    }
+
+    @GetMapping("/vote/promiseDetail")
+    public String votePromiseDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
+        commonService.viewCountUp("tb_promise", idx, request, response);
+
+        model.addAttribute( "page", criteria.getPage() );
+        model.addAttribute( "filter", criteria.getFilter() );
+        model.addAttribute( "keyword", criteria.getKeyword() );
+        model.addAttribute( "idx", idx );
+
+        PromiseDTO promiseDTO = promiseService.selectPromiseDetail(idx);
+        tb_user user = userService.getUser(promiseDTO.getWriterIdx());
+
+        model.addAttribute("promise", promiseDTO);
+        model.addAttribute("user", user);
+        model.addAttribute("calcTime", Time.calculateTime(promiseDTO.getSysregdate()));
+
+        return "/vote/promise/promiseDetail";
     }
 }

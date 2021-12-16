@@ -45,6 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/vote/boardCreate").hasAuthority("ROLE_USER")     // 권한 검사
                 .anyRequest().permitAll();  // 그 외 모든 사용자 접근가능
 
+        http.logout()
+                .logoutSuccessUrl("/");
+
         /**
          * 로그인 disable 처리
          */

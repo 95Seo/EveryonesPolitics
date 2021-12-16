@@ -22,4 +22,6 @@ public interface BoardMapper {
     public List<BoardDTO> selectMyBoardList(@Param("start")int start, @Param("amount")int amount, @Param("idx")int idx);
 
     public int selectMyBoardTotalCount(int idx);
+
+    public List<BoardDTO> selectLikeBoardList();
 }

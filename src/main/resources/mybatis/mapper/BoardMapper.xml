@@ -15,6 +15,18 @@
         where idx = #{idx}
     </update>
 
+    <select id="selectLikeBoardList" resultType="BoardDTO">
+        SELECT *
+        FROM tb_board a, (	SELECT filter as max_filter, MAX(LIKE_CNT) as max_like
+                            FROM tb_board
+                            group by filter ) b
+        where a.use_yn = 'y'
+        AND a.LIKE_CNT = b.max_like
+        and a.FILTER = b.max_filter
+        group by a.filter
+        order by filter desc;
+    </select>
+
     <select id="selectBoardList" parameterType="com.hustar.edu.vote.paging.Criteria" resultType="BoardDTO">
         SELECT c.*
         FROM (SELECT
