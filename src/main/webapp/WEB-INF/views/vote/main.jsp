@@ -62,6 +62,7 @@
 
 
 
+
   <style>
     .fc-day:hover{background: lightblue; cursor: pointer;}
   </style>
@@ -495,15 +496,15 @@
           <!-- End off Head_title -->
           <div class="work_menu text-center">
             <div id="filters2" class="toolbar mb2 mt2">
-              <button onclick="click_btn('all')" class="btn-md fil-cat filter active" data-filter="all">
+              <button onclick="click_btn('all')" class="btn-md ">
                 ALL</button>/
-              <button onclick="click_btn('10~19')" class="btn-md fil-cat filter"  data-filter=".blue">
+              <button onclick="click_btn('10~19')" class="btn-md ">
                 10대</button>/
-              <button onclick="click_btn('20~29')" class="btn-md fil-cat filter"  data-filter=".red">
+              <button onclick="click_btn('20~29')" class="btn-md ">
                 20대</button>/
-              <button onclick="click_btn('30~39')" class="btn-md fil-cat filter"  data-filter=".yellow">
+              <button onclick="click_btn('30~39')" class="btn-md ">
                 30대</button>/
-              <button onclick="click_btn('40~49')" class="btn-md fil-cat filter"  data-filter=".bcards">
+              <button onclick="click_btn('40~49')" class="btn-md ">
                 40대</button>/
             </div>
           </div>
@@ -627,6 +628,7 @@
 <!-- JavaScript for BarChart-->
 <script type="text/javascript">
 
+  var myChart;
   click_btn("all");
 
   function click_btn(r) {
@@ -651,7 +653,13 @@
     var context = document
             .getElementById('myChart')
             .getContext('2d');
-    var myChart = new Chart(context, {
+    var context = document
+            .getElementById('myChart')
+            .getContext('2d');
+    if(myChart){
+      myChart.destroy();
+    }
+    myChart = new Chart(context, {
       type: 'bar', // 차트의 형태
       data: { // 차트에 들어갈 데이터
         labels: [
@@ -693,6 +701,7 @@
         ]
       },
       options: {
+        legend: {display: false},
         scales: {
           yAxes: [
             {

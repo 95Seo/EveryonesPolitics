@@ -112,7 +112,7 @@
                     <div class="vote-date-expire">
                         <p>투표 기간</p>
                         <p>12/17~12/24</p>
-                        <p>총 투표 수 : <c:out value="${voteCount}"/></p>
+                        <p>총 투표 수 : <c:out value="${voteCount}" /></p>
                     </div>
                 </div>
             </div>
