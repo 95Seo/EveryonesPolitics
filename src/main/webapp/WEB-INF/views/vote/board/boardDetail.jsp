@@ -157,7 +157,7 @@
                             <c:if test="${board.writerIdx==principal.idx}">
                                 <div class="view-button-box-02">
                                 <div class="view-delete-button">
-                                    <a href="/vote/boardDelete?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                    <a href="/vote/boardDelete?idx=${board.idx}">
                                         <button>삭제</button>
                                     </a>
                                 </div>
