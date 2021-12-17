@@ -156,16 +156,16 @@
                             </div>
                             <c:if test="${board.writerIdx==principal.idx}">
                                 <div class="view-button-box-02">
-                                <div class="view-delete-button">
-                                    <a href="/vote/boardDelete?idx=${board.idx}">
-                                        <button>삭제</button>
-                                    </a>
-                                </div>
-                                <div class="view-write-button">
-                                    <a href="/vote/boardUpdate?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
-                                        <button>수정</button>
-                                    </a>
-                                </div>
+                                    <div class="view-delete-button">
+                                        <a href="/vote/boardDelete?idx=${board.idx}">
+                                            <button>삭제</button>
+                                        </a>
+                                    </div>
+                                    <div class="view-write-button">
+                                        <a href="/vote/boardUpdate?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                            <button>수정</button>
+                                        </a>
+                                    </div>
                                 </div>
                             </c:if>
                         </div>
@@ -189,21 +189,11 @@
                             </div>
                         </form>
 
-                        <button id="commentInfo_button"><i class="fas fa-bars"></i></button>
-                        <div id="Toggle" style="display: none">
-                            <div class="Toggle-box" style="display: block; padding: 8px 0; ">
-                                <a href="">
-                                    <i class="fas fa-pen"></i>
-                                    <p>수정</p>
-                                </a>
-                                <a href="">
-                                    <i class="fas fa-trash"></i>
-                                    <p>삭제</p>
-                                </a>
-                            </div>
-                        </div>
-
                         <style>
+                            .toggle {
+                                display: none;
+                            }
+
                             .Toggle-box{
                                 display: block;
                                 padding: 8px 0;
@@ -240,30 +230,17 @@
                         </style>
 
                         <div class="commentList">
-
                         </div>
-
                     </div>
-
-
-
                     <!--                     추가                         -->
 
                     <script>
-                        $(function (){
-                            $("#commentInfo_button").click(function (){
-                                $("#Toggle").toggle();
-                            });
-                        });
-
                         var bno = ${board.idx}; //게시글 번호
 
                         $('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시
                             var insertData = $('[name=commentInsertForm]').serialize(); //commentInsertForm의 내용을 가져옴
                             commentInsert(insertData); //Insert 함수호출(아래)
                         });
-
-
 
                         //댓글 목록
                         function commentList(){
@@ -281,8 +258,14 @@
                                         a += '<div class="commentArea" style="margin-bottom: 10px; width: 80%;">';
                                         a += '<div class="commentInfo'+value.cno+'" style="font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;"><div>'+value.nickname +'</div>';
                                         a += '<div>'
-                                        a += '<a onclick="commentUpdate('+value.cno+',\''+value.content+'\');"> 수정 </a>';
-                                        a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div></div>';
+                                        a += '<button id="commentInfo_button"><i class="fas fa-bars"></i></button>';
+                                        a += '<div id="Toggle" class="toggle">';
+                                        a += '<div class="Toggle-box" style="display: block; padding: 8px 0; ">';
+                                        a += '<a onclick="commentUpdate('+value.cno+',\''+value.content+'\');">';
+                                        a += '<i class="fas fa-pen"></i><p>수정</p></a>';
+                                        a += '<a onclick="commentDelete('+value.cno+');">';
+                                        a += '<i class="fas fa-trash"></i><p>삭제</p></a></div></div>';
+                                        a += '</div></div>'
                                         a += '<div class="commentContent'+value.cno+'" style="font-size: 1.4rem; font-weight: 400; color: #030303; "> <p>'+value.content +'</p>';
                                         a += '</div></div>';
                                         a += '</div>';
@@ -292,6 +275,15 @@
                                 }
                             });
                         }
+
+                        $(document).on("click","button[id=commentInfo_button]",function(){
+                            if($(this.nextSibling).attr('class') != 'toggle') {
+                                $("div[id=Toggle]").addClass('toggle');
+                            } else {
+                                $("div[id=Toggle]").addClass('toggle');
+                                $(this.nextSibling).removeClass('toggle');
+                            }
+                        });
 
                         //댓글 등록
                         function commentInsert(insertData){
@@ -310,6 +302,7 @@
 
                         //댓글 수정 - 댓글 내용 출력을 input 폼으로 변경
                         function commentUpdate(cno, content){
+                            $("div[id=Toggle]").addClass('toggle');
                             var a ='';
 
                             a += '<div class="input-group">';
@@ -347,18 +340,14 @@
                             });
                         }
 
-
                         $(document).ready(function(){
                             commentList(); //페이지 로딩시 댓글 목록 출력
                         });
-
-
-
                     </script>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
