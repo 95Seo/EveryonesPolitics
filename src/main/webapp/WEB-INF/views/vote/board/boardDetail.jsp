@@ -177,30 +177,46 @@
                         <form name="commentInsertForm" style="margin-bottom: 50px;">
                             <div class="input-group" style="display: flex">
                                 <div class="imput-group-left" style="margin-right: 15px;" >
-                                    <img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">
+                                    <img src="<c:out value='${user.profile_img}'/>" class="comment-img">
                                 </div>
-                                <div class="input-group-right" style="width: 80%;">
+
+
+                                <div class="input-group-right">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
                                     <input type="text" class="form-control" id="comment-content" name="content" placeholder="공개 댓글 추가...">
                                 </div>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" name="commentInsertBtn" style="background:rgba(0, 0, 0, 0.05); color: rgba(0, 0, 0, 0.05); margin-top: 0px; padding: 10px; min-width: 100px">댓글</button>
-                                 </span>
+
+                                <button class="btn btn-default" type="button" name="commentInsertBtn" >댓글</button>
+
                             </div>
                         </form>
 
                         <style>
+                            .comment-img{
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                            }
+
+
+                            .btn-default{
+                                background:rgba(0, 0, 0, 0.05);
+                                color: rgb(0 0 0 / 45%);
+                                margin-top: 0px;
+                                padding: 10px;
+                                min-width: 100px;
+                            }
                             .toggle {
                                 display: none;
                             }
 
                             .Toggle-box{
                                 display: block;
-                                padding: 8px 0;
                                 position: absolute;
-                                border: 1px solid #999;
+                                border: 1px solid #99999942;
                                 border-radius: 5px;
-                                background: #f8efefba;
+                                background: #f8efef40;
+                                padding: 0px 36px 0px 16px;
                             }
                             .Toggle-box a{
                                 display: flex;
@@ -221,11 +237,13 @@
                             }
 
                             #commentInfo_button{
-                                font-size: 14px;
-                                padding: 10px 15px;
-                                background: #0a76b7;
-                                color: black;
-                                font-weight: bold;
+                                background: none;
+                                border: none;
+                            }
+
+                            .btn_right{
+                                display: flex;
+                                justify-content: flex-end;
                             }
                         </style>
 
@@ -251,22 +269,24 @@
                                 success : function(data){
                                     var a ='';
                                     $.each(data, function(key, value){
-                                        a += '<div class="commentList-wrap" style="display: flex">';
+                                        a += '<div class="commentList-wrap" style="display:flex; margin-bottom: 20px ">';
                                         a += '<div class="commentList-left" style="margin: 5px 15px 0px 0px;">';
-                                        a += '<img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">';
+                                        a += '<img src="<c:out value='${user.profile_img}' />" class="comment-img">';
                                         a += '</div>';
                                         a += '<div class="commentArea" style="margin-bottom: 10px; width: 80%;">';
                                         a += '<div class="commentInfo'+value.cno+'" style="font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;"><div>'+value.nickname +'</div>';
                                         a += '<div>'
-                                        a += '<button id="commentInfo_button"><i class="fas fa-bars"></i></button>';
+                                        a += '<button id="commentInfo_button"><i class="fas fa-ellipsis-v" style="color: black; font-size: 15px;"></i></button>';
                                         a += '<div id="Toggle" class="toggle">';
-                                        a += '<div class="Toggle-box" style="display: block; padding: 8px 0; ">';
+                                        a += '<div class="Toggle-box" style="display: block;">';
                                         a += '<a onclick="commentUpdate('+value.cno+',\''+value.content+'\');">';
                                         a += '<i class="fas fa-pen"></i><p>수정</p></a>';
                                         a += '<a onclick="commentDelete('+value.cno+');">';
                                         a += '<i class="fas fa-trash"></i><p>삭제</p></a></div></div>';
                                         a += '</div></div>'
-                                        a += '<div class="commentContent'+value.cno+'" style="font-size: 1.4rem; font-weight: 400; color: #030303; "> <p>'+value.content +'</p>';
+                                        a += '<div class="commentContent'+value.cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #030303; ">'+value.content +'</p></div>';
+                                        a += '<div class="commentLike'+value.cno+'" style="font-size: 1.2rem; font-weight: 400; color: #030303; ">';
+                                        a += '<i class="far fa-thumbs-up" style="margin-right: 10px" >3</i> <i class="far fa-thumbs-down" style="margin-right: 10px">3</i> <a href="">답글</a>';
                                         a += '</div></div>';
                                         a += '</div>';
                                     });
@@ -305,9 +325,11 @@
                             $("div[id=Toggle]").addClass('toggle');
                             var a ='';
 
-                            a += '<div class="input-group">';
+                            a += '<div class="input-group" style="display:flex;  flex-direction: column;">';
                             a += '<input type="text" class="form-control" name="content_'+cno+'" value="'+content+'"/>';
-                            a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">수정</button> </span>';
+                            a += '<span class="btn_right">';
+                            a += '<button class="btn btn-default" type="button" onclick="commentUpdateProc('+cno+');">저장</button>'
+                            a += '<button class="btn btn-default" type="button" onclick="">취소</span>';
                             a += '</div>';
 
                             $('.commentContent'+cno).html(a);
