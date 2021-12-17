@@ -38,9 +38,9 @@
 
     function submit() {
         // if($("#title").val()=="") {
-        //     alert($("#p_content").text());
+        //     alert(CKEDITOR.instances.content.getData());
         //     alert("제목을 입력해 주세요.");
-        // } else if($("#p_content").val()=="") {
+        // } else if(content=="") {
         //     alert("내용을 입력해 주세요.");
         // } else {
         //     $('#frm').submit();

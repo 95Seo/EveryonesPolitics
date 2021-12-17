@@ -177,7 +177,7 @@
                         <form name="commentInsertForm" style="margin-bottom: 50px;">
                             <div class="input-group" style="display: flex">
                                 <div class="imput-group-left" >
-                                    <img src="<c:out value='${user.profileImg}'/>" style="height: 40px;" width="40px;">
+                                    <img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">
                                 </div>
                                 <div class="input-group-right" style="width: 80%;">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
@@ -216,7 +216,7 @@
                                     $.each(data, function(key, value){
                                         a += '<div class="commentList-wrap" style="display: flex">';
                                         a += '<div class="commentList-left">';
-                                        a += '<img src="<c:out value='${user.profileImg}'/>" style="height: 40px;" width="40px;">';
+                                        a += '<img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">';
                                         a += '</div>';
                                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 10px; width: 80%;">';
                                         a += '<div class="commentInfo'+value.cno+'" style="font-size: 1.3rem; font-weight: 500; color: #030303;">'+value.nickname;

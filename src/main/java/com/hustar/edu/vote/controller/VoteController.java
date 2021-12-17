@@ -87,7 +87,7 @@ public class VoteController {
 	public String PostMyProfileUpdateController(tb_user user, @RequestParam @Nullable MultipartFile profileImg) {
 		log.info("VoteMyProfileUpdatePage");
 
-		if(profileImg == null) {
+		if(!profileImg.isEmpty()) {
 			UploadFile file_url = thumbnailUploadHandler.profileFileUpload(profileImg, "USER", user.getIdx());
 			System.out.println("dir : " + file_url.getFile_dir());
 			user.setProfile_img(file_url.getFile_dir());
