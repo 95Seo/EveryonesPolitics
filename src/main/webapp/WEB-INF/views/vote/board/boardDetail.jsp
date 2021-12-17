@@ -173,15 +173,15 @@
                         <!--                     추가                         -->
                         <!--  댓글  -->
 
-                        <label for="comment_content" style="margin-bottom: 10px; color: #030303; font-weight: 400; font-size: 1.6rem;">댓글</label>
+                        <label for="comment-content" style="margin-bottom: 10px; color: #030303; font-weight: 400; font-size: 1.6rem;">댓글</label>
                         <form name="commentInsertForm" style="margin-bottom: 50px;">
                             <div class="input-group" style="display: flex">
-                                <div class="imput-group-left" >
+                                <div class="imput-group-left" style="margin-right: 15px;" >
                                     <img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">
                                 </div>
                                 <div class="input-group-right" style="width: 80%;">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
-                                    <input type="text" class="form-control" id="comment_content" name="comment_content" placeholder="공개 댓글 추가...">
+                                    <input type="text" class="form-control" id="comment-content" name="content" placeholder="공개 댓글 추가...">
                                 </div>
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" name="commentInsertBtn" style="background:rgba(0, 0, 0, 0.05); color: rgba(0, 0, 0, 0.05); margin-top: 0px; padding: 10px; min-width: 100px">댓글</button>
@@ -189,13 +189,73 @@
                             </div>
                         </form>
 
+                        <button id="commentInfo_button"><i class="fas fa-bars"></i></button>
+                        <div id="Toggle" style="display: none">
+                            <div class="Toggle-box" style="display: block; padding: 8px 0; ">
+                                <a href="">
+                                    <i class="fas fa-pen"></i>
+                                    <p>수정</p>
+                                </a>
+                                <a href="">
+                                    <i class="fas fa-trash"></i>
+                                    <p>삭제</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <style>
+                            .Toggle-box{
+                                display: block;
+                                padding: 8px 0;
+                                position: absolute;
+                                border: 1px solid #999;
+                                border-radius: 5px;
+                                background: #f8efefba;
+                            }
+                            .Toggle-box a{
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .Toggle-box i{
+                                color: black;
+                                margin-right: 12px;
+                                font-size: 17px;
+                            }
+
+                            .Toggle-box p {
+                                font-size: 15px;
+                                color: black;
+                                font-weight: 400;
+
+                            }
+
+                            #commentInfo_button{
+                                font-size: 14px;
+                                padding: 10px 15px;
+                                background: #0a76b7;
+                                color: black;
+                                font-weight: bold;
+                            }
+                        </style>
+
                         <div class="commentList">
 
                         </div>
 
                     </div>
+
+
+
                     <!--                     추가                         -->
+
                     <script>
+                        $(function (){
+                            $("#commentInfo_button").click(function (){
+                                $("#Toggle").toggle();
+                            });
+                        });
+
                         var bno = ${board.idx}; //게시글 번호
 
                         $('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시
@@ -215,14 +275,15 @@
                                     var a ='';
                                     $.each(data, function(key, value){
                                         a += '<div class="commentList-wrap" style="display: flex">';
-                                        a += '<div class="commentList-left">';
+                                        a += '<div class="commentList-left" style="margin: 5px 15px 0px 0px;">';
                                         a += '<img src="<c:out value='${user.profile_img}'/>" style="height: 40px;" width="40px;">';
                                         a += '</div>';
-                                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 10px; width: 80%;">';
-                                        a += '<div class="commentInfo'+value.cno+'" style="font-size: 1.3rem; font-weight: 500; color: #030303;">'+value.nickname;
+                                        a += '<div class="commentArea" style="margin-bottom: 10px; width: 80%;">';
+                                        a += '<div class="commentInfo'+value.cno+'" style="font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;"><div>'+value.nickname +'</div>';
+                                        a += '<div>'
                                         a += '<a onclick="commentUpdate('+value.cno+',\''+value.content+'\');"> 수정 </a>';
-                                        a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div>';
-                                        a += '<div class="commentContent'+value.cno+'" style="font-size: 1.4rem; font-weight: 400; color: #030303;"> <p>'+value.content +'</p>';
+                                        a += '<a onclick="commentDelete('+value.cno+');"> 삭제 </a> </div></div>';
+                                        a += '<div class="commentContent'+value.cno+'" style="font-size: 1.4rem; font-weight: 400; color: #030303; "> <p>'+value.content +'</p>';
                                         a += '</div></div>';
                                         a += '</div>';
                                     });
