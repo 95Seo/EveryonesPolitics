@@ -6,6 +6,7 @@ import com.hustar.edu.vote.service.VoteServiceImpl;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,10 @@ public class VotingController {
 
     @PostMapping("/form")
     public String updateVoting(@AuthenticationPrincipal PrincipalDetail principal, tb_user user, Model model) {
+        System.out.println("voting : " + user.getVote());
+
         user.setIdx(principal.getIdx());
+
         voteServiceimpl.getupdateVoting(user);
 
         return "redirect:/";

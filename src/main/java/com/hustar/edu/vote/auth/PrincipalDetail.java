@@ -17,6 +17,7 @@ public class PrincipalDetail implements UserDetails {
 
     public PrincipalDetail(tb_user user) {
         System.out.println(user.getUsername() + " 사용자 입니다.");
+        System.out.println(user.getVote() + " 에 투표 했습니다.");
         this.user = user;
     }
 
