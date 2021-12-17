@@ -6,6 +6,26 @@
     ></script>
 
 <script>
+    CKEDITOR.on('dialogDefinition', function (ev) {
+        var dialogName = ev.data.name;
+        var dialog = ev.data.definition.dialog;
+        var dialogDefinition = ev.data.definition;
+        if (dialogName == 'image') {
+            dialog.on('show', function (obj) {
+                this.selectPage('Upload'); //업로드텝으로 시작
+            });
+            dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+            dialogDefinition.removeContents('Link'); // 링크탭 제거
+        }
+    });
+
+    CKEDITOR.editorConfig = function( config ) {
+        config.toolbarCanCollapse = true;
+        config.font_names = '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;';
+        //이미지 마우스로 리사이징 적용을 위한 플러그인 코드
+        config.extraPlugins = 'imageresizerowandcolumn';
+    };
+
     fill = "";
     $(document).on("click","input[type=radio]",function(){
         fill=$('input[name=filter]:checked').val();
@@ -37,18 +57,21 @@
     }
 
     function submit() {
-        // if($("#title").val()=="") {
-        //     alert(CKEDITOR.instances.content.getData());
-        //     alert("제목을 입력해 주세요.");
-        // } else if(content=="") {
-        //     alert("내용을 입력해 주세요.");
-        // } else {
-        //     $('#frm').submit();
-        // }
+        text = CKEDITOR.instances.content.getData();
+        checked = $('input:radio[name="filter"]').is(':checked');
+        if($("#title").val()=="") {
+            alert("제목을 입력해 주세요.");
+        } else if(text=="") {
+            alert("내용을 입력해 주세요.");
+        } else if(checked == false) {
+            alert("카테고리를 선택해 주세요.");
+        } else {
+            $('#frm').submit();
+        }
     }
 
     function cancel() {
-
+        location.href = "/vote/boardList";
     }
 </script>
 
@@ -87,9 +110,9 @@
 
                     <div class="col_c" style="display: flex; justify-content: center;" >
                         <div class="input-group" style="width: 100%;">
-                            <textarea class="form-control" id="p_content" name="content"></textarea>
+                            <textarea class="form-control" id="content" name="content"></textarea>
                             <script type="text/javascript">
-                                CKEDITOR.replace("p_content", {
+                                CKEDITOR.replace("content", {
                                     height: 500,
                                     uploadUrl: "/image/drag?dir=BOARD/CONTENT",  // 이게 드래그 드롭을 위한 URL
                                     filebrowserUploadUrl: "/image?dir=BOARD/CONTENT"  // 파일업로드를 위한 URL

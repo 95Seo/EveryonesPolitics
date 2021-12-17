@@ -148,4 +148,9 @@ public class BoardServiceImpl implements BoardService {
         log.info("get total My Board Count");
         return boardMapper.selectMyBoardTotalCount(idx);
     }
+
+    public void deleteBoardDetail(BoardDTO boardDTO) {
+        log.info("Board Delete Board_No : "+ boardDTO.getIdx());
+        boardMapper.deleteBoardDetail(boardDTO);
+    }
 }

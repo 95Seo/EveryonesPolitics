@@ -78,4 +78,10 @@
         WHERE use_yn = 'Y'
         AND writer_idx = #{idx}
     </select>
+
+    <update id="deleteBoardDetail" parameterType="BoardDTO">
+        update tb_board
+        set use_yn = 'N'
+        where idx = #{idx}
+    </update>
 </mapper>

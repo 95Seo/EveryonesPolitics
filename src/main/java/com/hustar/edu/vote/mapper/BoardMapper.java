@@ -24,4 +24,6 @@ public interface BoardMapper {
     public int selectMyBoardTotalCount(int idx);
 
     public List<BoardDTO> selectLikeBoardList();
+
+    public void deleteBoardDetail(BoardDTO boardDTO);
 }

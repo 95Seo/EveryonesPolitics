@@ -133,4 +133,11 @@ public class BoardController {
 
         return "/vote/board/boardDetail";
     }
+
+    @GetMapping("/vote/boardDelete")
+    public String voteBoardDeleteController(BoardDTO boardDTO) {
+        log.info("VoteBoardUpdatePage");
+        boardService.deleteBoardDetail(boardDTO);
+        return "redirect:/vote/boardList";
+    }
 }
