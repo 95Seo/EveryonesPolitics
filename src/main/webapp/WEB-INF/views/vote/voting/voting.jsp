@@ -5,8 +5,9 @@
 <link rel="stylesheet" href="../resources/css/votepage.css" />
 
 <script>
+    var vote = alert(${vote});
     $(document).on("click","input[type=radio]",function(){
-        showFill=$('input[name=fill]:checked').val();
+        showFill=$('input[name=vote]:checked').val();
         //라디오 버튼 값을 가져온다.
         chang_fill(showFill);
     });
@@ -15,142 +16,41 @@
         if(isNaN(${principal.idx})) {
             alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
             location.href ="/vote/voting";
-        } else if(!isNaN(${principal.vote})) {
+        } else if (vote != 0) {
             alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
             location.href ="/vote/voting";
         } else {
             alert("투표에 성공하였습니다 !.");
+            $("#frm").submit();
         }
     }
 
     function chang_fill(fill) {
-        $("input:radio[name='fill']").attr("checked", false);
-
-        if(fill == '이재명') {
+        if(fill == 1) {
             $("input:radio[id='radio1']").attr("checked", true);
-        } else if(fill == '윤석열') {
+            $("input:radio[id='radio2']").attr("checked", false);
+            $("input:radio[id='radio3']").attr("checked", false);
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 2) {
+            $("input:radio[id='radio1']").attr("checked", false);
             $("input:radio[id='radio2']").attr("checked", true);
-        } else if(fill == '심상정') {
+            $("input:radio[id='radio3']").attr("checked", false);
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 3) {
+            $("input:radio[id='radio1']").attr("checked", false);
+            $("input:radio[id='radio2']").attr("checked", false);
             $("input:radio[id='radio3']").attr("checked", true);
-        } else if(fill == '안철수') {
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 4) {
+            $("input:radio[id='radio1']").attr("checked", false);
+            $("input:radio[id='radio2']").attr("checked", false);
+            $("input:radio[id='radio3']").attr("checked", false);
             $("input:radio[id='radio4']").attr("checked", true);
         }
     }
 </script>
 
-<style>
-    .candidate01 {
-        display: inline-block;
-        background: url("../resources/images/behind01.jpg");
-        background-size: 100% 100%;
 
-    }
-
-
-    .candidate01 label:hover {
-        background: rgba(131, 226, 255, 0.7);
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .candidate01:hover h2 {
-        color: black;
-    }
-
-    .candidate01:hover p {
-        color: black;
-    }
-
-
-
-    #voting input[checked] + label {
-        animation-play-state: paused;
-        background: rgb(231 76 60 / 84%);
-        border-radius: 20px;
-        cursor: pointer;
-
-    }
-
-
-
-    @keyframes up {
-        from {
-            transform: translateY(0px);
-        }
-        to {
-            transform: translateY(-30px);
-        }
-    }
-
-    .candidate02 {
-        display: inline-block;
-        background: url("../resources/images/behind02.jpg");
-        background-size: 100% 100%;
-
-    }
-
-
-    .candidate02 label:hover {
-        background: rgba(216, 33, 45, 0.7);
-        cursor: pointer;
-        border-radius: 20px;
-    }
-
-    .candidate02:hover h2 {
-        color: black;
-    }
-
-    .candidate02:hover p {
-        color: black;
-    }
-
-    .candidate03 {
-        display: inline-block;
-        background: url("../resources/images/behind03.jpg");
-        background-size: 100% 100%;
-
-    }
-
-
-
-    .candidate03:hover label {
-        background: rgba(255, 202, 44, 0.7);
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .candidate03:hover h2 {
-        color: black;
-    }
-
-    .candidate03:hover p {
-        color: black;
-    }
-
-    .candidate04 {
-        display: inline-block;
-        background: url("../resources/images/behind04.jpg");
-        background-size: 100% 100%;
-
-    }
-
-
-
-    .candidate04:hover label {
-        background: rgba(234, 85, 4, 0.7);
-        border-radius: 20px;
-        cursor: pointer;
-    }
-
-    .candidate04:hover h2 {
-        color: black;
-    }
-
-    .candidate04:hover p {
-        color: black;
-    }
-
-</style>
 <section id="votepage" class="votepage sections">
     <div class="container">
         <div class="row">
@@ -169,24 +69,26 @@
         </div>
 
         <div class="row vote-Card">
-            <form action="/form" method="post">
+            <form action="/form" method="post" id="frm">
                 <div class="vote-Row" id="voting">
                     <div class="col-sm-3">
                         <li class="candidate01 comon-candidate">
-                            <input type="radio" name="fill" id="radio1" value="이재명">
+                            <input type="radio" name="vote" id="radio1" value=1>
                             <label for="radio1" class="cursor_pointer">
-                                <h2>이재명</h2>
-                                <p>새로운 대한민국<br />이재명은 합니다!</p>
+                                <div class="vote-checked"></div>
+<%--                                <h2>이재명</h2>--%>
+<%--                                <p>새로운 대한민국<br />이재명은 합니다!</p>--%>
                             </label>
                         </li>
                     </div>
 
                     <div class="col-sm-3">
                         <li class="candidate02 comon-candidate">
-                            <input type="radio" name="fill" id="radio2" value="윤석열">
+                            <input type="radio" name="vote" id="radio2" value=2>
                             <label for="radio2" class="cursor_pointer">
-                                <h2>윤석열</h2>
-                                <p>공정과 상식의 나라<br />되찾겠습니다.</p>
+                                <div class="vote-checked"></div>
+<%--                                <h2>윤석열</h2>--%>
+<%--                                <p>공정과 상식의 나라<br />되찾겠습니다.</p>--%>
                             </label>
                         </li>
                     </div>
@@ -195,20 +97,22 @@
                 <div class="vote-Row" id="voting">
                     <div class="col-sm-3">
                         <li class="candidate03 comon-candidate">
-                            <input type="radio" name="fill" id="radio3" value="심상정">
+                            <input type="radio" name="vote" id="radio3" value=3>
                             <label for="radio3" class="cursor_pointer">
-                                <h2>심상정</h2>
-                                <p>정의로운 복지국가,<br />정의당이 시작합니다</p>
+                                <div class="vote-checked"></div>
+<%--                                <h2>심상정</h2>--%>
+<%--                                <p>정의로운 복지국가,<br />정의당이 시작합니다</p>--%>
                             </label>
                         </li>
                     </div>
 
                     <div class="col-sm-3">
                         <li class="candidate04 comon-candidate">
-                            <input type="radio" name="fill" id="radio4" value="안철수">
+                            <input type="radio" name="vote" id="radio4" value=4>
                             <label for="radio4" class="cursor_pointer">
-                                <h2>안철수</h2>
-                                <p>말과 행동이 같은 정당</p>
+                                <div class="vote-checked"></div>
+<%--                                <h2>안철수</h2>--%>
+<%--                                <p>말과 행동이 같은 정당</p>--%>
                             </label>
                         </li>
                     </div>
@@ -218,7 +122,7 @@
                 <div class="col-sm-12">
                     <div class="vote-date-expirebox">
                         <ul class="vote-icon">
-                            <li><a href="#none"><input type="submit" onclick="vote_btn()" class="votingbtn" value="투표하기"></a>
+                            <li><a href="#none" onclick="vote_btn()"><input type="submit" class="votingbtn" value="투표하기"></a>
                             </li>
                         </ul>
                         <div class="vote-date-expire">
