@@ -35,10 +35,11 @@ public class CalendarController {
         result.forEach(it -> {
             JsonObject object = new JsonObject();
             object.addProperty("id", it.getId());
-            object.addProperty("groupId", it.getGroupId());
+            object.addProperty("groupname", it.getGroupname());
             object.addProperty("title", it.getTitle());
-            object.addProperty("writer", it.getWriter());
-            object.addProperty("content", it.getContent());
+            object.addProperty("location", it.getLocation());
+            object.addProperty("description", it.getDescription());
+            object.addProperty("url", it.getUrl());
             object.addProperty("start", it.getStart());
             object.addProperty("end" , it.getEnd());
             object.addProperty("allday" , it.isAllday());
@@ -46,6 +47,7 @@ public class CalendarController {
             object.addProperty("borderColor" , it.getBorderColor());
             arrObj.add(object);
         });
+
         System.out.println(arrObj);
 
         return arrObj.toString();

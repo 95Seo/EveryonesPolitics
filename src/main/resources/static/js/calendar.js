@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     + '<div class="CalendarInfo"><p><strong>후보자:</strong>' + info.event.title + '</p>'
                     + '<p><strong>정&nbsp&nbsp당:</strong>' + info.event.extendedProps.groupname + '</p></div>'
                     + '<div class ="CalendarContent"><p><strong>위치:</strong>' + info.event.extendedProps.location + '</p>'
-                    + '<p><strong>내용:</strong>' + info.event.extendedProps.description +  '</p></div>',
+                    + '<p><strong>내용:</strong>' + info.event.extendedProps.description +  '</p></div>'
+                    + '<p><strong>클릭시 링크로 바로가기</strong></p>',
                 allowHTML: true,
             })
         },
@@ -44,32 +45,20 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         editable: true,
         dayMaxEvents: true, // 너무 많은 이벤트가 있을떄 "more" 링크 생기게 해주는 부분
-        events:[{"id":1,
-            "groupname":"민주당",
-            "title":"이재명",
-            "location":"더불어민주당 중앙당사 4층",
-            "description": '김관영.채이배 전 국회의원 입당식',
-            "url": 'https://twitter.com/TheMinjoo_Kr/status/1468883507019935747',
-            "start":"2021-12-07",
-            "end":"2021-12-08",
-            "allday":true,
-            "backgroundColor":"#0178ba",
-            "borderColor":"#0178ba"}]
+        events: function(info, successCallback, failureCallback){
+                $.ajax({
+                  type: "get",
+                  url: "calendar.do?method=data",
+                  dataType: 'json',
 
-        // events: function(info, successCallback, failureCallback){
-        //     $.ajax({
-        //       type: "get",
-        //       url: "calendar.do?method=data",
-        //       dataType: 'json',
-        //
-        //
-        //         success: function(info) {
-        //           successCallback(info);
-        //         }
-        //
-        //
-        //     }); //ajax end
-        //   }, //events:function end
+
+                    success: function(info) {
+                      successCallback(info);
+                    }
+
+
+                }); //ajax end
+          }, //events:function end
 
       //===================== ajax데이터 불러올 부분 ========================//
     });

@@ -6,13 +6,17 @@
         <result property="end" column="end1"/>
     </resultMap>
     <select id="calenList" resultMap="calMap">
-        SELECT id, title,
+        SELECT id,
+        groupname,
+        title,
+        description,
+        location,
+        url,
         start1,
         end1,
-        ALLDAY,
-        TEXTCOLOR,
-        BACKGROUNDCOLOR,
-        BORDERCOLOR
+        allDay,
+        backgroundcolor,
+        bordercolor
         FROM tb_calendar
     </select>
 </mapper>
