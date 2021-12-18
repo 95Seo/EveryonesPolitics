@@ -202,7 +202,6 @@
     .search-box input[type="button"]:hover{
         background: #ff4722;
     }
-
 </style>
 
 <!-- board Section(게시판 리스트)-->

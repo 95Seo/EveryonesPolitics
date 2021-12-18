@@ -2,6 +2,11 @@
 <%@include file="../../include/header.jsp"%>
 
 <style>
+    .no_object {
+        margin: 10% 0;
+        text-align: center;
+        font-size: 20px;
+    }
     .templatemo-item-col .behind-item a {
         color: black;
     }
