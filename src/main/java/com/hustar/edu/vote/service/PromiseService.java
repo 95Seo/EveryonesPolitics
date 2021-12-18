@@ -12,4 +12,5 @@ public interface PromiseService {
     //추가(전체 글 개수)
     public int getTotal(Criteria cri);
     public void updatePromiseDetail(PromiseDTO promiseDTO);
+    public void deletePromiseDetail(PromiseDTO promiseDTO);
 }

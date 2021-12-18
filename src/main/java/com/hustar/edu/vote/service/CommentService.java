@@ -1,12 +1,12 @@
 package com.hustar.edu.vote.service;
 
-import com.hustar.edu.vote.dto.CommentVO;
+import com.hustar.edu.vote.dto.CommentDTO;
 
 import java.util.List;
 
 public interface CommentService {
-    public List<CommentVO> commentListService(CommentVO comment) throws Exception;
-    public int commentInsertService(CommentVO comment) throws Exception;
-    public int commentUpdateService(CommentVO comment) throws Exception;
+    public List<CommentDTO> commentListService(CommentDTO comment) throws Exception;
+    public int commentInsertService(CommentDTO comment) throws Exception;
+    public int commentUpdateService(CommentDTO comment) throws Exception;
     public int commentDeleteService(int cno) throws Exception;
 }

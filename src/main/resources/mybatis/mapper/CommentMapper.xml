@@ -5,31 +5,32 @@
     <select id="commentCount" resultType="int">
         SELECT
         COUNT(*)
-        FROM comment
+        FROM tb_comment
     </select>
 
-    <select id="commentList" parameterType="CommentVO" resultType="CommentVO">
+    <select id="commentList" parameterType="CommentDTO" resultType="CommentDTO">
         select a.*, b.profile_img as profileImg, b.nickname as nickname
-        from comment a, tb_user b
+        from tb_comment a, tb_user b
         where a.bno =#{bno}
+        and a.board_nm = #{boardNm}
         and a.writer = b.idx
     </select>
 
 
-    <insert id="commentInsert" parameterType="CommentVO">
+    <insert id="commentInsert" parameterType="CommentDTO">
         INSERT INTO
-        comment (BNO, CONTENT, WRITER, REG_DATE)
-        VALUES(#{bno},#{content},#{writer},now())
+            tb_comment (BNO, CONTENT, WRITER, SYSREGDATE, BOARD_NM)
+        VALUES(#{bno},#{content},#{writer},now(), #{boardNm})
     </insert>
 
-    <update id="commentUpdate" parameterType="CommentVO">
-        UPDATE comment
+    <update id="commentUpdate" parameterType="CommentDTO">
+        UPDATE tb_comment
         SET
         CONTENT = #{content}
         WHERE CNO = #{cno}
     </update>
 
     <delete id="commentDelete" parameterType="int">
-        DELETE FROM comment WHERE CNO = #{cno}
+        DELETE FROM tb_comment WHERE CNO = #{cno}
     </delete>
 </mapper>

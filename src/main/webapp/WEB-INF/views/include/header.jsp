@@ -140,8 +140,8 @@
                            <li ><a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">로그인</a></li>
                           </c:when>
                           <c:otherwise>
-                            <li><a href="#">로그아웃</a></li>
                             <li><a href="/vote/myProfileInfo">마이페이지</a></li>
+                            <li><a href="/logout">로그아웃</a></li>
                           </c:otherwise>
 
                         </c:choose>

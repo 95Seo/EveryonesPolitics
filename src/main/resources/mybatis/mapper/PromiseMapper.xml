@@ -3,8 +3,8 @@
 <mapper namespace="com.hustar.edu.vote.mapper.PromiseMapper">
 
     <insert id="insertPromise" parameterType="PromiseDTO">
-        insert into tb_promise(writer_idx, title, content, file_url)
-        values (#{writerIdx}, #{title}, #{content}, #{fileUrl});
+        insert into tb_promise(writer_idx, title, content, file_url, filter)
+        values (#{writerIdx}, #{title}, #{content}, #{fileUrl}, #{filter});
     </insert>
 
     <update id="updatePromiseDetail" parameterType="PromiseDTO">
@@ -45,4 +45,10 @@
         <if test="filter != 'all' ">AND filter = #{filter}</if>
         <if test='keyword != null'>AND title Like CONCAT('%', #{keyword}, '%')</if>
     </select>
+
+    <update id="deletePromiseDetail" parameterType="PromiseDTO">
+        update tb_promise
+        set use_yn = 'N'
+        where idx = #{idx}
+    </update>
 </mapper>

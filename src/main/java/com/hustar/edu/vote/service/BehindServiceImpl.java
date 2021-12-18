@@ -92,4 +92,8 @@ public class BehindServiceImpl implements BehindService {
         log.info("get total count");
         return behindMapper.selectBehindTotalCount(cri);
     }
+
+    public void deleteBehindDetail(BehindDTO behindDTO) {
+        behindMapper.deleteBehindDetail(behindDTO);
+    }
 }

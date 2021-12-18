@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hustar.edu.vote.FileUpload.ThumbnailUploadHandler;
 import com.hustar.edu.vote.FileUpload.UploadFile;
 import com.hustar.edu.vote.auth.PrincipalDetail;
+import com.hustar.edu.vote.dto.BehindDTO;
 import com.hustar.edu.vote.dto.PromiseDTO;
 import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.dto.tb_user;
@@ -73,7 +74,7 @@ public class PromiseController {
     }
 
     @PostMapping("/vote/promiseCreate")
-    public String PostPromiseCreateController (@RequestParam("title") String title, @RequestParam("content") String content,
+    public String PostPromiseCreateController (PromiseDTO promiseDTO,
                                               @RequestParam MultipartFile multipartFile) {
 
         log.info("PostPromiseCreatePage");
@@ -81,14 +82,10 @@ public class PromiseController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetail userDetails = (PrincipalDetail)principal;
 
-        PromiseDTO promiseDTO = new PromiseDTO();
-
         UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "PROMISE/THUMBNAIL");
         System.out.println("file_url : " + file_url.getFile_dir());
 
         promiseDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
-        promiseDTO.setTitle(title);
-        promiseDTO.setContent(content);
         promiseDTO.setFileUrl(file_url.getFile_dir());
 
         promiseService.insertPromise(promiseDTO);
@@ -116,12 +113,14 @@ public class PromiseController {
         } catch (Exception e) {
             e.printStackTrace();
             promiseDTO.setFileUrl("null");
+        } finally {
+            promiseService.updatePromiseDetail(promiseDTO);
+            rttr.addAttribute("page", criteria.getPage());
+            rttr.addAttribute("filter", criteria.getFilter());
+            rttr.addAttribute("keyword", criteria.getKeyword());
+            rttr.addAttribute("idx", promiseDTO.getIdx());
         }
-        promiseService.updatePromiseDetail(promiseDTO);
-        rttr.addAttribute("page", criteria.getPage());
-        rttr.addAttribute("filter", criteria.getFilter());
-        rttr.addAttribute("keyword", criteria.getKeyword());
-        rttr.addAttribute("idx", promiseDTO.getIdx());
+
         return "redirect:/vote/promiseDetail";
     }
 
@@ -142,5 +141,13 @@ public class PromiseController {
         model.addAttribute("calcTime", Time.calculateTime(promiseDTO.getSysregdate()));
 
         return "/vote/promise/promiseDetail";
+    }
+
+    @GetMapping("/vote/promiseDelete")
+    public String voteBoardDeleteController(PromiseDTO promiseDTO) {
+        log.info("VoteBoardUpdatePage");
+        promiseService.deletePromiseDetail(promiseDTO);
+
+        return "redirect:/vote/promiseList";
     }
 }

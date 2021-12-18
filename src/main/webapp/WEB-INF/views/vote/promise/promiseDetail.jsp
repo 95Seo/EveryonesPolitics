@@ -156,7 +156,7 @@
                             <c:if test="${principal.role == 'ADMIN'}">
                                 <div class="view-button-box-02">
                                     <div class="view-delete-button">
-                                        <a href="/vote/promiseDelete?idx=${board.idx}&page=${page}&filter=${filter}&keyword=${keyword}">
+                                        <a href="/vote/promiseDelete?idx=${promise.idx}">
                                             <button>삭제</button>
                                         </a>
                                     </div>

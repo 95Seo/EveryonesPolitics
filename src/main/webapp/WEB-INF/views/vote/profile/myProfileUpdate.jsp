@@ -24,7 +24,6 @@
                             <div class="myprofile-left-img">
                                 <img name="profile_img" src="<c:out value='${info.profile_img}'/>">
                             </div>
-                            <div><button>삭제</button></div>
                         </li>
                         <li><input type="file" placeholder="가로 세로 제한 길이: 90px" name="profileImg"></li>
                         <li class="myprofile-edit-button">

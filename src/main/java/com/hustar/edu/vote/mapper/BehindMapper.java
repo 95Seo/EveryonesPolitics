@@ -1,6 +1,7 @@
 package com.hustar.edu.vote.mapper;
 
 import com.hustar.edu.vote.dto.BehindDTO;
+import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,4 +18,6 @@ public interface BehindMapper {
     public int selectBehindTotalCount(Criteria cri);
 
     public void updateBehindDetail(BehindDTO behindDTO);
+
+    public void deleteBehindDetail(BehindDTO behindDTO);
 }

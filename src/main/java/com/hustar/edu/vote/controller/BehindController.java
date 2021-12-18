@@ -1,11 +1,11 @@
 package com.hustar.edu.vote.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hustar.edu.vote.FileUpload.FileUploadHandler;
 import com.hustar.edu.vote.FileUpload.ThumbnailUploadHandler;
 import com.hustar.edu.vote.FileUpload.UploadFile;
 import com.hustar.edu.vote.auth.PrincipalDetail;
 import com.hustar.edu.vote.dto.BehindDTO;
+import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.Time;
 import com.hustar.edu.vote.dto.tb_user;
 import com.hustar.edu.vote.paging.Criteria;
@@ -14,6 +14,7 @@ import com.hustar.edu.vote.service.CommonService;
 import com.hustar.edu.vote.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,24 +74,18 @@ public class BehindController {
     }
 
     @PostMapping("/vote/behindCreate")
-    public String PostBehindCreateController (@RequestParam("title") String title, @RequestParam("content") String content,
-                                              @RequestParam MultipartFile multipartFile, String filter) {
+    public String PostBehindCreateController (BehindDTO behindDTO, @RequestParam MultipartFile multipartFile) {
 
         log.info("PostBehindCreatePage");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetail userDetails = (PrincipalDetail)principal;
 
-        BehindDTO behindDTO = new BehindDTO();
-
         UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
         System.out.println("file_url : " + file_url.getFile_dir());
 
         behindDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
-        behindDTO.setTitle(title);
-        behindDTO.setContent(content);
         behindDTO.setFileUrl(file_url.getFile_dir());
-        behindDTO.setFilter(filter);
 
         behindService.insertBehind(behindDTO);
         return "redirect:/vote/behindList";
@@ -108,15 +103,22 @@ public class BehindController {
     }
 
     @PostMapping("/vote/behindUpdate")
-    public String votePostBehindUpdateController(BehindDTO behindDTO, Criteria criteria, RedirectAttributes rttr, @RequestParam MultipartFile multipartFile) {
+    public String votePostBehindUpdateController(BehindDTO behindDTO, Criteria criteria, RedirectAttributes rttr, @RequestParam @Nullable MultipartFile multipartFile) {
         log.info("VoteBehindUpdatePage");
-        UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
-        behindDTO.setFileUrl(file_url.getFile_dir());
-        behindService.updateBehindDetail(behindDTO);
-        rttr.addAttribute("page", criteria.getPage());
-        rttr.addAttribute("filter", criteria.getFilter());
-        rttr.addAttribute("keyword", criteria.getKeyword());
-        rttr.addAttribute("idx", behindDTO.getIdx());
+
+        try {
+            UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
+            behindDTO.setFileUrl(file_url.getFile_dir());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            behindService.updateBehindDetail(behindDTO);
+            rttr.addAttribute("page", criteria.getPage());
+            rttr.addAttribute("filter", criteria.getFilter());
+            rttr.addAttribute("keyword", criteria.getKeyword());
+            rttr.addAttribute("idx", behindDTO.getIdx());
+        }
+
         return "redirect:/vote/behindDetail";
     }
 
@@ -137,5 +139,12 @@ public class BehindController {
         model.addAttribute("calcTime", Time.calculateTime(behindDTO.getSysregdate()));
 
         return "/vote/behind/behindDetail";
+    }
+
+    @GetMapping("/vote/behindDelete")
+    public String voteBoardDeleteController(BehindDTO behindDTO) {
+        log.info("VoteBoardUpdatePage");
+        behindService.deleteBehindDetail(behindDTO);
+        return "redirect:/vote/behindList";
     }
 }

@@ -9,7 +9,7 @@
     obj.dataType = "JSON";
     obj.error=function(e){console.log(e)};
 
-    board_nm = "tb_board"; //보여줄 페이지
+    var board_nm = "tb_board"; //보여줄 페이지
     board_idx = JSON.parse ( ${idx} );
 
     detailCall(board_nm, board_idx); //리스트 호출 함수
@@ -183,6 +183,7 @@
 
                                 <div class="input-group-right">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
+                                    <input type="hidden" name="boardNm" value="tb_board"/>
                                     <input type="text" class="form-control" id="comment-content" name="content" placeholder="공개 댓글 추가...">
                                 </div>
 
@@ -265,7 +266,10 @@
                             $.ajax({
                                 url : '/comment/list',
                                 type : 'get',
-                                data : {'bno':bno},
+                                data : {
+                                    'bno':bno,
+                                    'boardNm': board_nm
+                                },
                                 success : function(data){
                                     var a ='';
                                     $.each(data, function(key, value){

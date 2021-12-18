@@ -13,4 +13,5 @@ public interface BehindService {
     //추가(전체 글 개수)
     public int getTotal(Criteria cri);
     public void updateBehindDetail(BehindDTO behindDTO);
+    public void deleteBehindDetail(BehindDTO behindDTO);
 }

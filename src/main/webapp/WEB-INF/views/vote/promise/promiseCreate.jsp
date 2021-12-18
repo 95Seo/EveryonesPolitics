@@ -35,12 +35,47 @@
             $("input:radio[id='radio4']").attr("checked", true);
         }
     }
+
+    function submit() {
+        text = CKEDITOR.instances.content.getData();
+        checked = $('input:radio[name="filter"]').is(':checked');
+        if($("#title").val()=="") {
+            alert("제목 입력 해라");
+        } else if(text=="") {
+            alert("내용 입력 안할래?");
+        } else if(checked == false) {
+            alert("복.명.복.창 합니다.");
+            alert("쉬운길은 늘 잘못된 길");
+            alert("필터 넣으세요.");
+        } else if($("#exampleFormControlFile1").val()=="") {
+            alert("썸네일은 필수다 필수");
+        } else {
+            $('#frm').submit();
+        }
+    }
+
+    function cancel() {
+        location.href = "/vote/promiseList";
+    }
 </script>
+
+<style>
+    .board-button > a {
+        cursor: pointer;
+        background: #efefef;
+        display: inline-block;
+        border: 1px solid #dcdcdc;
+        width: 150px;
+        height: 70px;
+        line-height: 70px;
+        color: black;
+    }
+</style>
 
 <section class="board common-list" style="margin-top: 80px">
     <div class="container">
         <div class="row">
-            <form action="/vote/promiseCreate" method="post" enctype="multipart/form-data">
+            <form action="/vote/promiseCreate" id="frm" method="post" enctype="multipart/form-data">
                 <div class="board-wrap">
                     <div id="fillter">
                         <ul>
@@ -53,15 +88,15 @@
                     <div class="board-title">
                         <p>제목</p>
                         <span>
-                        <input type="text" name="title" />
+                        <input type="text" id="title" name="title" />
                       </span>
                     </div>
 
                     <div class="col_c" style="display: flex; justify-content: center;" >
                         <div class="input-group" style="width: 100%;">
-                            <textarea class="form-control" id="p_content" name="content"></textarea>
+                            <textarea class="form-control" id="content" name="content"></textarea>
                             <script type="text/javascript">
-                                CKEDITOR.replace("p_content", {
+                                CKEDITOR.replace("content", {
                                     height: 500,
                                     uploadUrl: "/image/drag?dir=PROMISE/CONTENT",  // 이게 드래그 드롭을 위한 URL
                                     filebrowserUploadUrl: "/image?dir=PROMISE/CONTENT"  // 파일업로드를 위한 URL
@@ -83,8 +118,8 @@
             </span>
                     </div>
                     <div class="board-button">
-                        <a href="/vote/promiseList"><button>돌아가기</button></a>
-                        <a><button type="submit">등록하기</button></a>
+                        <a onclick="cancel()">돌아가기</a>
+                        <a id="submit" onclick="submit()">등록하기</a>
                     </div>
                 </div>
             </form>

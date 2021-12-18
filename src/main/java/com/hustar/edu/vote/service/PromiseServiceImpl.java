@@ -92,4 +92,8 @@ public class PromiseServiceImpl implements PromiseService {
         log.info("get total count");
         return pomiseMapper.selectPromiseTotalCount(cri);
     }
+
+    public void deletePromiseDetail(PromiseDTO promiseDTO) {
+        pomiseMapper.deletePromiseDetail(promiseDTO);
+    }
 }

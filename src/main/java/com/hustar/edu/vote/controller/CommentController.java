@@ -1,9 +1,8 @@
 package com.hustar.edu.vote.controller;
 
 import com.hustar.edu.vote.auth.PrincipalDetail;
-import com.hustar.edu.vote.dto.CommentVO;
+import com.hustar.edu.vote.dto.CommentDTO;
 import com.hustar.edu.vote.service.CommentService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,35 +23,33 @@ public class CommentController {
 
     @RequestMapping("/list") //댓글 리스트
     @ResponseBody
-    private List<CommentVO> mCommentServiceList(Model model, @RequestParam int bno) throws Exception{
+    private List<CommentDTO> mCommentServiceList(Model model, CommentDTO commentDTO) throws Exception{
 
         System.out.println("댓글 리스트");
 
-        CommentVO comment = new CommentVO();
-        comment.setBno(bno);
+        System.out.println("bno: "+commentDTO.getBno());
 
-        return mCommentService.commentListService(comment);
+        System.out.println("boardNm: "+commentDTO.getBoardNm());
+
+        return mCommentService.commentListService(commentDTO);
     }
 
     // 로그인 예외 처리 해주세요. 신책임님
     @RequestMapping("/insert") //댓글 작성
     @ResponseBody
-    private int mCommentServiceInsert(@AuthenticationPrincipal PrincipalDetail principal, @RequestParam int bno, @RequestParam String content) throws Exception{
+    private int mCommentServiceInsert(@AuthenticationPrincipal PrincipalDetail principal, CommentDTO commentDTO) throws Exception{
 
-        CommentVO comment = new CommentVO();
-        comment.setBno(bno);
-        comment.setContent(content);
         //로그인 기능을 구현했거나 따로 댓글 작성자를 입력받는 폼이 있다면 입력 받아온 값으로 사용하면 됩니다. 저는 따로 폼을 구현하지 않았기때문에 임시로 "test"라는 값을 입력해놨습니다.
-        comment.setWriter(principal.getIdx());
+        commentDTO.setWriter(principal.getIdx());
 
-        return mCommentService.commentInsertService(comment);
+        return mCommentService.commentInsertService(commentDTO);
     }
 
     @RequestMapping("/update") //댓글 수정
     @ResponseBody
     private int mCommentServiceUpdateProc(@RequestParam int cno, @RequestParam String content) throws Exception{
 
-        CommentVO comment = new CommentVO();
+        CommentDTO comment = new CommentDTO();
         comment.setCno(cno);
         comment.setContent(content);
 

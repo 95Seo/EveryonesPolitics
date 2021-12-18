@@ -3,8 +3,8 @@
 <mapper namespace="com.hustar.edu.vote.mapper.BehindMapper">
 
     <insert id="insertBehind" parameterType="BehindDTO">
-        insert into tb_behind(writer_idx, title, content, file_url)
-        values (#{writerIdx}, #{title}, #{content}, #{fileUrl});
+        insert into tb_behind(writer_idx, title, content, file_url, filter)
+        values (#{writerIdx}, #{title}, #{content}, #{fileUrl}, #{filter});
     </insert>
 
     <update id="updateBehindDetail" parameterType="BehindDTO">
@@ -45,4 +45,10 @@
         <if test="filter != 'all' ">AND filter = #{filter}</if>
         <if test='keyword != null'>AND title Like CONCAT('%', #{keyword}, '%')</if>
     </select>
+
+    <update id="deleteBehindDetail" parameterType="BehindDTO">
+        update tb_behind
+        set use_yn = 'N'
+        where idx = #{idx}
+    </update>
 </mapper>

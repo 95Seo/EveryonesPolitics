@@ -1,5 +1,6 @@
 package com.hustar.edu.vote.mapper;
 
+import com.hustar.edu.vote.dto.BoardDTO;
 import com.hustar.edu.vote.dto.PromiseDTO;
 import com.hustar.edu.vote.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,4 +18,6 @@ public interface PromiseMapper {
     public int selectPromiseTotalCount(Criteria cri);
 
     public void updatePromiseDetail(PromiseDTO promiseDTO);
+
+    public void deletePromiseDetail(PromiseDTO promiseDTO);
 }

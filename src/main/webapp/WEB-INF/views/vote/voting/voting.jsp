@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="../resources/css/votepage.css" />
 
 <script>
-    var vote = alert(${vote});
+    var vote = ${vote};
+
     $(document).on("click","input[type=radio]",function(){
         showFill=$('input[name=vote]:checked').val();
         //라디오 버튼 값을 가져온다.
@@ -15,13 +16,13 @@
     function vote_btn() {
         if(isNaN(${principal.idx})) {
             alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
-            location.href ="/vote/voting";
-        } else if (vote != 0) {
-            alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
-            location.href ="/vote/voting";
         } else {
-            alert("투표에 성공하였습니다 !.");
-            $("#frm").submit();
+            if (vote != 0) {
+                alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
+            } else {
+                alert("투표에 성공하였습니다 !.");
+                $("#frm").submit();
+            }
         }
     }
 

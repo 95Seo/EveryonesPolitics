@@ -19,13 +19,6 @@
         }
     });
 
-    CKEDITOR.editorConfig = function( config ) {
-        config.toolbarCanCollapse = true;
-        config.font_names = '맑은 고딕/Malgun Gothic;굴림/Gulim;돋움/Dotum;바탕/Batang;궁서/Gungsuh;';
-        //이미지 마우스로 리사이징 적용을 위한 플러그인 코드
-        config.extraPlugins = 'imageresizerowandcolumn';
-    };
-
     fill = "";
     $(document).on("click","input[type=radio]",function(){
         fill=$('input[name=filter]:checked').val();

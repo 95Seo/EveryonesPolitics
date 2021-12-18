@@ -116,8 +116,8 @@
                       </sec:authorize>
                     </li>
                       <sec:authorize access="isAuthenticated()">
-                       <li><a href="/logout">로그아웃</a></li>
                         <li><a href="/vote/myProfileInfo">마이페이지</a></li>
+                       <li><a href="/logout">로그아웃</a></li>
                       </sec:authorize>
                   </ul>
                 </div>

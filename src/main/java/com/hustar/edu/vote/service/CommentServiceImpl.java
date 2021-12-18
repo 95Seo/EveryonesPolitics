@@ -1,6 +1,6 @@
 package com.hustar.edu.vote.service;
 
-import com.hustar.edu.vote.dto.CommentVO;
+import com.hustar.edu.vote.dto.CommentDTO;
 import com.hustar.edu.vote.mapper.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,17 +13,17 @@ public class CommentServiceImpl implements CommentService{
     CommentMapper mCommentMapper;
 
     @Override
-    public List<CommentVO> commentListService(CommentVO comment) throws Exception {
+    public List<CommentDTO> commentListService(CommentDTO comment) throws Exception {
         return mCommentMapper.commentList(comment);
     }
 
     @Override
-    public int commentInsertService(CommentVO comment) throws Exception {
+    public int commentInsertService(CommentDTO comment) throws Exception {
         return mCommentMapper.commentInsert(comment);
     }
 
     @Override
-    public int commentUpdateService(CommentVO comment) throws Exception {
+    public int commentUpdateService(CommentDTO comment) throws Exception {
         return mCommentMapper.commentUpdate(comment);
     }
 
