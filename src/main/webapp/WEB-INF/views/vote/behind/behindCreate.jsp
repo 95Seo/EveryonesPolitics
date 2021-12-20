@@ -47,9 +47,11 @@
             alert("복.명.복.창 합니다.");
             alert("쉬운길은 늘 잘못된 길");
             alert("필터 넣으세요.");
-        } else if($("#exampleFormControlFile1").val()=="") {
-            alert("썸네일은 필수다 필수");
-        } else {
+        }
+        // else if($("#exampleFormControlFile1").val()=="") {
+        //     alert("썸네일은 필수다 필수");
+        // }
+        else {
             $('#frm').submit();
         }
     }

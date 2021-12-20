@@ -74,20 +74,25 @@ public class BehindController {
     }
 
     @PostMapping("/vote/behindCreate")
-    public String PostBehindCreateController (BehindDTO behindDTO, @RequestParam MultipartFile multipartFile) {
+    public String PostBehindCreateController (BehindDTO behindDTO, @RequestParam @Nullable MultipartFile multipartFile) {
 
         log.info("PostBehindCreatePage");
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         PrincipalDetail userDetails = (PrincipalDetail)principal;
 
-        UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
-        System.out.println("file_url : " + file_url.getFile_dir());
+        try {
+            UploadFile file_url = thumbnailUploadHandler.thumbnailFileUpload(multipartFile, "BEHIND/THUMBNAIL");
+            System.out.println("file_url : " + file_url.getFile_dir());
+            behindDTO.setFileUrl(file_url.getFile_dir());
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            behindDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
 
-        behindDTO.setWriterIdx(((PrincipalDetail) principal).getIdx());
-        behindDTO.setFileUrl(file_url.getFile_dir());
+            behindService.insertBehind(behindDTO);
+        }
 
-        behindService.insertBehind(behindDTO);
         return "redirect:/vote/behindList";
     }
 
