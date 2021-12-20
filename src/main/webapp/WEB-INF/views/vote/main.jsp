@@ -599,8 +599,8 @@
         spaceBetween: 40,
       },
       1025: {
-        slidesPerView: 3,
-        spaceBetween: 50,
+        slidesPerView: 4,
+        spaceBetween: 20,
       },
     },
   });

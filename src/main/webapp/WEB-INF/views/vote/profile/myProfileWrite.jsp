@@ -157,61 +157,7 @@
                                 </li>
                             </ul>
                             <ul id="list-bd" class="list-bd">
-                                <li>
-                                    <div class="no">1</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-31</div>
-                                    <div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-                                </li>
-                                <li>
-                                    <div class="no">2</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-23</div>
-                                    <div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-
-                                </li>
-                                <li>
-                                    <div class="no">3</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-23</div>
-                                    <div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-                                </li>
-                                <li>
-                                    <div class="no">4</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-23</div>
-                                    <div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-                                </li>
-                                <li>
-                                    <div class="no">5</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-23</div>
-                                    <div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-                                </li>
-                                <li>
-                                    <div class="no">6</div>
-                                    <div class="candidate">신주영</div>
-                                    <div class="subject"><a href="/vote/boardDetail">게시물 제목이 출력되는곳</a></div>
-                                    <div class="date">2021-12-23</div><div class="writer">백동채</div>
-                                    <div class="view-num">4</div>
-                                    <div class="recommend-num">65</div>
-                                </li>
-
+                                
                             </ul>
                         </div>
 
