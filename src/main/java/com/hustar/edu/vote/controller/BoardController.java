@@ -11,6 +11,8 @@ import com.hustar.edu.vote.service.CommonService;
 import com.hustar.edu.vote.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,7 +116,7 @@ public class BoardController {
     }
 
     @GetMapping("/vote/boardDetail")
-    public String voteBoardDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String voteBoardDetailController(@AuthenticationPrincipal @Nullable PrincipalDetail principal, int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
         commonService.viewCountUp("tb_board", idx, request, response);
 
         model.addAttribute( "page", criteria.getPage() );
@@ -126,6 +128,12 @@ public class BoardController {
         tb_user user = userService.getUser(boardDTO.getWriterIdx());
 
         System.out.println("getProfile_img:" + user.getProfile_img());
+
+        if (principal != null) {
+            model.addAttribute("current_idx", principal.getIdx());
+        } else {
+            model.addAttribute("current_idx", 0);
+        }
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("user", user);
