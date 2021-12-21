@@ -893,10 +893,10 @@ button.btn-md:hover {
   /*margin-bottom: -6px;*/
 }
 
-.tile img {
-  height: auto;
+.single_portfolio img {
+  height: 163px;
   display: inline-block;
-  width: 100%;
+  width: 163px;
 }
 
 .single_portfolio {

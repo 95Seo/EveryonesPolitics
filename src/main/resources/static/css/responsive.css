@@ -22,7 +22,7 @@ Author URI: http://www.bootstrapthemes.co
     margin: 1rem 0;
     -webkit-column-count: 3;
     -moz-column-count: 3;
-    column-count: 3;
+    column-count: 5;
   }
 
   .single_study_text {
@@ -55,7 +55,7 @@ Author URI: http://www.bootstrapthemes.co
   #portfoliowork {
     -webkit-column-count: 2;
     -moz-column-count: 2;
-    column-count: 2;
+    column-count: 4;
   }
   .main_team ul li:nth-child(1) {
     top: 86%;
@@ -75,10 +75,9 @@ Author URI: http://www.bootstrapthemes.co
     width: 100vw;
   }
   #portfoliowork {
-    margin: 1rem 0;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
+    -moz-columns: 4;
+    -webkit-columns: 4;
+    columns: 4;
   }
   .navbar-nav .open .dropdown-menu {
     position: static;
@@ -193,10 +192,9 @@ Author URI: http://www.bootstrapthemes.co
     background: rgba(255, 255, 255, 0.85);
   }
   #portfoliowork {
-    margin: 1rem 0;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
+    -moz-columns: 4;
+    -webkit-columns: 4;
+    columns: 3;
   }
   .main_team ul li:nth-child(1) {
     top: 138%;
@@ -294,10 +292,9 @@ Author URI: http://www.bootstrapthemes.co
     width: 350px;
   }
   #portfoliowork {
-    margin: 2rem 0;
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
+    -moz-columns: 4;
+    -webkit-columns: 4;
+    columns: 2;
   }
   html {
     font-size: 65%;
@@ -321,6 +318,12 @@ Author URI: http://www.bootstrapthemes.co
 }
 
 @media (max-width: 320px) {
+  #portfoliowork {
+    -moz-columns: 4;
+    -webkit-columns: 4;
+    columns: 2;
+  }
+
   #b_list .col-lg-3{
     width:100%;
     float: none;
