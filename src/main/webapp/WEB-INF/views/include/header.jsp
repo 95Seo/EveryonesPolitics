@@ -12,7 +12,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>EVERYONE'S POLITICS</title>
+    <title>모두의정치</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -20,12 +20,9 @@
     <!--Google Fonts link-->
     <link
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="../resources/css/templatemo-edu-meeting.css" />
 
@@ -58,6 +55,8 @@
     <!-- font Awesome-->
   <script src="https://kit.fontawesome.com/a4196a8ce8.js" crossorigin="anonymous"></script>
 
+
+
     <script src="../resources/js/isotope.min.js"></script>
     <script src="../resources/js/custom.js"></script>
 
@@ -85,8 +84,6 @@
     .header{
       background-color: rgba(34, 61, 97, 0.64);
     }
-
-
   </style>
   <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="principal"/>
@@ -118,7 +115,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="/">
+                      <a class="navbar-brand" href="/" >
                         <img src="../resources/images/logo.png" />
                       </a>
                     </div>
@@ -134,7 +131,7 @@
                         <li><a href="/vote/promiseList">대선 공약</a></li>
                         <li><a href="/vote/behindList">대선 비하인드</a></li>
                         <li><a href="/vote/boardList">대선 게시판</a></li>
-                        <li><a href="#blog">모의 투표</a></li>
+                        <li><a href="/vote/voting">모의 투표</a></li>
                         <c:choose>
                           <c:when test="${empty principal.username}">
                            <li ><a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">로그인</a></li>

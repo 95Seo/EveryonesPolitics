@@ -9,7 +9,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>EVERYONE'S POLITICS</title>
+  <title>모두의정치</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -61,7 +61,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 
-
+  <!--Theme Responsive css-->
+  <link rel="stylesheet" href="../resources/css/responsive.css" />
 
   <style>
     .fc-day:hover{background: lightblue; cursor: pointer;}
@@ -117,7 +118,7 @@
                     </li>
                       <sec:authorize access="isAuthenticated()">
                         <li><a href="/vote/myProfileInfo">마이페이지</a></li>
-                       <li><a href="/logout">로그아웃</a></li>
+                        <li><a href="/logout">로그아웃</a></li>
                       </sec:authorize>
                   </ul>
                 </div>
@@ -241,7 +242,7 @@
 
   <!-- Portfolio section (공약)-->
   <section id="portfolio" class="portfolio sections">
-    <div class="container" style="height: 584px;">
+    <div class="container" style="height: 1510px">
       <div class="row">
         <div class="main_portfolio">
           <div class="col-md-12">

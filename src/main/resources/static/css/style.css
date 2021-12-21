@@ -631,7 +631,7 @@ input::-ms-input-placeholder {
   color: #fff;
 }
 .navbar-brand {
-  padding: 0px 15px;
+  padding: 0px 8px;
 }
 .navbar-brand > img {
   max-width: 80%;
@@ -1273,7 +1273,7 @@ button.btn-md:hover {
 }
 
 h2.main_bar2 {
-  float: left;
+  text-align: center;
   font-family: "notokr-bold";
   color: #fff;
   font-size: 46px;

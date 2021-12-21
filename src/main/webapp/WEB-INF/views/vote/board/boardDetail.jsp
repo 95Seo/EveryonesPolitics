@@ -256,6 +256,35 @@
                     <!--                     추가                         -->
 
                     <script>
+
+                        function timeForToday(value){
+                            const today = new Date();
+                            const timeValue = new Date(value);
+
+                            const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+                            console.log(betweenTime);
+
+                            if ( betweenTime < 1){
+                                return `방금전`;
+                            } else if (betweenTime < 60) {
+                                return betweenTime+`분전`;
+                            }
+
+
+
+                            const betweenTimeHour = Math.floor(betweenTime / 60);
+                            if(betweenTimeHour < 24){
+                                return betweenTimeHour +`시간전`;
+                            }
+
+                            const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+                            if(betweenTimeDay < 365){
+                                return betweenTimeDay + `일전`;
+                            }
+
+                            return Math.floor(betweenTimeDay / 365) + `년전`;
+                        }
+
                         $(document).ready(function (){
                             ReplyList(); //페이지 로딩시 댓글 목록 출력
                         });
@@ -319,13 +348,13 @@
                                             }
                                             listHtml += '</div>';
                                             if (use_yn == 'N') {
-                                                listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #030303; ">(삭제된 댓글입니다.)</p></div>';
+                                                listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #e20000; ">(삭제된 댓글입니다.)</p></div>';
                                             } else {
-                                                listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
+                                                listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.0rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
                                             }
 
                                             // 답글 버튼
-                                            listHtml += '           <div class="commentLike'+cno+'" style="font-size: 1.2rem; font-weight: 400; color: #030303; ">';
+                                            listHtml += '           <div class="commentLike'+cno+'" style="font-size: 1.0rem; font-weight: 400; color: #030303; ">';
                                             if(likeYn == 'Y') {
                                                 listHtml += '               <i id="reply_likeUp" class="far fa-thumbs-up active like_up'+cno+'" likeYn="'+likeYn+'" cno="' + cno + '" style="margin-right: 10px;" >'+likeCnt+'</i>';
                                             } else {
@@ -346,7 +375,7 @@
 
                                             listHtml += '           <a style="cursor: pointer;" class="writer_reply_start_'+cno+'" data-toggle="collapse" data-target="#re_replyList'+cno+'" aria-expanded="false" aria-controls="collapseExample">';
                                             if(grpsCnt != 0) {
-                                                listHtml += grpsCnt+'개의 답글 보기';
+                                                listHtml += '<i class="fas fa-caret-down" style="color: #23527c; margin-right: 10px;"></i>'+grpsCnt+'개의 답글 보기';
                                             }
                                             listHtml += '</a>';
 
@@ -380,7 +409,7 @@
 
                                             // 댓글에 답글 보기를 누르면 답글리스트가 나온다.
                                             // ----답글리스트
-                                            listHtml += '<div class="collapse row rereply_List" id="re_replyList' + cno + '">';
+                                            listHtml += '<div class="collapse row rereply_List" id="re_replyList' + cno + '" style="margin-left: 30px;">';
                                             listHtml += '       <div class="commentList-wrap" id="rereplyList' + cno + '" style="margin-bottom: 20px; margin-left: 30px;">';
 
                                             listHtml += '</div></div>';
@@ -481,11 +510,12 @@
                                         }
 
                                         // 답글일때
+                                        listHtml += " <div class='commentRelist' style='display: flex;'>";
                                         listHtml += "       <div class='commentList-left' style='margin: 5px 15px 0px 0px;'>";
-                                        listHtml += '           <img src="' + wprofile + '" class="comment-img">';
+                                        listHtml += '           <img src="' + wprofile + '" class="comment-img" style="height: 24px; width: 24px;">';
                                         listHtml += "       </div>";
                                         listHtml += "       <div class='commentArea' style='margin-bottom: 10px; width: 80%;'>";
-                                        listHtml += "           <div class='commentInfo' style='font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname+cno+"</div>";
+                                        listHtml += "           <div class='commentInfo' style='font-size: 1.0rem; font-weight: 400; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname + "<span style='margin-left: 10px;color: #797979;'>"+timeForToday(wdate)+"</span></div>";
                                         if (login_idx == writer) {
                                             listHtml += '           <div>';
                                             if(use_yn == 'Y') {
@@ -500,12 +530,12 @@
                                         }
                                         listHtml += '</div>';
                                         if (use_yn == 'N') {
-                                            listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #030303; ">(삭제된 댓글입니다.)</p></div>';
+                                            listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.0rem; font-weight: 400; color: #e20000; ">(삭제된 댓글입니다.)</p></div>';
                                         } else {
-                                            listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.2rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
+                                            listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 0.8rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
                                         }
                                         // 좋아요 싫어요 버튼
-                                        listHtml += '           <div class="commentLike'+cno+'" style="font-size: 1.2rem; font-weight: 400; color: #030303; ">';
+                                        listHtml += '           <div class="commentLike'+cno+'" style="font-size: 0.8rem; font-weight: 400; color: #030303; ">';
                                         if(likeYn == 'Y') {
                                             listHtml += '               <i id="rereply_likeUp" class="far fa-thumbs-up active like_up'+cno+'" likeYn="'+likeYn+'" cno="' + cno + '" style="margin-right: 10px;" >'+likeCnt+'</i>';
                                         } else {
@@ -518,13 +548,9 @@
                                             listHtml += '               <i id="rereply_likeDown" class="far fa-thumbs-down" likeYn="'+likeYn+'" cno="' + cno + '" style="margin-right: 10px;"></i>';
                                         }
                                         listHtml += '           </div>';
-
-                                        listHtml += '       <div class="col-3 reply-right">';
-                                        listHtml += '           <div>';
-                                        listHtml += wdate;
-                                        listHtml += '           </div>';
                                         listHtml += '       </div>';
                                         listHtml += '     </div>';
+                                        listHtml += '</div>';
 
                                         $("#rereplyList"+grp).html(listHtml);
                                     });
