@@ -130,11 +130,10 @@
                       id="bs-example-navbar-collapse-1"
                     >
                       <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#history">대선 스케줄</a></li>
                         <li><a href="/vote/promiseList">대선 공약</a></li>
                         <li><a href="/vote/behindList">대선 비하인드</a></li>
                         <li><a href="/vote/boardList">대선 게시판</a></li>
-                        <li><a href="#blog">모의 투표</a></li>
+                        <li><a href="/vote/voting">모의 투표</a></li>
                         <c:choose>
                           <c:when test="${empty principal.username}">
                            <li ><a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">로그인</a></li>

@@ -115,7 +115,7 @@
       content += "<div class='behind-item'><a href=/vote/behindDetail?idx="+item.idx+"&page="+currPage+"&filter="+showFill+"&keyword="+keyWord+">";
       content += '<div class="thumb">';
       content += '<div class="price"><span>'+item.filter+'</span></div>';
-      content += '<img class="behind-img" src="'+item.fileUrl+'"/></div>'
+      content += '<img class="behind-img"  src="'+item.fileUrl+'" onerror="" /></div>'
       content += '<div class="down-content"><div class="behind-title">'
       content += '<h4>'+view_title+'</h4></div>';
       content += '<div><span>'+item.sysregdate+'</span><span style="margin-left: 6px;"><i class="far fa-comment-dots" style="margin: 0px 5px;"></i>3</span>';
@@ -128,6 +128,18 @@
     //내용 붙이기
     $("#b_list").empty();
     $("#b_list").append(content);
+  }
+
+  function onErrorImage(_img) {
+      // 처음 에러가 나면 data-load-num에 0부여
+      var loadNum = $(_img).attr('data-load-num') == undefined ? 0 : $(_img).attr('data-load-num');
+
+      if (loadNum < 3){		// 이미지를 3번 불러옴
+          $(_img).attr('data-load-num', ++loadNum);
+          $(_img).attr('src', "../images/logo.png");
+      } else {			// 이미지 없음 표시
+          $(_img).attr('src', "../resources/images/logo.png");
+      }
   }
 
 
