@@ -12,7 +12,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>EVERYONE'S POLITICS</title>
+    <title>모두의정치</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -20,12 +20,9 @@
     <!--Google Fonts link-->
     <link
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i"
-      rel="stylesheet"
-    />
+      rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="../resources/css/templatemo-edu-meeting.css" />
 
@@ -58,6 +55,8 @@
     <!-- font Awesome-->
   <script src="https://kit.fontawesome.com/a4196a8ce8.js" crossorigin="anonymous"></script>
 
+
+
     <script src="../resources/js/isotope.min.js"></script>
     <script src="../resources/js/custom.js"></script>
 
@@ -85,8 +84,6 @@
     .header{
       background-color: rgba(34, 61, 97, 0.64);
     }
-
-
   </style>
   <sec:authorize access="isAuthenticated()">
     <sec:authentication property="principal" var="principal"/>
@@ -118,7 +115,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="/">
+                      <a class="navbar-brand" href="/" >
                         <img src="../resources/images/logo.png" />
                       </a>
                     </div>
