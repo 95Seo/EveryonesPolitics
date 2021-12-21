@@ -2,35 +2,217 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hustar.edu.vote.mapper.CommentMapper">
 
-    <select id="commentCount" resultType="int">
-        SELECT
-        COUNT(*)
-        FROM tb_comment
+    <!-- 댓글 쓰기 -->
+    <insert id="picture_reply_write" parameterType="CommentDTO" useGeneratedKeys="true" keyProperty="cno">
+        insert into tb_comment (grp, grps, grpl, board_nm, bno, content, writer, sysregdate)
+        values(#{grp}, 0, 0, "tb_board", #{bno}, #{content}, #{writer}, now());
+    </insert>
+
+    <!-- 답글 쓰기 -->
+    <insert id="picture_rereply_write" parameterType="CommentDTO" useGeneratedKeys="true" keyProperty="cno">
+        insert into tb_comment (grp, grps, grpl, board_nm, bno, content, writer, sysregdate)
+        values(#{grp}, #{grps}, #{grpl}, "tb_board", #{bno}, #{content}, #{writer}, now());
+    </insert>
+
+    <!-- 모댓글일경우 no, grp 일치하게 함 -->
+    <update id="picture_reply_check" parameterType="CommentDTO">
+        update tb_comment set grp = #{grp}
+        where cno=#{cno}
+    </update>
+
+    <!-- 모댓글 삭제 -->
+    <update id="picture_reply_delete" parameterType="CommentDTO">
+        update tb_comment set use_yn = 'N'
+        where cno=#{cno}
+    </update>
+
+    <!-- 모댓글이 삭제된 댓글일때 그에 딸린 답글들이 모두 삭제되면 테이블에서 완전히 삭제한다 -->
+    <update id="picture_reply_delete_after_rereply_delete" parameterType="CommentDTO">
+        update tb_comment set real_delete = 'Y'
+        WHERE grp IN(#{grp})
+    </update>
+
+    <!-- COUNT(*) 세팅 -->
+    <update id="updateTotalComment" parameterType="CommentDTO">
+        <if test="boardNm == 'tb_board'">
+            update tb_board set comment_cnt=#{commentCnt}
+            where idx=#{bno}
+        </if>
+        <if test="boardNm == 'tb_behind'">
+            update tb_behind set comment_cnt=#{commentCnt}
+            where idx=#{bno}
+        </if>
+        <if test="boardNm == 'tb_promise'">
+            update tb_promise set comment_cnt=#{commentCnt}
+            where idx=#{bno}
+        </if>
+    </update>
+
+    <!--COUNT(*) 구하기 -->
+    <select id="getTotalComment" parameterType="CommentDTO" resultType="int">
+        select COUNT(*)
+        from tb_comment
+        where board_nm = #{boardNm}
+        and bno = #{bno}
+        and real_delete = 'N'
     </select>
 
-    <select id="commentList" parameterType="CommentDTO" resultType="CommentDTO">
+    <!-- Max(grps) + 1 세팅 -->
+    <update id="updateMaxGrps" parameterType="CommentDTO">
+        update tb_comment set grps_cnt=#{grpsCnt}
+        where cno=#{grp}
+    </update>
+
+    <!-- Max(grps) 구하기 -->
+    <select id="getMaxGrps" parameterType="CommentDTO" resultType="CommentDTO">
+        select max(grps) as grpsCnt
+        from tb_comment
+        where grp = #{grp}
+    </select>
+
+    <!-- (좋아요, 유저 프로필, 댓글내용 까지 전부다)댓글 리스트 가져오기 -->
+    <select id="all_picutre_replyList" parameterType="CommentDTO" resultType="CommentDTO">
         select a.*, b.profile_img as profileImg, b.nickname as nickname
-        from tb_comment a, tb_user b
-        where a.bno =#{bno}
+        from (
+              select a1.*, IFNULL(c.like_yn, 'O') AS likeYn
+              from tb_comment a1 LEFT JOIN tb_comment_like c
+                                           on a1.cno = c.cno
+                                           and c.writer = #{writer}) a, tb_user b
+        where a.real_delete = 'N'
+          and a.bno =#{bno}
+          and a.board_nm = #{boardNm}
+          and a.writer = b.idx
+        order by a.grp asc, a.grps asc
+    </select>
+
+    <!-- 댓글 리스트 가져오기 -->
+    <select id="picutre_replyList" parameterType="CommentDTO" resultType="CommentDTO">
+        select a.*, b.profile_img as profileImg, b.nickname as nickname
+        from (
+                 select a1.*, IFNULL(c.like_yn, 'O') AS likeYn
+                 from tb_comment a1 LEFT JOIN tb_comment_like c
+                                              on a1.cno = c.cno
+                                                  and c.writer = #{writer}) a, tb_user b
+        where a.real_delete = 'N'
+          and a.bno =#{bno}
+          and a.board_nm = #{boardNm}
+          and a.writer = b.idx
+          and a.grpl = 0
+        order by a.grp asc, a.grps asc
+    </select>
+
+    <!-- 대댓글 리스트 가져오기 -->
+    <select id="picutre_rereplyList" parameterType="CommentDTO" resultType="CommentDTO">
+        select a.*, b.profile_img as profileImg, b.nickname as nickname
+        from (
+                 select a1.*, IFNULL(c.like_yn, 'O') AS likeYn
+                 from tb_comment a1 LEFT JOIN tb_comment_like c
+                                              on a1.cno = c.cno
+                                                  and c.writer = #{writer}) a, tb_user b
+        where a.real_delete = 'N'
+        and a.bno =#{bno}
         and a.board_nm = #{boardNm}
         and a.writer = b.idx
+        and a.grpl = 1
+        order by a.grp asc, a.grps asc
     </select>
 
+    <!-- 댓글 갯수 카운트 -->
+    <select id="picture_reply_count" parameterType="CommentDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_comment
+        WHERE board_nm = #{boardNm}
+        AND bno = #{bno}
+    </select>
 
-    <insert id="commentInsert" parameterType="CommentDTO">
-        INSERT INTO
-            tb_comment (BNO, CONTENT, WRITER, SYSREGDATE, BOARD_NM)
-        VALUES(#{bno},#{content},#{writer},now(), #{boardNm})
+    <!-- 0. 좋아요 기록 카운트 -->
+    <select id="getLogLikeCnt" parameterType="CommentLikeDTO" resultType="int">
+        select count(*)
+        from tb_comment_like
+        where board_nm = #{boardNm}
+          and bno = #{bno}
+          and cno = #{cno}
+          and writer = #{writer}
+    </select>
+
+    <!-- 3. 좋아요 갯수 카운트 -->
+    <select id="getLikeCnt" parameterType="CommentLikeDTO" resultType="int">
+        select count(*)
+        from tb_comment_like
+        where board_nm = #{boardNm}
+        and bno = #{bno}
+        and cno = #{cno}
+        and writer = #{writer}
+        and like_yn = 'Y'
+    </select>
+
+    <!-- 4. 좋아요 갯수 수정 -->
+    <update id="updateLikeCnt" parameterType="CommentDTO">
+        update tb_comment set like_cnt = #{likeCnt}
+        where cno = #{cno}
+    </update>
+
+    <!-- 1. 좋아요 업데이트 -->
+    <update id="updateLike" parameterType="CommentLikeDTO">
+        update tb_comment_like set like_yn = #{likeYn}, sysmoddate = now()
+        where board_nm = #{boardNm}
+        and bno = #{bno}
+        and cno = #{cno}
+        and writer = #{writer}
+    </update>
+
+    <!-- 2. 없으면 좋아요 인서트 -->
+    <insert id="insertLike" parameterType="CommentLikeDTO">
+        insert into tb_comment_like (writer, board_nm, bno, cno, like_yn)
+        values(#{writer}, #{boardNm}, #{bno}, #{cno}, #{likeYn});
     </insert>
+
+    <!-- 모댓글에 달린 대댓글 갯수 카운트 -->
+    <select id="picture_count_rereply" parameterType="CommentDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_comment
+        WHERE grp = #{grp}
+        AND grpl = 1
+    </select>
+
+    <!-- grp가 일치하는 답글 중 사용중인 댓글이 몇갠지 카운트 한다. -->
+    <select id="picture_count_rereply_fromrereply" parameterType="CommentDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM tb_comment
+        WHERE grp = #{grp}
+        AND use_yn = 'Y'
+    </select>
+
+    <select id="getComment" parameterType="CommentDTO" resultType="CommentDTO">
+        SELECT *
+        FROM tb_comment
+        WHERE cno = #{grp}
+    </select>
+
+<!--    <select id="commentList" parameterType="CommentDTO" resultType="CommentDTO">-->
+<!--        select a.*, b.profile_img as profileImg, b.nickname as nickname-->
+<!--        from tb_comment a, tb_user b-->
+<!--        where a.bno =#{bno}-->
+<!--        and a.board_nm = #{boardNm}-->
+<!--        and a.writer = b.idx-->
+<!--    </select>-->
+
+
+<!--    <insert id="commentInsert" parameterType="CommentDTO">-->
+<!--        INSERT INTO-->
+<!--            tb_comment (BNO, CONTENT, WRITER, SYSREGDATE, BOARD_NM)-->
+<!--        VALUES(#{bno},#{content},#{writer},now(), #{boardNm})-->
+<!--    </insert>-->
 
     <update id="commentUpdate" parameterType="CommentDTO">
         UPDATE tb_comment
         SET
-        CONTENT = #{content}
+        CONTENT = #{content},
+        SYSMODDATE = now()
         WHERE CNO = #{cno}
     </update>
 
-    <delete id="commentDelete" parameterType="int">
-        DELETE FROM tb_comment WHERE CNO = #{cno}
-    </delete>
+<!--    <delete id="commentDelete" parameterType="int">-->
+<!--        DELETE FROM tb_comment WHERE CNO = #{cno}-->
+<!--    </delete>-->
 </mapper>
