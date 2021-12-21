@@ -180,15 +180,19 @@
                                     <img src="<c:out value='${user.profile_img}'/>" class="comment-img">
                                 </div>
 
-                                <div class="input-group-right">
+                                <div class="input-group-right" style="width: 80%;">
                                     <input type="hidden" name="bno" value="${board.idx}"/>
                                     <input type="hidden" name="boardNm" value="tb_board"/>
                                     <input type="text" class="form-control" id="comment-content" name="content" placeholder="공개 댓글 추가...">
                                 </div>
-
-                                <button class="btn btn-default" type="button" name="commentInsertBtn" >댓글</button>
-
                             </div>
+                            <span class="btn_right" style="width: 85%;">
+                                    <button class="btn btn-default" type="button" name="commentInsertBtn" onclick="create_btn()" >댓글</button>
+                                    <input type="reset" value="취소" class="btn btn-default">
+                                </span>
+
+
+
                         </form>
 
                         <style>
@@ -256,6 +260,14 @@
                     <!--                     추가                         -->
 
                     <script>
+
+                        function create_btn() {
+                            if(isNaN(${principal.idx})) {
+                                alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
+                            } else {
+
+                            }
+                        }
 
                         function timeForToday(value){
                             const today = new Date();
@@ -386,12 +398,14 @@
                                             // 댓글에 답글 달기를 누르면 답글입력란이 나온다.
                                             // ----답글입력란
                                             listHtml += '<div class="collapse row rereply_write" id="re_replyWrite' + cno + '">';
-                                            listHtml += '       <div class="commentWrite-wrap" style="margin-bottom: 20px; margin-left: 30px;">';
+                                            listHtml += '       <div class="commentWrite-wrap" style="margin-left: 30px; width: 80%;">';
                                             if(login_idx != 0) {
+                                                listHtml += '<div style="display: flex;">';
                                                 listHtml += '<div class="imput-group-left" style="margin-right: 15px;" >';
                                                 listHtml += '<img src="' + wprofile + '" class="comment-img"></div>';
-                                                listHtml += '<div class="input-group-right">';
-                                                listHtml += '<input type="text" class="form-control" id="input_rereply' + cno + '" name="content" placeholder="댓글입력..."></div>';
+                                                listHtml += '<div class="input-group-right" style="width: 100%;">';
+                                                listHtml += '<input type="text" class="form-control" id="input_rereply' + cno + '" name="content" placeholder="답글입력..."></div>';
+                                                listHtml += '</div>';
                                                 // 답글달기 버튼이 눌리면 모댓글 번호(cno)와 게시물번호 (bno)를 함수에 전달한다.
 
                                                 // 동적으로 넣은 html태그에서 발생하는 이벤트는 동적으로 처리해줘야한다 !!!!
@@ -399,9 +413,11 @@
                                                 // list += '            <button onclick="javascript:WriteReReply('+no+','+bno+')" type="button" class="btn btn-success mb-1 write_rereply" >답글&nbsp;달기</button>';
                                                 // 위 코드는 클릭되어도 값이 넘겨지지 않는다. 값이 undefined가 된다.
                                                 // 아래코드처럼 짜야한다. click이벤트를 처리하지 않고 데이터(no, bno)만 속성으로 넘겨주도록 작성한다.
-                                                listHtml += '           <div class="col-3">';
-                                                listHtml += '                   <button type="button" class="btn btn-success mb-1 write_rereply" cno="' + cno + '" bno="' + bno + '">답글 달기</button>';
-                                                listHtml += '           </div>';
+
+                                                listHtml += '<span class="btn_right">';
+                                                listHtml += '  <button type="button" class="btn btn-default write_rereply" cno="' + cno + '" bno="' + bno + '">답글</button>';
+                                                listHtml += '  <button type="button" class="btn btn-default"  onclick="ReReplyList();">취소</span>';
+
                                                 // ------ 답글입력란 끝
                                             }
 
@@ -423,11 +439,11 @@
 
                                     // 답글에서 답글달기를 누르면 input란에 "@답글작성자"가 들어간다.
                                     // 답글을 작성한 후 답글달기 버튼을 눌렀을 때 그 click event를 아래처럼 jquery로 처리한다.
-                                    $('button.btn.btn-success.mb-1.write_rereply').on('click', function() {
-                                       console.log('cno', $(this).attr('cno'));
-                                       console.log('bno', $(this).attr('bno'));
+                                    $('button.btn.btn-default.write_rereply').on('click', function() {
+                                        console.log('cno', $(this).attr('cno'));
+                                        console.log('bno', $(this).attr('bno'));
 
-                                       // 답글을 DB에 저장하는 함수를 호출한다. bno와 no를 같이 넘겨주어야 한다.
+                                        // 답글을 DB에 저장하는 함수를 호출한다. bno와 no를 같이 넘겨주어야 한다.
                                         WriteReReply($(this).attr('bno'), $(this).attr('cno'));
                                     });
 
@@ -463,7 +479,7 @@
 
                                     // 삭제버튼을 클릭했을 때
                                     $('.reply_delete').on('click', function (){
-                                       // 모댓글 삭제일때
+                                        // 모댓글 삭제일때
                                         DeleteReply($(this).attr('cno'), $(this).attr('bno'), $(this).attr('grp'));
 
                                     });
@@ -471,7 +487,7 @@
                                     ReReplyList(); //페이지 로딩시 대댓글 목록 출력
 
                                 }
-                           });
+                            });
                         }
 
                         //대댓글 목록
@@ -823,6 +839,7 @@
                         const UpdateReReplyProc = function (cno){
                             var updateContent = $('[name=content_'+cno+']').val();
 
+                            alert("동작" +  updateContent);
                             $.ajax({
                                 url : '/picture_replyUpdate.do',
                                 type : 'get',

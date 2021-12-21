@@ -82,7 +82,7 @@
           and a.bno =#{bno}
           and a.board_nm = #{boardNm}
           and a.writer = b.idx
-        order by a.grp asc, a.grps asc
+        order by a.grp desc, a.grps desc
     </select>
 
     <!-- 댓글 리스트 가져오기 -->
@@ -98,7 +98,7 @@
           and a.board_nm = #{boardNm}
           and a.writer = b.idx
           and a.grpl = 0
-        order by a.grp asc, a.grps asc
+        order by a.grp desc, a.grps desc
     </select>
 
     <!-- 대댓글 리스트 가져오기 -->
@@ -114,7 +114,7 @@
         and a.board_nm = #{boardNm}
         and a.writer = b.idx
         and a.grpl = 1
-        order by a.grp asc, a.grps asc
+        order by a.grp desc, a.grps desc
     </select>
 
     <!-- 댓글 갯수 카운트 -->

@@ -148,7 +148,7 @@ public class CommentApiController {
 
     // 댓글, 답글 수정
     @RequestMapping("/picture_replyUpdate.do")
-    private int mCommentServiceUpdateProc(@RequestParam int cno, @RequestParam String boardNm, @RequestParam String content) throws Exception{
+    private int mCommentServiceUpdateProc(@RequestParam int cno, @RequestParam(required = false) String boardNm, @RequestParam String content) throws Exception{
 
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setCno(cno);
