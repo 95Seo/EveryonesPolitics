@@ -92,7 +92,7 @@ public class VoteController {
 			System.out.println("dir : " + file_url.getFile_dir());
 			user.setProfile_img(file_url.getFile_dir());
 		}
-
+		
 		userService.updateUser(user);
 		return "redirect:/vote/myProfileInfo";
 	}

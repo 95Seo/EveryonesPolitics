@@ -2,6 +2,26 @@
 <%@include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="../resources/css/myprofile.css">
 
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            document.getElementById('preview').src = "";
+        }
+    }
+
+    function history_back() {
+        window.history.back(this);
+    }
+
+
+</script>
+
 <section class="myprofile-info common-list" style="margin-top: 80px;">
     <div class="myprofile-info-wrap">
         <div class="myprofile-inner">
@@ -9,7 +29,7 @@
                 <h3>회원정보 조회/수정</h3>
             </div>
             <div class="myprofile-edit-box">
-                <form action="/vote/myProfileUpdate" method="post" enctype="multipart/form-data">
+                <form action="/vote/myProfileUpdate" method="post" enctype="multipart/form-data" id="prm">
                     <input type="hidden" name="idx" value="${info.idx}"/>
                     <input type="hidden" name="username" value="${info.username}"/>
                     <ul>
@@ -22,12 +42,13 @@
                         <li><p>프로필 사진</p></li>
                         <li class="myprofile-edit-img">
                             <div class="myprofile-left-img">
-                                <img name="profile_img" src="<c:out value='${info.profile_img}'/>">
+                                <input type="hidden" name="profile_img" value="${info.profile_img}"/>
+                                <img id="preview" src="<c:out value='${info.profile_img}'/>">
                             </div>
                         </li>
-                        <li><input type="file" placeholder="가로 세로 제한 길이: 90px" name="profileImg"></li>
+                        <li><input id="input-image" type="file" onchange="readURL(this)"; placeholder="가로 세로 제한 길이: 90px" name="profileImg"></li>
                         <li class="myprofile-edit-button">
-                            <button>취소</button>
+                            <button type="button" onclick="history_back(this)">취소</button>
                             <button type="submit">등록</button>
                         </li>
                     </ul>
