@@ -41,7 +41,7 @@ public class VoteController {
 	@Autowired
 	ThumbnailUploadHandler thumbnailUploadHandler;
 
-	@GetMapping("/")
+	@GetMapping("/main")
 	public String voteMainController(Criteria criteria, Model model) {
 		log.info("VoteMainPage");
 		try {
