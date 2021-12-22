@@ -423,43 +423,89 @@
                 </div>
                 <div class="list1">
                   <ul>
+                    <c:if test="${list[0].filter eq null}">
+                      <a>
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[0].filter}</span><span class="date">등록된 게시물이 없습니다.</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[0].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
+                    <c:if test="${list[0].filter ne null}">
+                      <a href="/vote/boardDetail?idx=${list[0].idx}">
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[0].filter}</span><span class="date">${list[0].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[0].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
 
-                    <a href="/vote/boardDetail?idx=${list[0].idx}">
-                      <li>
-                        <div class="cont">
-                          <span class="label">${list[0].filter}</span><span class="date">${list[0].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>${list[0].title}</h3>
-                        </div>
-                      </li>
-                    </a>
+                    <c:if test="${list[1].filter eq null}">
+                      <a>
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[1].filter}</span><span class="date">등록된 게시물이 없습니다.</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[1].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
+                    <c:if test="${list[1].filter ne null}">
+                      <a href="/vote/boardDetail?idx=${list[1].idx}">
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[1].filter}</span><span class="date">${list[1].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[1].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
 
-                    <a href="/vote/boardDetail?idx=${list[1].idx}">
-                      <li>
-                        <div class="cont">
-                          <span class="label">${list[1].filter}</span><span class="date">${list[1].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>${list[1].title}</h3>
-                        </div>
-                      </li>
-                    </a>
+                    <c:if test="${list[2].filter eq null}">
+                      <a>
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[2].filter}</span><span class="date">등록된 게시물이 없습니다.</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[2].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
+                    <c:if test="${list[2].filter ne null}">
+                      <a href="/vote/boardDetail?idx=${list[2].idx}">
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[2].filter}</span><span class="date">${list[2].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[2].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
 
-                    <a href="/vote/boardDetail?idx=${list[2].idx}">
-                      <li>
-                        <div class="cont">
-                          <span class="label">${list[2].filter}</span><span class="date">${list[2].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i></i><br>
-                          <h3>${list[2].title}</h3>
-                        </div>
-                      </li>
-                    </a>
-
-
-                    <a href="/vote/boardDetail?idx=${list[3].idx}">
-                      <li>
-                        <div class="cont">
-                          <span class="label">${list[3].filter}</span><span class="date">${list[3].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
-                          <h3>${list[3].title}</h3>
-                        </div>
-                      </li>
-                    </a>
+                    <c:if test="${list[3].filter eq null}">
+                      <a>
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[3].filter}</span><span class="date">등록된 게시물이 없습니다.</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[3].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
+                    <c:if test="${list[3].filter ne null}">
+                      <a href="/vote/boardDetail?idx=${list[3].idx}">
+                        <li>
+                          <div class="cont">
+                            <span class="label">${list[3].filter}</span><span class="date">${list[3].sysregdate}</span><i class="fas fa-chevron-right fa-2x"></i><br>
+                            <h3>${list[3].title}</h3>
+                          </div>
+                        </li>
+                      </a>
+                    </c:if>
 
                   </ul>
                 </div>
