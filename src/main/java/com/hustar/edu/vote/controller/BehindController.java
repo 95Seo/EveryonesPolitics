@@ -15,6 +15,7 @@ import com.hustar.edu.vote.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -128,7 +129,7 @@ public class BehindController {
     }
 
     @GetMapping("/vote/behindDetail")
-    public String voteBehindDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String voteBehindDetailController(@AuthenticationPrincipal @Nullable PrincipalDetail principal, int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
         commonService.viewCountUp("tb_behind", idx, request, response);
 
         model.addAttribute( "page", criteria.getPage() );
@@ -138,6 +139,13 @@ public class BehindController {
 
         BehindDTO behindDTO = behindService.selectBehindDetail(idx);
         tb_user user = userService.getUser(behindDTO.getWriterIdx());
+
+        if (principal != null) {
+            model.addAttribute("current_idx", principal.getIdx());
+            model.addAttribute("current_img", principal.getProfile_img());
+        } else {
+            model.addAttribute("current_idx", 0);
+        }
 
         model.addAttribute("behind", behindDTO);
         model.addAttribute("user", user);

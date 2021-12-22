@@ -15,6 +15,7 @@ import com.hustar.edu.vote.service.UserService;
 import com.sun.istack.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -125,7 +126,7 @@ public class PromiseController {
     }
 
     @GetMapping("/vote/promiseDetail")
-    public String votePromiseDetailController(int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String votePromiseDetailController(@AuthenticationPrincipal @org.springframework.lang.Nullable PrincipalDetail principal,  int idx, Criteria criteria, Model model, HttpServletRequest request, HttpServletResponse response) {
         commonService.viewCountUp("tb_promise", idx, request, response);
 
         model.addAttribute( "page", criteria.getPage() );
@@ -135,6 +136,13 @@ public class PromiseController {
 
         PromiseDTO promiseDTO = promiseService.selectPromiseDetail(idx);
         tb_user user = userService.getUser(promiseDTO.getWriterIdx());
+
+        if (principal != null) {
+            model.addAttribute("current_idx", principal.getIdx());
+            model.addAttribute("current_img", principal.getProfile_img());
+        } else {
+            model.addAttribute("current_idx", 0);
+        }
 
         model.addAttribute("promise", promiseDTO);
         model.addAttribute("user", user);
