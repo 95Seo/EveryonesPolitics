@@ -885,6 +885,7 @@ button.btn-md:hover {
 #portfoliowork {
   -moz-columns: 4;
   -webkit-columns: 4;
+  -webkit-columns: 4;
   columns: 6;
 }
 .scale-anm {
@@ -901,7 +902,9 @@ button.btn-md:hover {
 
 .single_portfolio {
   position: relative;
-  padding: 5px;
+  margin-bottom: 15px;
+  align-content: center;
+  justify-content: center;
 }
 
 .single_portfolio:hover .grid_item_overlay {

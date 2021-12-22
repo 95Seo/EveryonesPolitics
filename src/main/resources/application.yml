@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-    url: jdbc:mysql://vote-database.cwbqmbimwd5j.ap-northeast-2.rds.amazonaws.com/voteWeb?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://real-vote-web.cwbqmbimwd5j.ap-northeast-2.rds.amazonaws.com/voteWeb?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
     username: admin
     password: 265389QWas!!
 
