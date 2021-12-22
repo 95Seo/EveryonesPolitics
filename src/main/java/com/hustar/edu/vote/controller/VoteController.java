@@ -12,6 +12,9 @@ import com.hustar.edu.vote.service.UserService;
 import com.sun.istack.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,10 +41,19 @@ public class VoteController {
 	@Autowired
 	BoardService boardService;
 
+	@Value("${cos.key}")
+	private String cosKey;
+
 	@Autowired
 	ThumbnailUploadHandler thumbnailUploadHandler;
 
-	@GetMapping("/main")
+	private final AuthenticationManager authenticationManager; // @Autowired
+
+	public VoteController(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
+
+	@GetMapping("/")
 	public String voteMainController(Criteria criteria, Model model) {
 		log.info("VoteMainPage");
 		try {
@@ -94,6 +106,15 @@ public class VoteController {
 		}
 		
 		userService.updateUser(user);
+
+		user = userService.getUser(user.getIdx());
+
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), cosKey));
+
+		// 실제 SecurityContext에 authentication 정보를 등록한다.
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		System.out.println("재 로그인 성공");
+
 		return "redirect:/vote/myProfileInfo";
 	}
 

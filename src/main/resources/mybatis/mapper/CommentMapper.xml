@@ -5,13 +5,13 @@
     <!-- 댓글 쓰기 -->
     <insert id="picture_reply_write" parameterType="CommentDTO" useGeneratedKeys="true" keyProperty="cno">
         insert into tb_comment (grp, grps, grpl, board_nm, bno, content, writer, sysregdate)
-        values(#{grp}, 0, 0, "tb_board", #{bno}, #{content}, #{writer}, now());
+        values(#{grp}, 0, 0, #{boardNm}, #{bno}, #{content}, #{writer}, now());
     </insert>
 
     <!-- 답글 쓰기 -->
     <insert id="picture_rereply_write" parameterType="CommentDTO" useGeneratedKeys="true" keyProperty="cno">
         insert into tb_comment (grp, grps, grpl, board_nm, bno, content, writer, sysregdate)
-        values(#{grp}, #{grps}, #{grpl}, "tb_board", #{bno}, #{content}, #{writer}, now());
+        values(#{grp}, #{grps}, #{grpl}, #{boardNm}, #{bno}, #{content}, #{writer}, now());
     </insert>
 
     <!-- 모댓글일경우 no, grp 일치하게 함 -->

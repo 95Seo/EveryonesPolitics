@@ -131,6 +131,7 @@ public class BoardController {
 
         if (principal != null) {
             model.addAttribute("current_idx", principal.getIdx());
+            model.addAttribute("current_img", principal.getProfile_img());
         } else {
             model.addAttribute("current_idx", 0);
         }
