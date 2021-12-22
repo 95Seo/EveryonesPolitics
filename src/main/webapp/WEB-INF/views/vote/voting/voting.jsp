@@ -4,54 +4,6 @@
 
 <link rel="stylesheet" href="../resources/css/votepage.css" />
 
-<script>
-    var vote = ${vote};
-
-    $(document).on("click","input[type=radio]",function(){
-        showFill=$('input[name=vote]:checked').val();
-        //라디오 버튼 값을 가져온다.
-        chang_fill(showFill);
-    });
-
-    function vote_btn() {
-        if(isNaN(${principal.idx})) {
-            alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
-        } else {
-            if (vote != 0) {
-                alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
-            } else {
-                alert("투표에 성공하였습니다 !.");
-                $("#frm").submit();
-            }
-        }
-    }
-
-    function chang_fill(fill) {
-        if(fill == 1) {
-            $("input:radio[id='radio1']").attr("checked", true);
-            $("input:radio[id='radio2']").attr("checked", false);
-            $("input:radio[id='radio3']").attr("checked", false);
-            $("input:radio[id='radio4']").attr("checked", false);
-        } else if(fill == 2) {
-            $("input:radio[id='radio1']").attr("checked", false);
-            $("input:radio[id='radio2']").attr("checked", true);
-            $("input:radio[id='radio3']").attr("checked", false);
-            $("input:radio[id='radio4']").attr("checked", false);
-        } else if(fill == 3) {
-            $("input:radio[id='radio1']").attr("checked", false);
-            $("input:radio[id='radio2']").attr("checked", false);
-            $("input:radio[id='radio3']").attr("checked", true);
-            $("input:radio[id='radio4']").attr("checked", false);
-        } else if(fill == 4) {
-            $("input:radio[id='radio1']").attr("checked", false);
-            $("input:radio[id='radio2']").attr("checked", false);
-            $("input:radio[id='radio3']").attr("checked", false);
-            $("input:radio[id='radio4']").attr("checked", true);
-        }
-    }
-</script>
-
-
 <section id="votepage" class="votepage sections">
     <div class="container">
         <div class="row">
@@ -123,8 +75,7 @@
                 <div class="col-sm-12">
                     <div class="vote-date-expirebox">
                         <ul class="vote-icon">
-                            <li><a href="#none" onclick="vote_btn()"><input type="submit" class="votingbtn" value="투표하기"></a>
-                            </li>
+                            <li><a onclick="vote_btn()"><input type="submit" class="votingbtn" value="투표하기"></a></li>
                         </ul>
                         <div class="vote-date-expire">
                             <p>투표 기간</p>
@@ -138,5 +89,53 @@
     </div>
 </section>
 
+<script>
+    var vote = ${vote}
+
+    $(document).on("click","input[type=radio]",function(){
+        showFill=$('input[name=vote]:checked').val();
+        //라디오 버튼 값을 가져온다.
+        chang_fill(showFill);
+    });
+
+
+    function vote_btn() {
+        if(isNaN(${principal.idx})) {
+            alert("죄송합니다. 로그인이 필요한 서비스 입니다.");
+        } else {
+            if (vote != 0) {
+                alert("죄송합니다. 이미 투표를 완료 하셨습니다.");
+            } else {
+                alert("투표에 성공하였습니다 !.");
+                $("#frm").submit();
+            }
+        }
+    }
+
+
+    function chang_fill(fill) {
+        if(fill == 1) {
+            $("input:radio[id='radio1']").attr("checked", true);
+            $("input:radio[id='radio2']").attr("checked", false);
+            $("input:radio[id='radio3']").attr("checked", false);
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 2) {
+            $("input:radio[id='radio1']").attr("checked", false);
+            $("input:radio[id='radio2']").attr("checked", true);
+            $("input:radio[id='radio3']").attr("checked", false);
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 3) {
+            $("input:radio[id='radio1']").attr("checked", false);
+            $("input:radio[id='radio2']").attr("checked", false);
+            $("input:radio[id='radio3']").attr("checked", true);
+            $("input:radio[id='radio4']").attr("checked", false);
+        } else if(fill == 4) {
+            $("input:radio[id='radio1']").attr("checked", false);
+            $("input:radio[id='radio2']").attr("checked", false);
+            $("input:radio[id='radio3']").attr("checked", false);
+            $("input:radio[id='radio4']").attr("checked", true);
+        }
+    }
+</script>
 
 <%@include file="../../include/footer.jsp"%>
