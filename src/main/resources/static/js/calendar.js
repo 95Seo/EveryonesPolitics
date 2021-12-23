@@ -24,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 theme : 'tomato',
                 content: '<div class="CalendarTitle" style="background : '+info.event.backgroundColor+';" ><p>'
                     + info.event.title + '</p></div>'
-                    + '<div class="CalendarInfo"><p><strong>후보자:</strong>' + info.event.title + '</p>'
-                    + '<p><strong>정&nbsp&nbsp당:</strong>' + info.event.extendedProps.groupname + '</p></div>'
+                    + '<div class="CalendarInfo"><p><strong>후보자:</strong>' + info.event.extendedProps.groupname + '</p>'
                     + '<div class ="CalendarContent"><p><strong>위치:</strong>' + info.event.extendedProps.location + '</p>'
                     + '<p><strong>내용:</strong>' + info.event.extendedProps.description +  '</p></div>'
                     + '<p><strong>클릭시 링크로 바로가기</strong></p>',
