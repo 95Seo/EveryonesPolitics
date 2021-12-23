@@ -112,7 +112,7 @@
                     <li><a href="#blog">모의 투표</a></li>
                     <li>
                       <sec:authorize access="!isAuthenticated()">
-                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code">로그인</a>
+                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=17d0622174b2b4cd77314e16dd2d9dde&redirect_uri=http://3.35.57.12/auth/kakao/callback&response_type=code">로그인</a>
 <%--                      <sec:authentication property="name" />님 안녕하세요 ^^ 예외--%>
                       </sec:authorize>
                     </li>
@@ -658,7 +658,6 @@
 
 <!-- JavaScript for BarChart-->
 <script type="text/javascript">
-
   var myChart;
   click_btn("all");
 
@@ -675,12 +674,14 @@
       data: param,
 
       success: function(info) {
+        alert(1);
         print_chart(info);
       }
     }); //ajax end
   }
 
   function print_chart(data) {
+    alert(data)
     var context = document
             .getElementById('myChart')
             .getContext('2d');
