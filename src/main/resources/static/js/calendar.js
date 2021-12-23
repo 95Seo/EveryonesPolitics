@@ -35,11 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         eventClick: function (arg){
             //있는 일정 클릭시,
-            console.log("#등록된 일정 클릭#");
-            console.log(arg.event);
-
             if(arg.event.url){
-                window.open(arg.event.url);
+                location.href = arg.event.url;
             }
         },
         editable: true,

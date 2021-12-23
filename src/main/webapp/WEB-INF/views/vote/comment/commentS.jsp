@@ -150,7 +150,6 @@
 
     //댓글 목록
     const ReplyList = function (){
-        alert(1);
         $.ajax({
             url : '/picture_replyList.do',
             type : 'get',
@@ -256,7 +255,7 @@
 
                             listHtml += '<span class="btn_right">';
                             listHtml += '  <button type="button" class="btn btn-default write_rereply" cno="' + cno + '" bno="' + bno + '">답글</button>';
-                            listHtml += '  <button type="button" class="btn btn-default"  onclick="ReReplyList();">취소</span>';
+                            listHtml += '  <button type="button" class="btn btn-default"  onclick="ReplyList();">취소</span>';
 
                             // ------ 답글입력란 끝
                         }
