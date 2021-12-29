@@ -23,8 +23,7 @@
     <select id="selectChartView" resultType="int">
         select count(vote)
         from tb_user
-        where AGE_RANGE IS not null
-        and vote = #{vote}
+        where vote = #{vote}
         <if test="age_range != 'all'">
           and AGE_RANGE = #{age_range};
         </if>

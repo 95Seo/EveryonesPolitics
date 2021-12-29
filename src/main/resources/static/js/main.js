@@ -122,22 +122,6 @@ jQuery(document).ready(function ($) {
         event.preventDefault();
     });
 
-
-
-// Portfoliowork init
-    jQuery('#portfoliowork').mixItUp({
-        selectors: {
-            target: '.tile',
-            filter: '.filter'
-                    //           sort: '.sort-btn'
-        },
-        animation: {
-            animateResizeContainer: false,
-            effects: 'fade scale'
-        }
-
-    });
-
 // dropdown menu
     $('.dropdown-menu').click(function (e) {
         e.stopPropagation();

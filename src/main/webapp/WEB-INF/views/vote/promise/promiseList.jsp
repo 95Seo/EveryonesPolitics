@@ -77,6 +77,21 @@
         console.log(d);
         var d = JSON.parse(result);
         message = d.message;
+
+          $("input:radio[name='fill']").attr("checked", false);
+
+          if(showFill == '이재명') {
+              $("input:radio[id='radio1']").attr("checked", true);
+          } else if(showFill == '윤석열') {
+              $("input:radio[id='radio2']").attr("checked", true);
+          } else if(showFill == '심상정') {
+              $("input:radio[id='radio3']").attr("checked", true);
+          } else if(showFill == '안철수') {
+              $("input:radio[id='radio4']").attr("checked", true);
+          } else {
+              $("input:radio[id='radio5']").attr("checked", true);
+          }
+
         if (message == "fail") {
           var content = "<div class='no_object'>게시물이 없습니다.</div>";
           //내용 붙이기
@@ -145,20 +160,6 @@
       end = Math.ceil(currPage/5)*5; //생성가능 페이지수? 6,11,16 씩 대입해 보자
       start= end - 4;
       content +="<li><a onclick='listCall("+(start-1)+")' class='fa fa-angle-left cursor_pointer'>이전</a> |</li> ";
-    }
-
-    $("input:radio[name='fill']").attr("checked", false);
-
-    if(showFill == '이재명') {
-      $("input:radio[id='radio1']").attr("checked", true);
-    } else if(showFill == '윤석열') {
-      $("input:radio[id='radio2']").attr("checked", true);
-    } else if(showFill == '심상정') {
-      $("input:radio[id='radio3']").attr("checked", true);
-    } else if(showFill == '안철수') {
-      $("input:radio[id='radio4']").attr("checked", true);
-    } else {
-      $("input:radio[id='radio5']").attr("checked", true);
     }
 
     for(var i=start; i<=end;i++){
