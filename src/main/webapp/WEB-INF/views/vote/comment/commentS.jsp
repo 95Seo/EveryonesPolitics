@@ -184,7 +184,7 @@
                         listHtml += '           <img src="' + wprofile + '" class="comment-img">';
                         listHtml += "       </div>";
                         listHtml += "       <div class='commentArea' style='margin-bottom: 10px; width: 80%;'>";
-                        listHtml += "           <div class='commentInfo' style='font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname+"</div>";
+                        listHtml += "           <div class='commentInfo' style='font-size: 1.3rem; font-weight: 500; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname+"<span style='margin-left: 10px; color: #797979;'>"+timeForToday(wdate)+"</span></div>";
                         if (login_idx == writer) {
                             listHtml += '           <div>';
                             if(use_yn == 'Y') {
@@ -363,7 +363,7 @@
                     listHtml += '           <img src="' + wprofile + '" class="comment-img" style="height: 24px; width: 24px;">';
                     listHtml += "       </div>";
                     listHtml += "       <div class='commentArea' style='margin-bottom: 10px; width: 80%;'>";
-                    listHtml += "           <div class='commentInfo' style='font-size: 1.0rem; font-weight: 400; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname + "<span style='margin-left: 10px;color: #797979;'>"+timeForToday(wdate)+"</span></div>";
+                    listHtml += "           <div class='commentInfo' style='font-size: 1.2rem; font-weight: 400; color: #030303; display: flex; justify-content: space-between;'><div>"+wnickname + "<span style='margin-left: 10px;color: #797979;'>"+timeForToday(wdate)+"</span></div>";
                     if (login_idx == writer) {
                         listHtml += '           <div>';
                         if(use_yn == 'Y') {
@@ -380,10 +380,10 @@
                     if (use_yn == 'N') {
                         listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.0rem; font-weight: 400; color: #e20000; ">(삭제된 댓글입니다.)</p></div>';
                     } else {
-                        listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 0.8rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
+                        listHtml += '       <div class="commentContent'+cno+'"><p style="font-size: 1.0rem; font-weight: 400; color: #030303; ">'+content +'</p></div>';
                     }
                     // 좋아요 싫어요 버튼
-                    listHtml += '           <div class="commentLike'+cno+'" style="font-size: 0.8rem; font-weight: 400; color: #030303; ">';
+                    listHtml += '           <div class="commentLike'+cno+'" style="font-size: 1.0rem; font-weight: 400; color: #030303; ">';
                     if(likeYn == 'Y') {
                         listHtml += '               <i id="rereply_likeUp" class="far fa-thumbs-up active like_up'+cno+'" likeYn="'+likeYn+'" cno="' + cno + '" style="margin-right: 10px;" >'+likeCnt+'</i>';
                     } else {

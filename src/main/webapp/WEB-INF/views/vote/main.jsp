@@ -256,80 +256,22 @@
           </div>
           <div class="work_menu text-center">
             <div id="filters" class="toolbar mb2 mt2">
-              <button class="btn-md fil-cat filter" data-filter=".all" onclick="change_filter('all')">
+              <button class="btn-md fil-cat filter promise_btn" id="all_promise" data-filter=".all" onclick="change_filter('all')">
                 ALL</button>/
-              <button class="btn-md fil-cat filter" data-rel="blue" data-filter=".blue" onclick="change_filter('이재명')">
+              <button class="btn-md fil-cat filter promise_btn" id="lee_promise" data-rel="blue" data-filter=".blue" onclick="change_filter('이재명')">
                 이재명</button>/
-              <button class="btn-md fil-cat filter" data-rel="red" data-filter=".red" onclick="change_filter('윤석열')">
+              <button class="btn-md fil-cat filter promise_btn" id="yun_promise" data-rel="red" data-filter=".red" onclick="change_filter('윤석열')">
                 윤석열</button>/
-              <button class="btn-md fil-cat filter" data-rel="yellow" data-filter=".yellow" onclick="change_filter('심상정')">
+              <button class="btn-md fil-cat filter promise_btn" id="sim_promise" data-rel="yellow" data-filter=".yellow" onclick="change_filter('심상정')">
                 심상정</button>/
-              <button class="btn-md fil-cat filter" data-rel="bcards" data-filter=".bcards" onclick="change_filter('안철수')">
+              <button class="btn-md fil-cat filter promise_btn" id="an_promise" data-rel="bcards" data-filter=".bcards" onclick="change_filter('안철수')">
                 안철수</button>/
             </div>
           </div>
         </div>
       </div>
 
-
       <div id="portfoliowork">
-        <div class="single_portfolio tile scale-anm red ">
-          <img src="../resources/images/pf1.jpeg"/>
-          <a href="/vote/promiseList">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-        <div class="single_portfolio">
-          <img src="../resources/images/pf2.jpeg"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-        <div class="single_portfolio tile scale-anm red">
-          <img src="../resources/images/pf3.jpeg"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-        <div class="single_portfolio tile scale-anm red ">
-          <img src="../resources/images/pf4.jpeg"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-        <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf5.png"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-
-        <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf6.png"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
-        <div class="single_portfolio tile scale-anm blue">
-          <img src="../resources/images/pf7.png"/>
-          <a href="/vote/promiseList" class="portfolio-img">
-            <div class="grid_item_overlay">
-              <h3>자세히보기</h3>
-            </div>
-          </a>
-        </div>
       </div>
 
       <div style="clear: both"></div>
@@ -537,15 +479,15 @@
           <!-- End off Head_title -->
           <div class="work_menu text-center">
             <div id="filters2" class="toolbar mb2 mt2">
-              <button onclick="click_btn('all')" class="btn-md ">
+              <button onclick="click_btn('all')" id="vote_all" class="btn-md vote_btn">
                 ALL</button>/
-              <button onclick="click_btn('10~19')" class="btn-md ">
+              <button onclick="click_btn('10~19')" id="vote_10" class="btn-md vote_btn">
                 10대</button>/
-              <button onclick="click_btn('20~29')" class="btn-md ">
+              <button onclick="click_btn('20~29')" id="vote_20" class="btn-md vote_btn">
                 20대</button>/
-              <button onclick="click_btn('30~39')" class="btn-md ">
+              <button onclick="click_btn('30~39')" id="vote_30" class="btn-md vote_btn">
                 30대</button>/
-              <button onclick="click_btn('40~49')" class="btn-md ">
+              <button onclick="click_btn('40~49')" id="vote_40" class="btn-md vote_btn">
                 40대</button>/
             </div>
           </div>
@@ -622,11 +564,6 @@
 <script src="../resources/js/plugins.js"></script>
 <script src="../resources/js/main.js"></script>
 
-
-
-
-
-
 <!-- Initialize Swiper -->
 <script>
   var swiper = new Swiper(".mySwiper02", {
@@ -663,6 +600,20 @@
 
   function click_btn(r) {
 
+    $(".vote_btn").removeClass('active');
+
+    if(r == 'all') {
+      $("button[id='vote_all']").addClass('active');
+    } else if(r == '10~19') {
+      $("button[id='vote_10']").addClass('active');
+    } else if(r == '20~29') {
+      $("button[id='vote_20']").addClass('active');
+    } else if(r == '30~39') {
+      $("button[id='vote_30']").addClass('active');
+    } else if(r == '40~49') {
+      $("button[id='vote_40']").addClass('active');
+    }
+
     var param = {};
     param = {age_range:r};
 
@@ -682,9 +633,6 @@
 
   function print_chart(data) {
     alert(data)
-    var context = document
-            .getElementById('myChart')
-            .getContext('2d');
     var context = document
             .getElementById('myChart')
             .getContext('2d');
@@ -798,18 +746,18 @@
           $("#portfoliowork").append(content);
         } else {
           listPrint(d.list); //리스트 그리기
-          $("button[class='btn-md']").attr("checked", false);
+          $(".promise_btn").removeClass('active');
 
           if(showFill == '이재명') {
-            $("input:radio[id='radio1']").attr("checked", true);
+            $("button[id='lee_promise']").addClass('active');
           } else if(showFill == '윤석열') {
-            $("input:radio[id='radio2']").attr("checked", true);
+            $("button[id='yun_promise']").addClass('active');
           } else if(showFill == '심상정') {
-            $("input:radio[id='radio3']").attr("checked", true);
+            $("button[id='sim_promise']").addClass('active');
           } else if(showFill == '안철수') {
-            $("input:radio[id='radio4']").attr("checked", true);
+            $("button[id='an_promise']").addClass('active');
           } else {
-            $("input:radio[id='radio5']").attr("checked", true);
+            $("button[id='all_promise']").addClass('active');
           }
         }
       },

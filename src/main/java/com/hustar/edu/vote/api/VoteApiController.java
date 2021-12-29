@@ -36,7 +36,7 @@ public class VoteApiController {
 
     @RequestMapping(value="/vote/voteChartView", method = RequestMethod.GET)
     public List<Integer> GetselectVoteChartView(@RequestParam String age_range, Model model){
-
+        System.out.println("age_range : " + age_range);
         log.info("get GetselectChartView");
 
         List<Integer> list = new ArrayList<Integer>();
