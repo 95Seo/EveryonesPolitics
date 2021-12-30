@@ -12,10 +12,29 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="naver-site-verification" content="28d53048530f4a5fcbbf6000f62d6733132ca7e5" />
     <title>모두의정치</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- 선호 URL -->
+    <link rel="canonical" href="https://www.everyonespolitics.site/">
+    <!-- 페이지 설명 -->
+    <meta name="description" content="대선관련 정치 커뮤니티 웹사이트입니다."/>
+    <!-- Open Graph 제목 -->
+    <meta property="og:title" content="모두의정치">
+    <!-- Open Graph 설명 -->
+    <meta property="og:description" content="대선관련 정치 커뮤니티 웹사이트입니다.">
+
+    <!-- 모바일 사용성 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Open Graph Url -->
+    <meta property="og:url" content="https://www.everyonespolitics.site/">
+
+    <!-- 사이트 타입 -->
+    <meta property="og:type" content="website">
+
+    <!-- 사이트 소유확인을 위한 HTML 태그 -->
+    <meta name="naver-site-verification" content="28d53048530f4a5fcbbf6000f62d6733132ca7e5" />
+
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
     <!--Google Fonts link-->
