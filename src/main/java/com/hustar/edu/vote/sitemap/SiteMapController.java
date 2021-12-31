@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SiteMapController {
 
-    @RequestMapping(value="/sitemap.xml", method = RequestMethod.GET)
+    @RequestMapping(value="/sitemap.xml", method = RequestMethod.GET, produces = "application/xml;")
     @ResponseBody
     public XmlUrlSet main() {
         XmlUrlSet xmlUrlSet = new XmlUrlSet();
