@@ -1,4 +1,4 @@
-package com.hustar.edu.vote.dto;
+package com.hustar.edu.vote.sitemap;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;

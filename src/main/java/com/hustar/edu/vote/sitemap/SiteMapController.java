@@ -1,8 +1,6 @@
-package com.hustar.edu.vote.controller;
+package com.hustar.edu.vote.sitemap;
 
 
-import com.hustar.edu.vote.dto.XmlUrl;
-import com.hustar.edu.vote.service.XmlUrlSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
