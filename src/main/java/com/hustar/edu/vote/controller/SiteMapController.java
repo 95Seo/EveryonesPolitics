@@ -1,24 +1,33 @@
 package com.hustar.edu.vote.controller;
 
 
-import com.hustar.edu.vote.service.SiteMapService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.hustar.edu.vote.dto.XmlUrl;
+import com.hustar.edu.vote.service.XmlUrlSet;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-
-@RestController
+@Controller
 public class SiteMapController {
-    @Autowired
-    private SiteMapService siteMapService;
-    @RequestMapping(value="/sitemap.xml", produces= {"application/xml"})
+
+    @RequestMapping(value="/sitemap.xml", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> sitemap (HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        return ResponseEntity.ok(siteMapService.getSystemicSiteMap());
+    public XmlUrlSet main() {
+        XmlUrlSet xmlUrlSet = new XmlUrlSet();
+        create(xmlUrlSet, "", XmlUrl.Priority.HIGH);
+        create(xmlUrlSet, "/vote/promiseList", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/behindList", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/boardList", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/boardDetail?idx=2", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/boardDetail?idx=2", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/voting", XmlUrl.Priority.MEDIUM);
+        create(xmlUrlSet, "/vote/boardList?page=1&filter=all&keyword=", XmlUrl.Priority.ROW);
+
+        return xmlUrlSet;
+    }
+
+    private void create(XmlUrlSet xmlUrlSet, String link, XmlUrl.Priority priority) {
+        xmlUrlSet.addUrl(new XmlUrl("https://www.everyonespolitics.site"+link, priority));
     }
 }
