@@ -31,6 +31,8 @@
 
   <!-- 사이트 소유확인을 위한 HTML 태그 -->
   <meta name="naver-site-verification" content="28d53048530f4a5fcbbf6000f62d6733132ca7e5" />
+  <meta name="google-site-verification" content="zxUk91IP7EFeuB8ylxPf5ON87CrCoVNtttdS0IWDF2I" />
+
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
