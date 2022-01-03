@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchController {
 
     @GetMapping("/robots.txt")
-    public String robots() {return "User-agent: Yeti\nAllow:/\n";}
-
-
+    public String robots() {
+        return "User-agent: *\nDisallow:/\nUser-agent: Googlebot\nUser-agent: Yeti\nAllow:/\n";
+    }
 }
