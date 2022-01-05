@@ -6,11 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class VoteApplication extends SpringBootServletInitializer {
-
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(VoteApplication.class);
-	}
+public class VoteApplication {
 
 	public static final String APPLICATION_LOCATIONS = "spring.config.location="
 			+ "classpath:application.yml,"

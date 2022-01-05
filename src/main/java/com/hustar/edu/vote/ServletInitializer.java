@@ -10,4 +10,14 @@ public class ServletInitializer extends SpringBootServletInitializer {
 		return application.sources(VoteApplication.class);
 	}
 
+	public static final String APPLICATION_LOCATIONS = "spring.config.location="
+			+ "classpath:application.yml,"
+			+ "classpath:aws.yml";
+
+	public static void main(String[] args) {
+		new SpringApplicationBuilder(VoteApplication.class)
+				.properties(APPLICATION_LOCATIONS)
+				.run(args);
+	}
+
 }
