@@ -1,13 +1,15 @@
 package com.hustar.edu.vote;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+@SpringBootApplication
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(VoteApplication.class);
+		return application.sources(ServletInitializer.class);
 	}
 
 	public static final String APPLICATION_LOCATIONS = "spring.config.location="
@@ -15,7 +17,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 			+ "classpath:aws.yml";
 
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(VoteApplication.class)
+		new SpringApplicationBuilder(ServletInitializer.class)
 				.properties(APPLICATION_LOCATIONS)
 				.run(args);
 	}
