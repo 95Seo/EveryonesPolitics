@@ -19,8 +19,6 @@ public class AjaxService {
     @Autowired
     BoardService boardService;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     CommonService commonService;
 
