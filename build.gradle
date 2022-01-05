@@ -32,8 +32,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
 	compileOnly 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-devtools'
-//	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -60,7 +59,9 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.128'
 
 
-	runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
+	providedRuntime('org.springframework.boot:spring-boot-devtools')
+//	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 
 	// https://mvnrepository.com/artifact/org.jdom/jdom2
 	implementation group: 'org.jdom', name: 'jdom2', version: '2.0.6'
