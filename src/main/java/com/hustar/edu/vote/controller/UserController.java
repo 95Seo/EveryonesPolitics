@@ -195,7 +195,7 @@ public class UserController {
 //        System.out.println("username : " + username);
 //        System.out.println("password : " + password);
 
-        return "redirect:www.everyonespolitics.site/";
+        return "redirect:/";
     }
 
 }
