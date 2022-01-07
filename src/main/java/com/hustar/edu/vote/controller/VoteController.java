@@ -53,7 +53,7 @@ public class VoteController {
 		this.authenticationManager = authenticationManager;
 	}
 
-	@GetMapping("/vote")
+	@GetMapping("/")
 	public String voteMainController(Criteria criteria, Model model) {
 		log.info("VoteMainPage");
 		try {
