@@ -42,6 +42,13 @@ mybatis:
 
 server:
   port: 8080
+  tomcat:
+    threads:
+      max: 500 # Maximum amount of worker threads.
+      min-spare: 50 # Minimum amount of worker threads.
+    max-connections: 10000 # Maximum number of connections that the server will accept and process at any given time
+    use-relative-redirects: true
+    connection-timeout: 20000
   servlet:
     context-path: /
     encoding:
