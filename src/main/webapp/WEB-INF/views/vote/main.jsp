@@ -14,11 +14,11 @@
   <!-- 선호 URL -->
   <link rel="canonical" href="https://www.everyonespolitics.site/">
   <!-- 페이지 설명 -->
-  <meta name="description" content="대선관련 정치 커뮤니티 웹사이트입니다."/>
+  <meta name="description" content="모두의정치는 대선관련 정치 커뮤니티 웹사이트입니다. 각 정당의 핵심 후보인 이재명, 윤석열, 심상정, 안철수 후보들의 정보들을 모아놓은 웹사이트 입니다."/>
   <!-- Open Graph 제목 -->
   <meta property="og:title" content="모두의정치">
   <!-- Open Graph 설명 -->
-  <meta property="og:description" content="대선관련 정치 커뮤니티 웹사이트입니다.">
+  <meta property="og:description" content="모두의정치는 대선관련 정치 커뮤니티 웹사이트입니다. 각 정당의 핵심 후보인 이재명, 윤석열, 심상정, 안철수 후보들의 정보들을 모아놓은 웹사이트 입니다.">
 
   <!-- 모바일 사용성 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
